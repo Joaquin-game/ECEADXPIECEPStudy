@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ECE Math Lab: randomized engineering mathematics practice, linked cross-topic questions, and custom question generators.">
+<title>ECE Math Lab — Olympiad Trainer</title>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']],processEscapes:true},options:{ignoreHtmlClass:'no-math'},svg:{fontCache:'global'}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">∑</span><span>ECE Math Lab</span></div>
+    <div class="top-note">Practice locally · Create and export your own generators</div>
+  </header>
+  <section class="hero">
+    <div><div class="eyebrow">Engineering · Mathematics · Practice</div><h1>Train for the problems<br>you haven't seen yet.</h1><p>Randomized engineering math drills, linked cross-topic problems, and a generator editor for your team's own question bank.</p></div>
+    <div class="hero-aside"><strong id="bankStats">2,800 question generators</strong><span>20 categories · 570 linked-pair variants</span></div>
+  </section>
+  <nav class="tabs" aria-label="Main sections"><button class="tab active" data-tab="practicePage"><span class="tab-icon" aria-hidden="true">✎</span>Practice</button><button class="tab" data-tab="builderPage"><span class="tab-icon" aria-hidden="true">⌘</span>Question builder</button></nav>
+
+  <main id="practicePage" class="page active">
+    <section id="setupPanel" class="panel">
+      <div class="panel-head"><div><h2>Build a practice set</h2><p>Pick your topics and decide whether to combine concepts in linked question pairs.</p></div><span class="chip blue">GENERATE A TEST</span></div>
+      <div class="panel-body setup-grid">
+        <div><h3 class="section-title">Topics to include</h3><div id="categoryGrid" class="category-grid"></div><div style="display:flex;gap:8px;margin-top:11px"><button class="ghost" id="selectAllBtn" type="button">Select all</button><button class="ghost" id="selectNoneBtn" type="button">Clear all</button></div><div class="stats-line">Each topic has at least 48 numerical generators, 40 identification generators, and 40 true/false generators. Every topic pair has three linked-question variants.</div>
+          <details class="bank-explorer" id="bankExplorer"><summary>Inspect built-in numerical bank · 48+ entries per topic</summary>
+            <p class="bank-explorer-intro">This reads the same canonical registry used by the test sampler—not the shorter seed lists near the top of the JavaScript source.</p>
+            <div class="bank-explorer-controls"><label for="bankExplorerCategory">Category</label><select id="bankExplorerCategory"></select><button class="secondary" id="auditBankBtn" type="button">Run registry check</button></div>
+            <div id="bankExplorerSummary" class="bank-explorer-summary" role="status"></div>
+            <ol id="bankExplorerList" class="bank-explorer-list"></ol>
+          </details>
+        </div>
+        <div class="controls-panel">
+          <h3 class="section-title">Test settings</h3>
+          <div class="field"><label for="questionCount">Question count</label><select id="questionCount"><option value="5">5 questions</option><option value="10" selected>10 questions</option><option value="15">15 questions</option><option value="20">20 questions</option><option value="30">30 questions</option><option value="40">40 questions</option></select></div>
+          <div class="field"><label>Difficulty / level range</label><div class="difficulty-picker" role="group" aria-label="Choose minimum and maximum difficulty levels"><div class="difficulty-readouts"><span>Minimum <strong id="difficultyMinLabel">Level 1 · Foundation</strong></span><span>Maximum <strong id="difficultyMaxLabel">Level 3 · Intermediate</strong></span></div><div class="dual-range" id="difficultySlider"><div class="range-track"></div><div class="range-fill" id="difficultyRangeFill"></div><input id="difficultyMinSlider" type="range" min="1" max="5" step="1" value="1" aria-label="Minimum difficulty level"><input id="difficultyMaxSlider" type="range" min="1" max="5" step="1" value="3" aria-label="Maximum difficulty level"></div><div class="range-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div><div class="range-descriptions"><span>Foundation</span><span>Olympiad challenge</span></div></div><input type="hidden" id="difficultyMin" value="1"><input type="hidden" id="difficultyMax" value="3"><small>Drag either handle to set the range. The minimum and maximum stay ordered automatically; selected levels apply to all built-in question formats.</small></div>
+          <div class="field"><label>Answer formats · choose any combination</label><div id="answerFormats" class="format-options" role="group" aria-label="Question answer formats">
+            <label class="format-option"><input type="checkbox" name="answerFormat" value="mc" checked><span class="format-icon" aria-hidden="true">☷</span><span>Multiple choice</span></label>
+            <label class="format-option"><input type="checkbox" name="answerFormat" value="fib" checked><span class="format-icon" aria-hidden="true">✎</span><span>Fill in the blank</span></label>
+            <label class="format-option"><input type="checkbox" name="answerFormat" value="id"><span class="format-icon" aria-hidden="true">Aa</span><span>Identification</span></label>
+            <label class="format-option"><input type="checkbox" name="answerFormat" value="tf"><span class="format-icon" aria-hidden="true">T/F</span><span>True or false</span></label>
+          </div><div class="format-note">Select one or more formats. With Multiple choice + Identification selected, identification concepts may also appear as term-recognition choices.</div></div>
+          <div class="field"><label>Test flow</label><div class="flow-options" role="radiogroup" aria-label="Test flow">
+            <label class="flow-option"><input type="radio" name="testFlow" value="all" checked><span><strong>All questions at once</strong><small>Answer the full set, then see the score and solutions.</small></span></label>
+            <label class="flow-option"><input type="radio" name="testFlow" value="one"><span><strong>One at a time</strong><small>Check each answer and read its solution before continuing.</small></span></label>
+          </div></div>
+          <div class="field"><label for="generatorPool">Question generators</label><select id="generatorPool"><option value="both" selected>Topic + linked pairs</option><option value="single">Topic generators only</option><option value="pairs">Linked pairs only</option></select><small>Linked pairs generate a dependent second question. Question count includes both steps.</small></div>
+          <label class="check-row"><input type="checkbox" id="includeCustom" checked><span>Include my saved generators whenever their category and dependency requirements match.</span></label>
+          <div class="notice"><strong>Linked questions:</strong> Step 2 depends on Step 1. If you change your Step 1 answer, the dependent question updates and uses that value (follow-through scoring).</div>
+          <button class="primary wide" id="startQuizBtn" type="button">Generate practice test →</button>
+          <div id="setupMessage" class="stats-line" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quizPanel" class="panel quiz-shell hidden" style="margin-top:18px">
+      <div class="quiz-topline"><div><strong id="quizTitle">Practice test</strong><span id="quizSubtitle"></span></div><label class="recipe-debug-toggle"><input id="showRecipeDebug" type="checkbox"><span>Show recipe names</span></label><button id="restartBtn" class="text-btn" type="button">← Back to setup</button></div>
+      <form id="quizForm"><div id="questionList" class="question-list"></div><section id="stepFeedback" class="step-feedback hidden" aria-live="polite"></section><div class="quiz-actions"><span class="hint" id="quizHint">Answers are checked after you submit.</span><button id="submitQuizBtn" class="primary" type="submit">Submit answers</button></div></form>
+      <section id="resultsPanel" class="hidden" aria-live="polite">
+        <div class="result-summary"><div><h2 id="resultHeading">Test complete</h2><p id="resultMessage"></p></div><div style="text-align:right"><div class="result-score" id="resultScore"></div><div class="result-percent" id="resultPercent"></div></div></div>
+        <div class="result-toolbar"><button class="primary" id="screenshotBtn" type="button">Save results screenshot</button><button class="secondary" id="printBtn" type="button">Print / Save PDF</button><button class="ghost" id="newQuizBtn" type="button">New test</button></div>
+        <div class="review-heading">Answer review &amp; worked solutions</div><div id="reviewList" class="review-list"></div>
+      </section>
+    </section>
+  </main>
+
+  <main id="builderPage" class="page">
+    <section class="panel">
+      <div class="panel-head"><div><h2>Build your question generators</h2><p>Create a template in the visual editor or edit a JSON generator spec directly. Use <code>x_prev</code> (or the legacy alias <code>prev</code>) to make a question depend on the answer before it.</p></div><span class="chip teal">YOUR QUESTION BANK</span></div>
+      <nav class="subtabs" aria-label="Question builder modes"><button class="subtab active" data-subtab="visualSubpage">Visual builder</button><button class="subtab" data-subtab="codeSubpage">Code editor (JSON)</button></nav>
+      <div id="visualSubpage" class="subpage active"><div class="builder-grid" style="padding:18px">
+        <section class="panel" style="box-shadow:none"><div class="panel-head"><div><h2>Create a template</h2><p>Random ranges and expressions are recalculated every time the template is used.</p></div></div><div class="panel-body">
+          <div class="field"><label for="templateTitle">Generator name</label><input id="templateTitle" maxlength="90" placeholder="e.g. Find the current from Ohm's law"></div>
+          <div class="two-col"><div class="field"><label for="templateCategory">Question category</label><select id="templateCategory"></select></div><div class="field"><label for="templateFormat">Answer display</label><select id="templateFormat"><option value="number">Number</option><option value="currency">Currency ($)</option><option value="percent">Percent (%)</option><option value="degrees">Degrees (°)</option></select></div></div>
+          <div class="field"><label for="templateMode">Preferred answer style</label><select id="templateMode"><option value="mixed">Mixed / follow test setting</option><option value="mc">Multiple choice</option><option value="fib">Fill-in-the-blank</option><option value="id">Identification</option><option value="tf">True / false</option></select></div>
+          <div class="field"><label for="templateVariables">Random variables</label><textarea id="templateVariables" placeholder="R=2..10&#10;V=12..24"></textarea><small>One per line: <code>name=min..max</code>. Integer ranges are inclusive. Example: <code>R=2..10</code>.</small></div>
+          <div class="field"><label for="templatePrompt">Question prompt</label><textarea id="templatePrompt" placeholder="A circuit has \(R={{R}}\,\Omega\) and \(V={{V}}\,V\). Find current \(I=V/R\)."></textarea><small>Use LaTeX: <code>\(...\)</code> or <code>\[...\]</code>. Insert computed values with <code>{{R}}</code> or expressions like <code>{{V/R}}</code>.</small></div>
+          <div class="field"><label id="templateAnswerLabel" for="templateAnswer">Correct-answer expression</label><input id="templateAnswer" placeholder="V/R"><small id="templateAnswerHelp">Supported operators: <code>+ - * / ^</code>, parentheses and <code>sqrt, abs, sin, cos, tan, exp, log, ln</code>. No JavaScript execution is used.</small></div><div class="field hidden" id="templateAliasesField"><label for="templateAliases">Accepted identification answers / synonyms</label><textarea id="templateAliases" placeholder="alternate name
+common abbreviation"></textarea><small>One accepted synonym per line. Used only for identification generators.</small></div>
+          <label class="check-row"><input type="checkbox" id="templateDepends"><span><strong>Make this generator depend on a previous question.</strong> Use <code>x_prev</code> in the answer expression (for example <code>x_prev*2</code>). In the prompt, explicitly define \(x_{\mathrm{prev}}\) as the numerical answer from the previous step. It will be paired with a question from another selected category.</span></label>
+          <div class="field"><label for="templateExplanation">Solution / explanation</label><textarea id="templateExplanation" placeholder="Use Ohm's law: I=V/R={{V/R}} A."></textarea></div>
+          <div class="field"><label for="templateDistractors">Incorrect answer expressions (optional)</label><textarea id="templateDistractors" placeholder="R/V&#10;V*R&#10;V-R"></textarea><small>One per line. Must evaluate to distinct incorrect numeric choices for a particular randomized version.</small></div>
+          <div class="two-col"><button id="previewTemplateBtn" class="secondary" type="button">Preview a random version</button><button id="saveTemplateBtn" class="primary" type="button">Save generator</button></div>
+          <div id="builderMessage" class="stats-line" role="status"></div>
+          <div id="templatePreview" class="preview-card hidden"><h3>Randomized preview</h3><div id="previewPrompt" class="prompt"></div><div class="preview-answer">Expected answer: <span id="previewAnswer"></span></div><div id="previewExplanation" class="preview-explanation"></div></div>
+        </div></section>
+        <div><section class="panel" style="box-shadow:none;margin-bottom:14px"><div class="panel-head"><div><h2>Saved generators</h2><p id="templateCount">Saved in this browser</p></div></div><div class="panel-body"><div id="templateList" class="template-list"></div><div id="noTemplates" class="empty-state">No custom generators yet. Create one or load the example from the code editor.</div></div></section><div class="builder-tip"><strong>Correctness note</strong><br>Built-in generators calculate answers directly from the same formulas used in their explanations. Custom generators use your expression as the answer key; the app validates the syntax and ranges but cannot prove your formula describes the intended math problem. Preview several versions before sharing it with the team.</div></div>
+      </div></div>
+      <div id="codeSubpage" class="subpage"><div class="builder-grid" style="padding:18px">
+        <section class="panel" style="box-shadow:none"><div class="panel-head"><div><h2>Generator spec editor</h2><p>JSON is validated before it is saved. This is a declarative generator format, not arbitrary JavaScript.</p></div></div><div class="panel-body">
+          <div class="field"><label for="codeEditor">JSON specification</label><textarea id="codeEditor" class="code-editor" spellcheck="false" aria-label="JSON generator specification"></textarea><small>Paste one generator object or an array of objects. Use <code>"variables":{"a":{"min":1,"max":9}}</code>, <code>"answer":"a^2 + x_prev"</code> for numeric modes, or <code>"mode":"id","answer":"Laplace transform","acceptedAnswers":["LT"]</code> for identification. For true/false use <code>"mode":"tf","answer":"a-3"</code> (positive is True, zero/negative False). Use optional <code>"steps":[...]</code> for a linked numeric sequence.</small></div>
+          <div class="two-col"><button id="loadExampleBtn" class="secondary" type="button">Load chain example</button><button id="validateCodeBtn" class="primary" type="button">Validate &amp; save JSON</button></div>
+          <div class="two-col" style="margin-top:9px"><button id="downloadCodeBtn" class="ghost" type="button">Download saved JSON</button><button id="importCodeBtn" class="ghost" type="button">Import JSON file</button><input id="importFile" class="file-input" type="file" accept=".json,application/json"></div>
+          <div id="codeMessage" class="stats-line" role="status"></div>
+        </div></section>
+        <div><section class="panel" style="box-shadow:none"><div class="panel-head"><div><h2>Generator spec guide</h2><p>Valid fields for a single question or linked steps.</p></div></div><div class="panel-body code-example-note">
+          <p><strong>Single generator</strong></p><p>Use <code>title</code>, <code>category</code>, <code>variables</code>, <code>prompt</code>, <code>answer</code>, and <code>explanation</code>. Modes are <code>mixed</code>, <code>mc</code>, <code>fib</code>, <code>id</code> (text identification), and <code>tf</code> (true/false). For <code>id</code>, answer is the term and optional <code>acceptedAnswers</code> is an array of aliases. For <code>tf</code>, answer can be literal <code>true</code>/<code>false</code> or a numeric expression: positive means True, zero/negative means False. Numeric modes may also use <code>format</code>, <code>distractors</code>, and <code>dependsOnPrevious</code>.</p>
+          <p><strong>Linked chain</strong></p><p>Use a root <code>title</code> and a <code>steps</code> array. Each step has a category, variables, prompt, answer, and explanation. A later step can use <code>x_prev</code> (or legacy <code>prev</code>) in its answer formula. In the prompt, declare \(x_{\mathrm{prev}}\) as the previous step’s numeric result. Use <code>{{x_prev}}</code> to insert its current numeric value into prompt/explanation text. If Step 1 changes, Step 2 recalculates and supports follow-through scoring.</p>
+          <p><strong>Categories</strong></p><p><code>laplace</code>, <code>ztrans</code>, <code>fourier</code>, <code>convolution</code>, <code>controls</code>, <code>signals</code>, <code>complexcalc</code>, <code>ode</code>, <code>vector</code>, <code>calculus</code>, <code>related</code>, <code>relativity</code>, <code>advanced</code>, <code>em</code>, <code>econ</code>, <code>data</code>, <code>geas</code>, <code>electronics</code>, <code>precalc</code>, <code>probability</code>.</p>
+          <p><strong>Expression functions</strong></p><p>Arithmetic operators, parentheses, <code>sqrt</code>, <code>abs</code>, <code>sin</code>, <code>cos</code>, <code>tan</code>, <code>exp</code>, <code>log</code>/<code>ln</code>, <code>floor</code>, <code>ceil</code>, <code>round</code>, <code>min</code>, <code>max</code>, <code>pi</code>, and <code>e</code>. Expressions are evaluated by a restricted math parser, not <code>eval()</code>.</p>
+          <p><strong>Example:</strong> a parent question outputs a value; the next step uses <code>x_prev/(1+x_prev*H)</code>, with <code>H</code> sampled from its own variable range. The code editor accepts JSON only and checks required fields. Identification generators use a text answer; true/false generators use true/false or a numeric truth expression.</p>
+        </div></section><div class="builder-tip">Use code mode to version, share, or back up custom generators as JSON files. Use the visual builder for a faster single-question template.</div></div>
+      </div></div>
+    </section>
+  </main>
+  <footer class="footer"><span>ECE Math Lab · formula-based randomized practice</span><span id="mathStatus" class="math-status">Math rendering loads from MathJax CDN.</span></footer>
+</div>
+<div id="toast" class="toast hidden" role="status"></div>
+<script src="locales/en.js"></script>
+
+
+<!-- Ordered local scripts: do not reorder without retesting; the category modules register before the finalizer and UI startup. -->
+<script src="js/core/runtime.js"></script>
+<script src="js/question-bank/shared-helpers.js"></script>
+<script src="js/question-bank/registry-core.js"></script>
+<script src="js/question-bank/categories/laplace.js"></script>
+<script src="js/question-bank/categories/ztrans.js"></script>
+<script src="js/question-bank/categories/fourier.js"></script>
+<script src="js/question-bank/categories/convolution.js"></script>
+<script src="js/question-bank/categories/controls.js"></script>
+<script src="js/question-bank/categories/signals.js"></script>
+<script src="js/question-bank/categories/complexcalc.js"></script>
+<script src="js/question-bank/categories/ode.js"></script>
+<script src="js/question-bank/categories/vector.js"></script>
+<script src="js/question-bank/categories/calculus.js"></script>
+<script src="js/question-bank/categories/related.js"></script>
+<script src="js/question-bank/categories/relativity.js"></script>
+<script src="js/question-bank/categories/advanced.js"></script>
+<script src="js/question-bank/categories/em.js"></script>
+<script src="js/question-bank/categories/econ.js"></script>
+<script src="js/question-bank/categories/data.js"></script>
+<script src="js/question-bank/categories/geas.js"></script>
+<script src="js/question-bank/categories/electronics.js"></script>
+<script src="js/question-bank/categories/precalc.js"></script>
+<script src="js/question-bank/categories/probability.js"></script>
+<script src="js/question-bank/finalize-registry.js"></script>
+<script src="js/concept-bank/catalog.js"></script>
+<script src="js/concept-bank/generators.js"></script>
+<script src="js/linked/linked-pairs.js"></script>
+<script src="js/custom/storage.js"></script>
+<script src="js/custom/specs.js"></script>
+<script src="js/custom/question-factory.js"></script>
+<script src="js/question-engine/format-normalization.js"></script>
+<script src="js/linked/module-builder.js"></script>
+<script src="js/custom/linked-custom.js"></script>
+<script src="js/question-engine/selection.js"></script>
+<script src="js/question-engine/test-builder.js"></script>
+<script src="js/ui/question-renderer.js"></script>
+<script src="js/ui/results.js"></script>
+<script src="js/ui/navigation.js"></script>
+<script src="js/ui/question-builder.js"></script>
+<script src="js/ui/bank-inspector.js"></script>
+<script src="js/ui/setup-categories.js"></script>
+<script src="js/ui/setup.js"></script>
+</body>
+</html>

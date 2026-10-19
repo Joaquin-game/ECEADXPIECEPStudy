@@ -147,10 +147,12 @@ const CATS=[
 {id:'electronics',icon:'▭',name:'Electronic Devices & Circuits (ECE)',short:'Electronic circuits',desc:'Diodes, transistors, op-amps, RC/RL circuits, and circuit laws'},
 {id:'precalc',icon:'x²',name:'Pre-Calculus',short:'Pre-calculus',desc:'Factoring, partial fractions, systems, trigonometry, and analytic geometry'},
 {id:'probability',icon:'P(A)',name:'Combinatorics & Probability',short:'Probability',desc:'Counting, permutations, combinations, probability models, and random variables'}];
+
 const CAT_IDS=CATS.map(c=>c.id), CAT_BY_ID=Object.fromEntries(CATS.map(c=>[c.id,c]));
 const STORE_KEY='eceMathLab.templates.v4';
 const $=id=>document.getElementById(id), rand=(a,b)=>Math.random()*(b-a)+a, ri=(a,b)=>Math.floor(rand(a,b+1)), pick=a=>a[ri(0,a.length-1)], roundN=(v,d=5)=>Number(Number(v).toFixed(d));
 let toastTimer=null,currentQuestions=[],currentResults=[],graded=false,quizMode=[],quizFlow='all',activeQuestionIndex=0,stepChecked=false,savedResponses={},quizNumber=0;
+
 function catName(id){return (CAT_BY_ID[id]||{name:id}).name}
 function shortCat(id){return (CAT_BY_ID[id]||{short:id}).short}
 function htmlEscape(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
@@ -176,6 +178,7 @@ function evalExpr(source,vars={}){
   const v=expr();if(i!==tokens.length)throw Error('Unexpected token: '+tokens[i]);if(!Number.isFinite(v))throw Error('Expression did not produce a finite real number.');return v;
 }
 function expandTemplate(str,vars){return String(str||'').replace(/\{\{\s*([^{}]+?)\s*\}\}/g,(_,expr)=>nfmt(evalExpr(expr,vars)))}
+
 function makeQ(category,title,prompt,answer,explanation,format='number',extras={}){
   const val=Number(answer);if(!Number.isFinite(val))throw Error(`Generator ${title} returned a non-finite answer.`);
   return {category,title,prompt,answer:val,explanation,format,custom:false,tolerance:Math.max(.012,Math.abs(val)*.001,Math.abs(val-roundN(val,3))+.0002),...extras};
