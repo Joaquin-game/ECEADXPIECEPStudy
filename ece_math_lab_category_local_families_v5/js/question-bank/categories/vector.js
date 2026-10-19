@@ -173,36 +173,36 @@ NUMERIC_GENERATOR_REGISTRY.vector = [...coreSeedEntries(V, VECTOR_CORE_SEEDS),
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(V,'Flux of a linear field through a sphere','vector-linear-field-sphere-flux',()=>{
   const a=ri(1,5),b=ri(1,5),c=ri(1,5),R=ri(1,4),ans=(a+b+c)*(4*Math.PI*R**3/3);
-  return qNum(V,'Flux of a linear field through a sphere',`For \(\\mathbf F=\\langle ${a}x,${b}y,${c}z\\rangle\), find the outward flux through the sphere \(x^2+y^2+z^2=${R*R}\) using the divergence theorem.`,ans,`\(\\nabla\\cdot\\mathbf F=${a}+${b}+${c}=${a+b+c}\). The sphere volume is \(4\\pi R^3/3\), so flux \(=(${a+b+c})4\\pi(${R})^3/3=${nfmt(ans)}\).`)
+  return qNum(V,'Flux of a linear field through a sphere',`For \\(\\mathbf F=\\langle ${a}x,${b}y,${c}z\\rangle\\), find the outward flux through the sphere \\(x^2+y^2+z^2=${R*R}\\) using the divergence theorem.`,ans,`\\(\\nabla\\cdot\\mathbf F=${a}+${b}+${c}=${a+b+c}\\). The sphere volume is \\(4\\pi R^3/3\\), so flux \\(=(${a+b+c})4\\pi(${R})^3/3=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(V,'Field scenario · Work done on a three-axis inspection robot','scenario-vector-3d-work',()=>{
   const F=[ri(-5,7),ri(-5,7),ri(-5,7)],d=[ri(-4,6),ri(-4,6),ri(-4,6)],ans=F.reduce((sum,val,i)=>sum+val*d[i],0);
-  const q=qNum(V,'Field scenario · Work done on a three-axis inspection robot',`An inspection robot experiences force \(\mathbf F=\langle${F.join(',')}\rangle\,N\) while its small displacement is \(\Delta\mathbf r=\langle${d.join(',')}\rangle\,m\). Find the work \(W=\mathbf F\cdot\Delta\mathbf r\).`,ans,`\(W=F_x\Delta x+F_y\Delta y+F_z\Delta z=${F[0]}(${d[0]})+${F[1]}(${d[1]})+${F[2]}(${d[2]})=${ans}\,J\).`);
+  const q=qNum(V,'Field scenario · Work done on a three-axis inspection robot',`An inspection robot experiences force \\(\\mathbf F=\\langle${F.join(',')}\\rangle\\,N\\) while its small displacement is \\(\\Delta\\mathbf r=\\langle${d.join(',')}\\rangle\\,m\\). Find the work \\(W=\\mathbf F\\cdot\\Delta\\mathbf r\\).`,ans,`\\(W=F_x\\Delta x+F_y\\Delta y+F_z\\Delta z=${F[0]}(${d[0]})+${F[1]}(${d[1]})+${F[2]}(${d[2]})=${ans}\\,J\\).`);
   return attachDiagram(q,'vector3d','Three coordinate axes x, y, z with a force vector and displacement vector in three dimensions. Work equals the dot product of the two vectors.');
 });
 appendNumericRecipe(V,'Applied · Divergence of a measured airflow field','scenario-vector-airflow-divergence',()=>{
   const a=ri(-3,5),b=ri(-3,5),c=ri(-3,5),ans=a+b+c;
-  return qNum(V,'Applied · Divergence of a measured airflow field',`A local velocity model around a sensor enclosure is \(\mathbf u(x,y,z)=\langle ${a}x, ${b}y, ${c}z\rangle\,m/s\). Find \(\nabla\cdot\mathbf u\) at any point.`,ans,`\(\nabla\cdot\mathbf u=\partial u_x/\partial x+\partial u_y/\partial y+\partial u_z/\partial z=${a}+(${b})+(${c})=${ans}\,s^{-1}\).`);
+  return qNum(V,'Applied · Divergence of a measured airflow field',`A local velocity model around a sensor enclosure is \\(\\mathbf u(x,y,z)=\\langle ${a}x, ${b}y, ${c}z\\rangle\\,m/s\\). Find \\(\\nabla\\cdot\\mathbf u\\) at any point.`,ans,`\\(\\nabla\\cdot\\mathbf u=\\partial u_x/\\partial x+\\partial u_y/\\partial y+\\partial u_z/\\partial z=${a}+(${b})+(${c})=${ans}\\,s^{-1}\\).`);
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('vector','Additional · Dot product of two measured vectors','vector-topup-01',()=>{
   const ax=ri(-5,8),ay=ri(-5,8),az=ri(-5,8),bx=ri(-5,8),by=ri(-5,8),bz=ri(-5,8),ans=ax*bx+ay*by+az*bz;
-  return qNum(V,'Dot product of two measured vectors',`Find \(\mathbf a\cdot\mathbf b\) for \(\mathbf a=(${ax},${ay},${az})\) and \(\mathbf b=(${bx},${by},${bz})\).`,ans,`\(\mathbf a\cdot\mathbf b=${ax}(${bx})+${ay}(${by})+${az}(${bz})=${ans}\).`);
+  return qNum(V,'Dot product of two measured vectors',`Find \\(\\mathbf a\\cdot\\mathbf b\\) for \\(\\mathbf a=(${ax},${ay},${az})\\) and \\(\\mathbf b=(${bx},${by},${bz})\\).`,ans,`\\(\\mathbf a\\cdot\\mathbf b=${ax}(${bx})+${ay}(${by})+${az}(${bz})=${ans}\\).`);
 });
 appendNumericRecipe('vector','Additional · Magnitude of a planar cross product','vector-topup-02',()=>{
   const ax=ri(-6,7),ay=ri(-6,7),bx=ri(-6,7),by=ri(-6,7),ans=Math.abs(ax*by-ay*bx);
-  return qNum(V,'Magnitude of a planar cross product',`For \(\mathbf a=(${ax},${ay},0)\) and \(\mathbf b=(${bx},${by},0)\), find \(|\mathbf a\times\mathbf b|\).`,ans,`The z-component is \(a_xb_y-a_yb_x=${ax}(${by})-${ay}(${bx})\). Its magnitude is \(${ans}\).`);
+  return qNum(V,'Magnitude of a planar cross product',`For \\(\\mathbf a=(${ax},${ay},0)\\) and \\(\\mathbf b=(${bx},${by},0)\\), find \\(|\\mathbf a\\times\\mathbf b|\\).`,ans,`The z-component is \\(a_xb_y-a_yb_x=${ax}(${by})-${ay}(${bx})\\). Its magnitude is \\(${ans}\\).`);
 });
 appendNumericRecipe('vector','Additional · Scalar projection onto a direction vector','vector-topup-03',()=>{
   const ax=ri(-5,8),ay=ri(-5,8),bx=ri(1,6),by=ri(1,6),dot=ax*bx+ay*by,ans=dot/Math.hypot(bx,by);
-  return qNum(V,'Scalar projection onto a direction vector',`Find the scalar projection of \(\mathbf a=(${ax},${ay})\) onto \(\mathbf b=(${bx},${by})\).`,ans,`The scalar projection is \((\mathbf a\cdot\mathbf b)/|\mathbf b|=${dot}/\sqrt{${bx}^2+${by}^2}=${nfmt(ans)}\).`);
+  return qNum(V,'Scalar projection onto a direction vector',`Find the scalar projection of \\(\\mathbf a=(${ax},${ay})\\) onto \\(\\mathbf b=(${bx},${by})\\).`,ans,`The scalar projection is \\((\\mathbf a\\cdot\\mathbf b)/|\\mathbf b|=${dot}/\\sqrt{${bx}^2+${by}^2}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('vector','Additional · Flux of a constant vector through a tilted surface','vector-topup-04',()=>{
   const F=ri(2,15),area=ri(1,10),theta=pick([0,30,45,60,90]),ans=F*area*Math.cos(theta*Math.PI/180);
-  return qNum(V,'Flux of a constant vector through a tilted surface',`A constant vector field has magnitude \(${F}\), and a flat surface has area \(${area}\). The field makes angle \(${theta}^\circ\) with the surface normal. Find flux.`,ans,`\(\Phi=FA\cos\theta=${F}(${area})\cos(${theta}^\circ)=${nfmt(ans)}\).`);
+  return qNum(V,'Flux of a constant vector through a tilted surface',`A constant vector field has magnitude \\(${F}\\), and a flat surface has area \\(${area}\\). The field makes angle \\(${theta}^\\circ\\) with the surface normal. Find flux.`,ans,`\\(\\Phi=FA\\cos\\theta=${F}(${area})\\cos(${theta}^\\circ)=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('vector','Additional · Directional derivative of a scalar field','vector-topup-05',()=>{
   const x=ri(-3,5),theta=pick([0,30,45,60,90]),ans=6*x*Math.cos(theta*Math.PI/180)+2*Math.sin(theta*Math.PI/180);
-  return qNum(V,'Directional derivative of a scalar field',`For \(f(x,y)=3x^2+2y\), find the directional derivative at \((x,y)=(${x},1)\) in the unit direction \(\mathbf u=(\cos${theta}^\circ,\sin${theta}^\circ)\).`,ans,`\(\nabla f=(6x,2)\), so \(D_{\mathbf u}f=(6x,2)\cdot\mathbf u=6(${x})\cos${theta}^\circ+2\sin${theta}^\circ=${nfmt(ans)}\).`);
+  return qNum(V,'Directional derivative of a scalar field',`For \\(f(x,y)=3x^2+2y\\), find the directional derivative at \\((x,y)=(${x},1)\\) in the unit direction \\(\\mathbf u=(\\cos${theta}^\\circ,\\sin${theta}^\\circ)\\).`,ans,`\\(\\nabla f=(6x,2)\\), so \\(D_{\\mathbf u}f=(6x,2)\\cdot\\mathbf u=6(${x})\\cos${theta}^\\circ+2\\sin${theta}^\\circ=${nfmt(ans)}\\).`);
 });

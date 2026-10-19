@@ -129,7 +129,7 @@ function makeGeasExpansionFamily21(title){
 function makeGeasExpansionFamily22(title){
   const v=ri(0,1)===1;
   {
-      const rho=ri(900,1200),vel=rand(.2,3),D0=ri(1,8)*.01,mu=pick([.001,.002,.003,.004]),ans=v?rho*vel*D0/mu:mu/rho;return qNum(G,title,v?`Water-like fluid has \(\rho=${rho}\,kg/m^3\), speed \(${nfmt(vel)}\,m/s\), pipe diameter \(${D0}\,m\), and dynamic viscosity \(${mu}\,Pa\,s\). Find the Reynolds number.`:`A water-like fluid has density \(\rho=${rho}\,kg/m^3\) and dynamic viscosity \(\mu=${mu}\,Pa\,s\). Find its kinematic viscosity \(\nu\) in \(m^2/s\).`,ans,v?`\(Re=\rho vD/\mu=${nfmt(ans)}\).`:`Kinematic viscosity is \(\nu=\mu/\rho=${mu}/${rho}=${nfmt(ans)}\,m^2/s\).`)
+      const rho=ri(900,1200),vel=rand(.2,3),D0=ri(1,8)*.01,mu=pick([.001,.002,.003,.004]),ans=v?rho*vel*D0/mu:mu/rho;return qNum(G,title,v?`Water-like fluid has \\(\\rho=${rho}\\,kg/m^3\\), speed \\(${nfmt(vel)}\\,m/s\\), pipe diameter \\(${D0}\\,m\\), and dynamic viscosity \\(${mu}\\,Pa\\,s\\). Find the Reynolds number.`:`A water-like fluid has density \\(\\rho=${rho}\\,kg/m^3\\) and dynamic viscosity \\(\\mu=${mu}\\,Pa\\,s\\). Find its kinematic viscosity \\(\\nu\\) in \\(m^2/s\\).`,ans,v?`\\(Re=\\rho vD/\\mu=${nfmt(ans)}\\).`:`Kinematic viscosity is \\(\\nu=\\mu/\\rho=${mu}/${rho}=${nfmt(ans)}\\,m^2/s\\).`)
   }
 }
 function makeGeasExpansionFamily23(title){
@@ -203,55 +203,55 @@ NUMERIC_GENERATOR_REGISTRY.geas = [...numericSeedEntries(G, GEAS_EXTRA_NAMES, 'C
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(G,'Normal stress from axial load','geas-normal-stress-force-area',()=>{
   const F=ri(5,40),area=rand(.01,.08),ans=F/(1000*area);
-  return qNum(G,'Normal stress from axial load',`A rod carries an axial force of \(${F}\\,kN\) over cross-sectional area \(A=${nfmt(area)}\\,m^2\). Find normal stress in MPa.`,ans,`\(\\sigma=F/A\). Converting kN/m² to MPa gives \(\\sigma=${F}/(1000\\times${nfmt(area)})=${nfmt(ans)}\\,MPa\).`)
+  return qNum(G,'Normal stress from axial load',`A rod carries an axial force of \\(${F}\\,kN\\) over cross-sectional area \\(A=${nfmt(area)}\\,m^2\\). Find normal stress in MPa.`,ans,`\\(\\sigma=F/A\\). Converting kN/m² to MPa gives \\(\\sigma=${F}/(1000\\times${nfmt(area)})=${nfmt(ans)}\\,MPa\\).`)
 });
 appendNumericRecipe(G,'Field scenario · Hydraulic power of a water pump','scenario-geas-hydraulic-pump-power',()=>{
   const flow=ri(2,20)/1000,head=ri(4,30),eta=pick([.55,.65,.72,.8]),rho=1000,g=9.81,hydraulic=rho*g*flow*head,ans=hydraulic/eta;
-  return qNum(G,'Field scenario · Hydraulic power of a water pump',`A field engineer specifies a pump moving water at \(Q=${nfmt(flow)}\,m^3/s\) against head \(h=${head}\,m\). If pump efficiency is \(\eta=${eta}\), estimate the required input power using \(P_{in}=\rho gQh/\eta\), with \(\rho=1000\,kg/m^3\), \(g=9.81\,m/s^2\).`,ans,`Hydraulic output is \(P_h=\rho gQh=1000(9.81)(${nfmt(flow)})(${head})=${nfmt(hydraulic)}\,W\). The required input is \(P_{in}=P_h/\eta=${nfmt(hydraulic)}/${eta}=${nfmt(ans)}\,W\).`);
+  return qNum(G,'Field scenario · Hydraulic power of a water pump',`A field engineer specifies a pump moving water at \\(Q=${nfmt(flow)}\\,m^3/s\\) against head \\(h=${head}\\,m\\). If pump efficiency is \\(\\eta=${eta}\\), estimate the required input power using \\(P_{in}=\\rho gQh/\\eta\\), with \\(\\rho=1000\\,kg/m^3\\), \\(g=9.81\\,m/s^2\\).`,ans,`Hydraulic output is \\(P_h=\\rho gQh=1000(9.81)(${nfmt(flow)})(${head})=${nfmt(hydraulic)}\\,W\\). The required input is \\(P_{in}=P_h/\\eta=${nfmt(hydraulic)}/${eta}=${nfmt(ans)}\\,W\\).`);
 });
 appendNumericRecipe(G,'Applied · Heat required to warm a test component','scenario-geas-component-heating',()=>{
   const m=ri(1,12)/10,cp=ri(350,900),dt=ri(10,70),ans=m*cp*dt;
-  return qNum(G,'Applied · Heat required to warm a test component',`A component of mass \(m=${nfmt(m)}\,kg\) and specific heat \(c_p=${cp}\,J/(kg\cdot K)\) warms by \(\Delta T=${dt}\,K\). Neglecting losses, calculate heat input \(Q=mc_p\Delta T\).`,ans,`\(Q=mc_p\Delta T=${nfmt(m)}(${cp})(${dt})=${nfmt(ans)}\,J\).`);
+  return qNum(G,'Applied · Heat required to warm a test component',`A component of mass \\(m=${nfmt(m)}\\,kg\\) and specific heat \\(c_p=${cp}\\,J/(kg\\cdot K)\\) warms by \\(\\Delta T=${dt}\\,K\\). Neglecting losses, calculate heat input \\(Q=mc_p\\Delta T\\).`,ans,`\\(Q=mc_p\\Delta T=${nfmt(m)}(${cp})(${dt})=${nfmt(ans)}\\,J\\).`);
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('geas','Additional · Specific gravity from sample density','geas-topup-01',()=>{
   const rho=ri(650,1400),ans=rho/1000;
-  return qNum(G,'Specific gravity from sample density',`A liquid sample has density \(${rho}\,kg/m^3\). Using water density \(1000\,kg/m^3\), find its specific gravity.`,ans,`Specific gravity is the density ratio: \(SG=${rho}/1000=${nfmt(ans)}\), dimensionless.`);
+  return qNum(G,'Specific gravity from sample density',`A liquid sample has density \\(${rho}\\,kg/m^3\\). Using water density \\(1000\\,kg/m^3\\), find its specific gravity.`,ans,`Specific gravity is the density ratio: \\(SG=${rho}/1000=${nfmt(ans)}\\), dimensionless.`);
 });
 appendNumericRecipe('geas','Additional · Hydraulic pressure from force and piston area','geas-topup-02',()=>{
   const F=ri(100,4000),Acm=ri(2,50),ans=F/(Acm/10000);
-  return qNum(G,'Hydraulic pressure from force and piston area',`A hydraulic piston carries force \(${F}\,N\) over area \(${Acm}\,cm^2\). Find pressure in Pa.`,ans,`Convert area: \(A=${Acm}\times10^{-4}\,m^2\). Then \(p=F/A=${F}/(${Acm}\times10^{-4})=${nfmt(ans)}\,Pa\).`);
+  return qNum(G,'Hydraulic pressure from force and piston area',`A hydraulic piston carries force \\(${F}\\,N\\) over area \\(${Acm}\\,cm^2\\). Find pressure in Pa.`,ans,`Convert area: \\(A=${Acm}\\times10^{-4}\\,m^2\\). Then \\(p=F/A=${F}/(${Acm}\\times10^{-4})=${nfmt(ans)}\\,Pa\\).`);
 });
 appendNumericRecipe('geas','Additional · Mechanical power from force and speed','geas-topup-03',()=>{
   const F=ri(20,800),v=rand(.5,8),ans=F*v;
-  return qNum(G,'Mechanical power from force and speed',`A motor moves a load with force \(${F}\,N\) at constant speed \(${nfmt(v)}\,m/s\). Find mechanical power in watts.`,ans,`When force and velocity are parallel, \(P=Fv=${F}(${nfmt(v)})=${nfmt(ans)}\,W\).`);
+  return qNum(G,'Mechanical power from force and speed',`A motor moves a load with force \\(${F}\\,N\\) at constant speed \\(${nfmt(v)}\\,m/s\\). Find mechanical power in watts.`,ans,`When force and velocity are parallel, \\(P=Fv=${F}(${nfmt(v)})=${nfmt(ans)}\\,W\\).`);
 });
 appendNumericRecipe('geas','Additional · Device efficiency from input and output power','geas-topup-04',()=>{
   const input=ri(300,2500),output=ri(100,input-1),ans=100*output/input;
-  return qNum(G,'Device efficiency from input and output power',`A device receives \(${input}\,W\) and delivers useful output \(${output}\,W\). Find efficiency in percent.`,ans,`\(\eta=100P_{out}/P_{in}=100(${output})/${input}=${nfmt(ans)}\%\).`,'percent');
+  return qNum(G,'Device efficiency from input and output power',`A device receives \\(${input}\\,W\\) and delivers useful output \\(${output}\\,W\\). Find efficiency in percent.`,ans,`\\(\\eta=100P_{out}/P_{in}=100(${output})/${input}=${nfmt(ans)}\\%\\).`,'percent');
 });
 appendNumericRecipe('geas','Additional · Torque from a perpendicular force','geas-topup-05',()=>{
   const F=ri(10,300),r=rand(.1,2),ans=F*r;
-  return qNum(G,'Torque from a perpendicular force',`A perpendicular force \(${F}\,N\) acts \(${nfmt(r)}\,m\) from a pivot. Find torque magnitude.`,ans,`For a perpendicular force, \(\tau=rF=${nfmt(r)}(${F})=${nfmt(ans)}\,N\,m\).`);
+  return qNum(G,'Torque from a perpendicular force',`A perpendicular force \\(${F}\\,N\\) acts \\(${nfmt(r)}\\,m\\) from a pivot. Find torque magnitude.`,ans,`For a perpendicular force, \\(\\tau=rF=${nfmt(r)}(${F})=${nfmt(ans)}\\,N\\,m\\).`);
 });
 appendNumericRecipe('geas','Additional · Centripetal acceleration','geas-topup-06',()=>{
   const v=ri(2,30),r=ri(2,25),ans=v*v/r;
-  return qNum(G,'Centripetal acceleration',`A test mass moves in a circle of radius \(${r}\,m\) at speed \(${v}\,m/s\). Find centripetal acceleration.`,ans,`\(a_c=v^2/r=${v}^2/${r}=${nfmt(ans)}\,m/s^2\).`);
+  return qNum(G,'Centripetal acceleration',`A test mass moves in a circle of radius \\(${r}\\,m\\) at speed \\(${v}\\,m/s\\). Find centripetal acceleration.`,ans,`\\(a_c=v^2/r=${v}^2/${r}=${nfmt(ans)}\\,m/s^2\\).`);
 });
 appendNumericRecipe('geas','Additional · Linear thermal expansion','geas-topup-07',()=>{
   const L=ri(1,12),alpha=pick([1.1e-5,1.7e-5,2.3e-5]),dT=ri(20,120),ans=L*alpha*dT;
-  return qNum(G,'Linear thermal expansion',`A \(${L}\,m\) bar has expansion coefficient \(\alpha=${alpha}\,K^{-1}\). If temperature rises by \(${dT}\,K\), find \(\Delta L\) in metres.`,ans,`\(\Delta L=\alpha L\Delta T=${alpha}(${L})(${dT})=${nfmt(ans)}\,m\).`);
+  return qNum(G,'Linear thermal expansion',`A \\(${L}\\,m\\) bar has expansion coefficient \\(\\alpha=${alpha}\\,K^{-1}\\). If temperature rises by \\(${dT}\\,K\\), find \\(\\Delta L\\) in metres.`,ans,`\\(\\Delta L=\\alpha L\\Delta T=${alpha}(${L})(${dT})=${nfmt(ans)}\\,m\\).`);
 });
 appendNumericRecipe('geas','Additional · Elastic potential energy in a spring','geas-topup-08',()=>{
   const k=ri(100,1200),x=rand(.01,.15),ans=.5*k*x*x;
-  return qNum(G,'Elastic potential energy in a spring',`A spring has stiffness \(k=${k}\,N/m\) and extension \(x=${nfmt(x)}\,m\). Find stored elastic potential energy.`,ans,`\(U=\frac12kx^2=0.5(${k})(${nfmt(x)})^2=${nfmt(ans)}\,J\).`);
+  return qNum(G,'Elastic potential energy in a spring',`A spring has stiffness \\(k=${k}\\,N/m\\) and extension \\(x=${nfmt(x)}\\,m\\). Find stored elastic potential energy.`,ans,`\\(U=\\frac12kx^2=0.5(${k})(${nfmt(x)})^2=${nfmt(ans)}\\,J\\).`);
 });
 appendNumericRecipe('geas','Additional · Normal stress from axial loading','geas-topup-09',()=>{
   const F=ri(800,12000),Amm=ri(20,150),ans=F/(Amm*1e-6)/1e6;
-  return qNum(G,'Normal stress from axial loading',`A specimen carries axial force \(${F}\,N\) on cross-sectional area \(${Amm}\,mm^2\). Find normal stress in MPa.`,ans,`\(\sigma=F/A=${F}/(${Amm}\times10^{-6})\,Pa=${nfmt(ans)}\,MPa\).`);
+  return qNum(G,'Normal stress from axial loading',`A specimen carries axial force \\(${F}\\,N\\) on cross-sectional area \\(${Amm}\\,mm^2\\). Find normal stress in MPa.`,ans,`\\(\\sigma=F/A=${F}/(${Amm}\\times10^{-6})\\,Pa=${nfmt(ans)}\\,MPa\\).`);
 });
 appendNumericRecipe('geas','Additional · Reynolds number for pipe flow','geas-topup-10',()=>{
   const rho=ri(850,1200),v=rand(.1,2),D=rand(.01,.08),mu=rand(.0008,.003),ans=rho*v*D/mu;
-  return qNum(G,'Reynolds number for pipe flow',`A fluid has density \(\rho=${rho}\,kg/m^3\), mean speed \(v=${nfmt(v)}\,m/s\), pipe diameter \(D=${nfmt(D)}\,m\), and dynamic viscosity \(\mu=${nfmt(mu)}\,Pa\,s\). Find Reynolds number.`,ans,`\(Re=\rho vD/\mu=${rho}(${nfmt(v)})(${nfmt(D)})/${nfmt(mu)}=${nfmt(ans)}\), dimensionless.`);
+  return qNum(G,'Reynolds number for pipe flow',`A fluid has density \\(\\rho=${rho}\\,kg/m^3\\), mean speed \\(v=${nfmt(v)}\\,m/s\\), pipe diameter \\(D=${nfmt(D)}\\,m\\), and dynamic viscosity \\(\\mu=${nfmt(mu)}\\,Pa\\,s\\). Find Reynolds number.`,ans,`\\(Re=\\rho vD/\\mu=${rho}(${nfmt(v)})(${nfmt(D)})/${nfmt(mu)}=${nfmt(ans)}\\), dimensionless.`);
 });

@@ -203,57 +203,57 @@ NUMERIC_GENERATOR_REGISTRY.probability = [...numericSeedEntries(PB, PROBABILITY_
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(PB,'Expected successes in sampling without replacement','probability-hypergeometric-expectation',()=>{
   const N0=ri(12,30),K=ri(2,N0-2),n=ri(2,Math.min(8,N0-1)),ans=n*K/N0;
-  return qNum(PB,'Expected successes in sampling without replacement',`A lot has \(N=${N0}\) items, of which \(K=${K}\) are defective. A sample of \(n=${n}\) is drawn without replacement. Find the expected number of defectives.`,ans,`For a hypergeometric random variable, \(E[X]=nK/N=${n}(${K})/${N0}=${nfmt(ans)}\).`)
+  return qNum(PB,'Expected successes in sampling without replacement',`A lot has \\(N=${N0}\\) items, of which \\(K=${K}\\) are defective. A sample of \\(n=${n}\\) is drawn without replacement. Find the expected number of defectives.`,ans,`For a hypergeometric random variable, \\(E[X]=nK/N=${n}(${K})/${N0}=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(PB,'Field scenario · Expected defective modules in a batch','scenario-probability-expected-defects',()=>{
   const n=ri(20,80),p=pick([.01,.02,.03,.05,.08]),ans=n*p;
-  return qNum(PB,'Field scenario · Expected defective modules in a batch',`A production line ships batches of \(${n}\) modules. The historical defective probability per module is \(p=${p}\), independently. Find the expected number of defective modules in one batch.`,ans,`For a binomial count, \(E[X]=np=${n}(${p})=${nfmt(ans)}\) defective modules.`);
+  return qNum(PB,'Field scenario · Expected defective modules in a batch',`A production line ships batches of \\(${n}\\) modules. The historical defective probability per module is \\(p=${p}\\), independently. Find the expected number of defective modules in one batch.`,ans,`For a binomial count, \\(E[X]=np=${n}(${p})=${nfmt(ans)}\\) defective modules.`);
 });
 appendNumericRecipe(PB,'Applied · Bayes rule for a fault alarm','scenario-probability-bayes-fault-alarm',()=>{
   const prevalence=pick([.01,.02,.04]),sensitivity=pick([.9,.95,.98]),falsePositive=pick([.03,.05,.08]),ans=prevalence*sensitivity/(prevalence*sensitivity+(1-prevalence)*falsePositive);
-  return qNum(PB,'Applied · Bayes rule for a fault alarm',`A diagnostic alarm monitors an electronic unit. A true fault occurs with probability \(${prevalence}\); the alarm detects a true fault with probability \(${sensitivity}\), and has false-positive probability \(${falsePositive}\) when no fault is present. Given an alarm, find the probability that a true fault exists.`,ans,`By Bayes' rule, \(P(F\mid A)=\frac{P(A\mid F)P(F)}{P(A\mid F)P(F)+P(A\mid F^c)P(F^c)}=\frac{${sensitivity}(${prevalence})}{${sensitivity}(${prevalence})+${falsePositive}(1-${prevalence})}=${nfmt(ans)}\).`);
+  return qNum(PB,'Applied · Bayes rule for a fault alarm',`A diagnostic alarm monitors an electronic unit. A true fault occurs with probability \\(${prevalence}\\); the alarm detects a true fault with probability \\(${sensitivity}\\), and has false-positive probability \\(${falsePositive}\\) when no fault is present. Given an alarm, find the probability that a true fault exists.`,ans,`By Bayes' rule, \\(P(F\\mid A)=\\frac{P(A\\mid F)P(F)}{P(A\\mid F)P(F)+P(A\\mid F^c)P(F^c)}=\\frac{${sensitivity}(${prevalence})}{${sensitivity}(${prevalence})+${falsePositive}(1-${prevalence})}=${nfmt(ans)}\\).`);
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('probability','Additional · Conditional probability from counts','probability-topup-01',()=>{
   const a=ri(10,60),b=ri(5,40),c=ri(5,40),ans=a/(a+b);
-  return qNum(PB,'Conditional probability from counts',`In a batch, ${a} items have both properties A and B, while ${b} additional items have A but not B. Given that an item has A, find the probability it also has B.`,ans,`Among the \(${a+b}\) items with A, \(${a}\) also have B. Thus \(P(B\mid A)=${a}/(${a}+${b})=${nfmt(ans)}\).`);
+  return qNum(PB,'Conditional probability from counts',`In a batch, ${a} items have both properties A and B, while ${b} additional items have A but not B. Given that an item has A, find the probability it also has B.`,ans,`Among the \\(${a+b}\\) items with A, \\(${a}\\) also have B. Thus \\(P(B\\mid A)=${a}/(${a}+${b})=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('probability','Additional · Expected value of a discrete score','probability-topup-02',()=>{
   const p=pick([.2,.25,.3,.4,.5]),x1=ri(1,5),x2=ri(6,12),ans=p*x1+(1-p)*x2;
-  return qNum(PB,'Expected value of a discrete score',`A score is \(${x1}\) with probability \(${nfmt(p)}\) and \(${x2}\) otherwise. Find its expected value.`,ans,`\(E[X]=${x1}(${nfmt(p)})+${x2}(1-${nfmt(p)})=${nfmt(ans)}\).`);
+  return qNum(PB,'Expected value of a discrete score',`A score is \\(${x1}\\) with probability \\(${nfmt(p)}\\) and \\(${x2}\\) otherwise. Find its expected value.`,ans,`\\(E[X]=${x1}(${nfmt(p)})+${x2}(1-${nfmt(p)})=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('probability','Additional · Zero-success probability in a binomial model','probability-topup-03',()=>{
   const n=ri(4,18),p=pick([.1,.2,.25,.3,.4,.5]),ans=(1-p)**n;
-  return qNum(PB,'Zero-success probability in a binomial model',`For \(X\sim Binomial(n=${n},p=${nfmt(p)})\), find \(P(X=0)\).`,ans,`\(P(X=0)=\binom n0p^0(1-p)^n=(1-${nfmt(p)})^{${n}}=${nfmt(ans)}\).`);
+  return qNum(PB,'Zero-success probability in a binomial model',`For \\(X\\sim Binomial(n=${n},p=${nfmt(p)})\\), find \\(P(X=0)\\).`,ans,`\\(P(X=0)=\\binom n0p^0(1-p)^n=(1-${nfmt(p)})^{${n}}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('probability','Additional · At least one event in independent trials','probability-topup-04',()=>{
   const n=ri(3,15),p=pick([.1,.15,.2,.25,.3,.4]),ans=1-(1-p)**n;
-  return qNum(PB,'At least one event in independent trials',`An event occurs independently with probability \(${nfmt(p)}\) on each of \(${n}\) trials. Find the probability it occurs at least once.`,ans,`Use the complement: \(P(\ge1)=1-(1-p)^n=1-(1-${nfmt(p)})^{${n}}=${nfmt(ans)}\).`);
+  return qNum(PB,'At least one event in independent trials',`An event occurs independently with probability \\(${nfmt(p)}\\) on each of \\(${n}\\) trials. Find the probability it occurs at least once.`,ans,`Use the complement: \\(P(\\ge1)=1-(1-p)^n=1-(1-${nfmt(p)})^{${n}}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('probability','Additional · Standard normal z-score','probability-topup-05',()=>{
   const x=rand(60,120),mu=rand(65,100),sd=rand(5,18),ans=(x-mu)/sd;
-  return qNum(PB,'Standard normal z-score',`A measurement \(x=${nfmt(x)}\) comes from a distribution with mean \(\mu=${nfmt(mu)}\) and standard deviation \(\sigma=${nfmt(sd)}\). Find its z-score.`,ans,`\(z=(x-\mu)/\sigma=(${nfmt(x)}-${nfmt(mu)})/${nfmt(sd)}=${nfmt(ans)}\).`);
+  return qNum(PB,'Standard normal z-score',`A measurement \\(x=${nfmt(x)}\\) comes from a distribution with mean \\(\\mu=${nfmt(mu)}\\) and standard deviation \\(\\sigma=${nfmt(sd)}\\). Find its z-score.`,ans,`\\(z=(x-\\mu)/\\sigma=(${nfmt(x)}-${nfmt(mu)})/${nfmt(sd)}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('probability','Additional · Hypergeometric probability of one selected defect','probability-topup-06',()=>{
   const N=ri(12,30),K=ri(2,Math.floor(N/2)),n=ri(2,Math.min(5,N-1)),k=1;
   const comb=(a,b)=>{if(b<0||b>a)return 0;b=Math.min(b,a-b);let out=1;for(let i=1;i<=b;i++)out=out*(a-b+i)/i;return out};
   const ans=comb(K,k)*comb(N-K,n-k)/comb(N,n);
-  return qNum(PB,'Hypergeometric probability of one selected defect',`A lot has \(${N}\) items including \(${K}\) defective. A sample of \(${n}\) is taken without replacement. Find the probability of exactly one defective item.`,ans,`\(P(X=1)=\binom K1\binom{N-K}{n-1}/\binom Nn=${nfmt(ans)}\).`);
+  return qNum(PB,'Hypergeometric probability of one selected defect',`A lot has \\(${N}\\) items including \\(${K}\\) defective. A sample of \\(${n}\\) is taken without replacement. Find the probability of exactly one defective item.`,ans,`\\(P(X=1)=\\binom K1\\binom{N-K}{n-1}/\\binom Nn=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('probability','Additional · Poisson probability of no arrivals','probability-topup-07',()=>{
   const lambda=rand(.5,8),ans=Math.exp(-lambda);
-  return qNum(PB,'Poisson probability of no arrivals',`Arrivals follow a Poisson model with mean \(\lambda=${nfmt(lambda)}\) per interval. Find the probability of zero arrivals.`,ans,`\(P(X=0)=e^{-\lambda}\lambda^0/0!=e^{-${nfmt(lambda)}}=${nfmt(ans)}\).`);
+  return qNum(PB,'Poisson probability of no arrivals',`Arrivals follow a Poisson model with mean \\(\\lambda=${nfmt(lambda)}\\) per interval. Find the probability of zero arrivals.`,ans,`\\(P(X=0)=e^{-\\lambda}\\lambda^0/0!=e^{-${nfmt(lambda)}}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('probability','Additional · Variance of a binomial count','probability-topup-08',()=>{
   const n=ri(5,40),p=pick([.1,.2,.3,.4,.5,.6]),ans=n*p*(1-p);
-  return qNum(PB,'Variance of a binomial count',`For \(X\sim Binomial(n=${n},p=${nfmt(p)})\), find \(Var(X)\).`,ans,`\(Var(X)=np(1-p)=${n}(${nfmt(p)})(1-${nfmt(p)})=${nfmt(ans)}\).`);
+  return qNum(PB,'Variance of a binomial count',`For \\(X\\sim Binomial(n=${n},p=${nfmt(p)})\\), find \\(Var(X)\\).`,ans,`\\(Var(X)=np(1-p)=${n}(${nfmt(p)})(1-${nfmt(p)})=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('probability','Additional · Probability from odds in favor','probability-topup-09',()=>{
   const odds=ri(1,12),ans=odds/(odds+1);
-  return qNum(PB,'Probability from odds in favor',`The odds in favor of an event are \(${odds}:1\). Find the event probability.`,ans,`Odds \(a:b\) correspond to probability \(a/(a+b)\). Therefore \(P=${odds}/(${odds}+1)=${nfmt(ans)}\).`);
+  return qNum(PB,'Probability from odds in favor',`The odds in favor of an event are \\(${odds}:1\\). Find the event probability.`,ans,`Odds \\(a:b\\) correspond to probability \\(a/(a+b)\\). Therefore \\(P=${odds}/(${odds}+1)=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('probability','Additional · Standard deviation of a sample mean','probability-topup-10',()=>{
   const sigma=rand(2,15),n=ri(4,100),ans=sigma/Math.sqrt(n);
-  return qNum(PB,'Standard deviation of a sample mean',`A population has standard deviation \(\sigma=${nfmt(sigma)}\). For independent sample size \(n=${n}\), find the standard deviation of the sample mean.`,ans,`\(\sigma_{\bar X}=\sigma/\sqrt n=${nfmt(sigma)}/\sqrt{${n}}=${nfmt(ans)}\).`);
+  return qNum(PB,'Standard deviation of a sample mean',`A population has standard deviation \\(\\sigma=${nfmt(sigma)}\\). For independent sample size \\(n=${n}\\), find the standard deviation of the sample mean.`,ans,`\\(\\sigma_{\\bar X}=\\sigma/\\sqrt n=${nfmt(sigma)}/\\sqrt{${n}}=${nfmt(ans)}\\).`);
 });

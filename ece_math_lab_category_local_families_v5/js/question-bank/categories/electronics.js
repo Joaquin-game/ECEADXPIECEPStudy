@@ -203,57 +203,57 @@ NUMERIC_GENERATOR_REGISTRY.electronics = [...numericSeedEntries(EC, ELECTRONICS_
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(EC,'Field scenario · Sensor voltage divider output','scenario-electronics-voltage-divider-diagram',()=>{
   const Vin=ri(5,24),R1=ri(1,10),R2=ri(1,10),ans=Vin*R2/(R1+R2);
-  const q=qNum(EC,'Field scenario · Sensor voltage divider output',`A sensor interface uses a divider with \(V_{in}=${Vin}\,V\), upper resistor \(R_1=${R1}\,k\Omega\), and lower resistor \(R_2=${R2}\,k\Omega\). The output is measured across \(R_2\). Find \(V_{out}\).`,ans,`\(V_{out}=V_{in}\frac{R_2}{R_1+R_2}=${Vin}\frac{${R2}}{${R1}+${R2}}=${nfmt(ans)}\,V\).`);
+  const q=qNum(EC,'Field scenario · Sensor voltage divider output',`A sensor interface uses a divider with \\(V_{in}=${Vin}\\,V\\), upper resistor \\(R_1=${R1}\\,k\\Omega\\), and lower resistor \\(R_2=${R2}\\,k\\Omega\\). The output is measured across \\(R_2\\). Find \\(V_{out}\\).`,ans,`\\(V_{out}=V_{in}\\frac{R_2}{R_1+R_2}=${Vin}\\frac{${R2}}{${R1}+${R2}}=${nfmt(ans)}\\,V\\).`);
   return attachDiagram(q,'circuit','The input source Vin connects to R1 then to the output node; R2 connects from the output node to ground. Vout is measured across R2.');
 });
 appendNumericRecipe(EC,'Applied · Forward-biased diode current','scenario-electronics-diode-current',()=>{
   const Vs=ri(4,15),R=ri(1,10),Vd=.7,ans=(Vs-Vd)/R;
-  const q=qNum(EC,'Applied · Forward-biased diode current',`A silicon indicator diode with constant forward drop \(V_D=0.7\,V\) is driven from a \(${Vs}\,V\) DC supply through \(R=${R}\,k\Omega\). Under the constant-drop model, find current in mA.`,ans,`By KVL, \(I=(V_s-V_D)/R=(${Vs}-0.7)/${R}=${nfmt(ans)}\,mA\), since volts divided by kΩ gives mA.`);
+  const q=qNum(EC,'Applied · Forward-biased diode current',`A silicon indicator diode with constant forward drop \\(V_D=0.7\\,V\\) is driven from a \\(${Vs}\\,V\\) DC supply through \\(R=${R}\\,k\\Omega\\). Under the constant-drop model, find current in mA.`,ans,`By KVL, \\(I=(V_s-V_D)/R=(${Vs}-0.7)/${R}=${nfmt(ans)}\\,mA\\), since volts divided by kΩ gives mA.`);
   return attachDiagram(q,'diodeCircuit','A DC supply Vs drives a series resistor R and a forward-biased silicon diode to the return node; the diode drop is modeled as 0.7 V.');
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('electronics','Additional · Current from Ohm law','electronics-topup-01',()=>{
   const V=ri(3,24),R=ri(1,12),ans=V/R;
-  return qNum(EC,'Current from Ohm law',`A resistor \(${R}\,k\Omega\) has \(${V}\,V\) across it. Find current in mA.`,ans,`By Ohm's law, \(I=V/R=${V}/${R}=${nfmt(ans)}\,mA\), since V/kΩ = mA.`);
+  return qNum(EC,'Current from Ohm law',`A resistor \\(${R}\\,k\\Omega\\) has \\(${V}\\,V\\) across it. Find current in mA.`,ans,`By Ohm's law, \\(I=V/R=${V}/${R}=${nfmt(ans)}\\,mA\\), since V/kΩ = mA.`);
 });
 appendNumericRecipe('electronics','Additional · Equivalent resistance of series resistors','electronics-topup-02',()=>{
   const r1=ri(1,12),r2=ri(1,12),r3=ri(1,12),ans=r1+r2+r3;
-  return qNum(EC,'Equivalent resistance of series resistors',`Three resistors of \(${r1}\,k\Omega\), \(${r2}\,k\Omega\), and \(${r3}\,k\Omega\) are in series. Find equivalent resistance in kΩ.`,ans,`Series resistances add: \(R_{eq}=${r1}+${r2}+${r3}=${ans}\,k\Omega\).`);
+  return qNum(EC,'Equivalent resistance of series resistors',`Three resistors of \\(${r1}\\,k\\Omega\\), \\(${r2}\\,k\\Omega\\), and \\(${r3}\\,k\\Omega\\) are in series. Find equivalent resistance in kΩ.`,ans,`Series resistances add: \\(R_{eq}=${r1}+${r2}+${r3}=${ans}\\,k\\Omega\\).`);
 });
 appendNumericRecipe('electronics','Additional · Equivalent resistance of two parallel resistors','electronics-topup-03',()=>{
   const r1=ri(1,12),r2=ri(1,12),ans=r1*r2/(r1+r2);
-  return qNum(EC,'Equivalent resistance of two parallel resistors',`Two resistors \(${r1}\,k\Omega\) and \(${r2}\,k\Omega\) are connected in parallel. Find equivalent resistance in kΩ.`,ans,`\(R_{eq}=R_1R_2/(R_1+R_2)=${r1}(${r2})/(${r1}+${r2})=${nfmt(ans)}\,k\Omega\).`);
+  return qNum(EC,'Equivalent resistance of two parallel resistors',`Two resistors \\(${r1}\\,k\\Omega\\) and \\(${r2}\\,k\\Omega\\) are connected in parallel. Find equivalent resistance in kΩ.`,ans,`\\(R_{eq}=R_1R_2/(R_1+R_2)=${r1}(${r2})/(${r1}+${r2})=${nfmt(ans)}\\,k\\Omega\\).`);
 });
 appendNumericRecipe('electronics','Additional · RC time constant','electronics-topup-04',()=>{
   const R=ri(2,100),C=ri(1,80),ans=R*C/1000;
-  return qNum(EC,'RC time constant',`An RC circuit has \(R=${R}\,k\Omega\) and \(C=${C}\,\mu F\). Find time constant in seconds.`,ans,`\(\tau=RC=(${R}\times10^3)(${C}\times10^{-6})=${nfmt(ans)}\,s\).`);
+  return qNum(EC,'RC time constant',`An RC circuit has \\(R=${R}\\,k\\Omega\\) and \\(C=${C}\\,\\mu F\\). Find time constant in seconds.`,ans,`\\(\\tau=RC=(${R}\\times10^3)(${C}\\times10^{-6})=${nfmt(ans)}\\,s\\).`);
 });
 appendNumericRecipe('electronics','Additional · Inductive reactance','electronics-topup-05',()=>{
   const f=ri(50,2000),Lmh=ri(1,40),ans=2*Math.PI*f*(Lmh/1000);
-  return qNum(EC,'Inductive reactance',`An inductor of \(${Lmh}\,mH\) operates at \(${f}\,Hz\). Find inductive reactance.`,ans,`\(X_L=2\pi fL=2\pi(${f})(${Lmh}/1000)=${nfmt(ans)}\,\Omega\).`);
+  return qNum(EC,'Inductive reactance',`An inductor of \\(${Lmh}\\,mH\\) operates at \\(${f}\\,Hz\\). Find inductive reactance.`,ans,`\\(X_L=2\\pi fL=2\\pi(${f})(${Lmh}/1000)=${nfmt(ans)}\\,\\Omega\\).`);
 });
 appendNumericRecipe('electronics','Additional · Capacitive reactance','electronics-topup-06',()=>{
   const f=ri(100,2000),Cmicro=ri(1,50),ans=1/(2*Math.PI*f*Cmicro*1e-6);
-  return qNum(EC,'Capacitive reactance',`A capacitor of \(${Cmicro}\,\mu F\) operates at \(${f}\,Hz\). Find capacitive reactance in ohms.`,ans,`\(X_C=1/(2\pi fC)=1/[2\pi(${f})(${Cmicro}\times10^{-6})]=${nfmt(ans)}\,\Omega\).`);
+  return qNum(EC,'Capacitive reactance',`A capacitor of \\(${Cmicro}\\,\\mu F\\) operates at \\(${f}\\,Hz\\). Find capacitive reactance in ohms.`,ans,`\\(X_C=1/(2\\pi fC)=1/[2\\pi(${f})(${Cmicro}\\times10^{-6})]=${nfmt(ans)}\\,\\Omega\\).`);
 });
 appendNumericRecipe('electronics','Additional · Voltage gain expressed in decibels','electronics-topup-07',()=>{
   const vin=pick([.1,.2,.5,1,2]),gain=pick([.25,.5,2,4,10]),ans=20*Math.log10(gain);
-  return qNum(EC,'Voltage gain expressed in decibels',`An amplifier has voltage gain \(A_v=${nfmt(gain)}\) and input \(${nfmt(vin)}\,V\). Find voltage gain in dB.`,ans,`For voltage gain, \(G_{dB}=20\log_{10}|A_v|=20\log_{10}(${nfmt(gain)})=${nfmt(ans)}\,dB\).`);
+  return qNum(EC,'Voltage gain expressed in decibels',`An amplifier has voltage gain \\(A_v=${nfmt(gain)}\\) and input \\(${nfmt(vin)}\\,V\\). Find voltage gain in dB.`,ans,`For voltage gain, \\(G_{dB}=20\\log_{10}|A_v|=20\\log_{10}(${nfmt(gain)})=${nfmt(ans)}\\,dB\\).`);
 });
 appendNumericRecipe('electronics','Additional · Voltage gain from input and output amplitudes','electronics-topup-08',()=>{
   const vin=pick([.1,.2,.5,1,2]),gain=pick([2,3,4,5,8]),vout=vin*gain,ans=vout/vin;
-  return qNum(EC,'Voltage gain from input and output amplitudes',`An amplifier changes an input amplitude of \(${nfmt(vin)}\,V\) to output amplitude \(${nfmt(vout)}\,V\). Find voltage gain.`,ans,`\(A_v=V_{out}/V_{in}=${nfmt(vout)}/${nfmt(vin)}=${nfmt(ans)}\).`);
+  return qNum(EC,'Voltage gain from input and output amplitudes',`An amplifier changes an input amplitude of \\(${nfmt(vin)}\\,V\\) to output amplitude \\(${nfmt(vout)}\\,V\\). Find voltage gain.`,ans,`\\(A_v=V_{out}/V_{in}=${nfmt(vout)}/${nfmt(vin)}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('electronics','Additional · BJT collector current from current gain','electronics-topup-09',()=>{
   const beta=ri(40,180),Ib=rand(10,100),ans=beta*Ib/1000;
-  return qNum(EC,'BJT collector current from current gain',`A BJT has current gain \(\beta=${beta}\) and base current \(I_B=${nfmt(Ib)}\,\mu A\). Estimate collector current in mA using \(I_C=\beta I_B\).`,ans,`\(I_C=${beta}(${nfmt(Ib)}\,\mu A)=${nfmt(ans)}\,mA\).`);
+  return qNum(EC,'BJT collector current from current gain',`A BJT has current gain \\(\\beta=${beta}\\) and base current \\(I_B=${nfmt(Ib)}\\,\\mu A\\). Estimate collector current in mA using \\(I_C=\\beta I_B\\).`,ans,`\\(I_C=${beta}(${nfmt(Ib)}\\,\\mu A)=${nfmt(ans)}\\,mA\\).`);
 });
 appendNumericRecipe('electronics','Additional · Charge on a capacitor','electronics-topup-10',()=>{
   const C=ri(2,100),V=ri(2,24),ans=C*V;
-  return qNum(EC,'Charge on a capacitor',`A capacitor of \(${C}\,\mu F\) is charged to \(${V}\,V\). Find charge in \(\mu C\).`,ans,`\(Q=CV=${C}\,\mu F\times${V}\,V=${ans}\,\mu C\).`);
+  return qNum(EC,'Charge on a capacitor',`A capacitor of \\(${C}\\,\\mu F\\) is charged to \\(${V}\\,V\\). Find charge in \\(\\mu C\\).`,ans,`\\(Q=CV=${C}\\,\\mu F\\times${V}\\,V=${ans}\\,\\mu C\\).`);
 });
 appendNumericRecipe('electronics','Additional · Ideal transformer output voltage','electronics-topup-11',()=>{
   const vp=ri(110,240),np=ri(200,1200),ns=ri(100,1800),ans=vp*ns/np;
-  return qNum(EC,'Ideal transformer output voltage',`An ideal transformer has primary voltage \(V_p=${vp}\,V\), primary turns \(N_p=${np}\), and secondary turns \(N_s=${ns}\). Find secondary voltage.`,ans,`\(V_s/V_p=N_s/N_p\), so \(V_s=${vp}(${ns}/${np})=${nfmt(ans)}\,V\).`);
+  return qNum(EC,'Ideal transformer output voltage',`An ideal transformer has primary voltage \\(V_p=${vp}\\,V\\), primary turns \\(N_p=${np}\\), and secondary turns \\(N_s=${ns}\\). Find secondary voltage.`,ans,`\\(V_s/V_p=N_s/N_p\\), so \\(V_s=${vp}(${ns}/${np})=${nfmt(ans)}\\,V\\).`);
 });

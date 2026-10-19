@@ -190,33 +190,33 @@ NUMERIC_GENERATOR_REGISTRY.em = [...coreSeedEntries(E, EM_CORE_SEEDS),
 appendNumericRecipe(E,'Field scenario · Magnetic dipole in a coil','scenario-em-magnetic-dipole-coil',()=>makeEmScenario(0));
 appendNumericRecipe(E,'Field scenario · Motional emf in a generator rail','scenario-em-motional-emf-rail',()=>{
   const B0=ri(2,9)/1000,ell=ri(10,60)/100,v=ri(1,15),ans=B0*ell*v;
-  const q=qNum(E,'Field scenario · Motional emf in a generator rail',`A portable generator has a conducting rod of length \(\ell=${nfmt(ell)}\,m\) sliding at \(v=${v}\,m/s\) perpendicular to a uniform magnetic field \(B=${nfmt(B0)}\,T\). Find the motional emf magnitude.`,ans,`For perpendicular motion, \(\mathcal E=B\ell v=${nfmt(B0)}(${nfmt(ell)})(${v})=${nfmt(ans)}\,V\).`);
+  const q=qNum(E,'Field scenario · Motional emf in a generator rail',`A portable generator has a conducting rod of length \\(\\ell=${nfmt(ell)}\\,m\\) sliding at \\(v=${v}\\,m/s\\) perpendicular to a uniform magnetic field \\(B=${nfmt(B0)}\\,T\\). Find the motional emf magnitude.`,ans,`For perpendicular motion, \\(\\mathcal E=B\\ell v=${nfmt(B0)}(${nfmt(ell)})(${v})=${nfmt(ans)}\\,V\\).`);
   return attachDiagram(q,'motionalEmf','A conducting rod of length ell slides to the right on two conducting rails through a uniform magnetic field directed into the page; the induced motional emf is B ell v.');
 });
 appendNumericRecipe(E,'Field scenario · Torque on a motor coil','scenario-em-motor-coil-torque',()=>{
   const N0=ri(30,180),I0=ri(1,6),area=ri(5,30)/10000,B0=ri(2,8)/10,angle=pick([30,45,60,90]),mu=N0*I0*area,ans=mu*B0*Math.sin(angle*Math.PI/180);
-  const q=qNum(E,'Field scenario · Torque on a motor coil',`A motor coil has \(N=${N0}\) turns, current \(I=${I0}\,A\), area per turn \(A=${nfmt(area)}\,m^2\), and field \(B=${nfmt(B0)}\,T\). The angle between its magnetic moment and the field is \(\theta=${angle}^\circ\). Find torque magnitude.`,ans,`\(\mu=NIA=${N0}(${I0})(${nfmt(area)})=${nfmt(mu)}\,A\cdot m^2\). Then \(\tau=\mu B\sin\theta=${nfmt(mu)}(${nfmt(B0)})\sin(${angle}^\circ)=${nfmt(ans)}\,N\cdot m\).`);
+  const q=qNum(E,'Field scenario · Torque on a motor coil',`A motor coil has \\(N=${N0}\\) turns, current \\(I=${I0}\\,A\\), area per turn \\(A=${nfmt(area)}\\,m^2\\), and field \\(B=${nfmt(B0)}\\,T\\). The angle between its magnetic moment and the field is \\(\\theta=${angle}^\\circ\\). Find torque magnitude.`,ans,`\\(\\mu=NIA=${N0}(${I0})(${nfmt(area)})=${nfmt(mu)}\\,A\\cdot m^2\\). Then \\(\\tau=\\mu B\\sin\\theta=${nfmt(mu)}(${nfmt(B0)})\\sin(${angle}^\\circ)=${nfmt(ans)}\\,N\\cdot m\\).`);
   return attachDiagram(q,'motorTorque','A multi-turn motor coil has magnetic moment mu at angle theta to field B; torque magnitude is mu B sin(theta).');
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('em','Additional · Magnetic force on a moving charge','em-topup-01',()=>{
   const q=ri(1,8),v=ri(2,15),B=rand(.1,1.5),ans=q*v*B;
-  return qNum(E,'Magnetic force on a moving charge',`A charge of \(${q}\,\mu C\) moves at \(${v}\times10^3\,m/s\) perpendicular to a \(${nfmt(B)}\,T\) magnetic field. Find force magnitude in mN.`,ans,`Using the stated scaled units, \(F=|q|vB=${q}(${v})(${nfmt(B)})=${nfmt(ans)}\,mN\).`);
+  return qNum(E,'Magnetic force on a moving charge',`A charge of \\(${q}\\,\\mu C\\) moves at \\(${v}\\times10^3\\,m/s\\) perpendicular to a \\(${nfmt(B)}\\,T\\) magnetic field. Find force magnitude in mN.`,ans,`Using the stated scaled units, \\(F=|q|vB=${q}(${v})(${nfmt(B)})=${nfmt(ans)}\\,mN\\).`);
 });
 appendNumericRecipe('em','Additional · Electric field from force on a test charge','em-topup-02',()=>{
   const F=ri(2,30),q=ri(1,8),ans=F/q;
-  return qNum(E,'Electric field from force on a test charge',`A test charge of \(${q}\,\mu C\) experiences an electric force of \(${F}\,\mu N\). Find the electric field magnitude in N/C.`,ans,`\(E=F/q=${F}\,\mu N/${q}\,\mu C=${nfmt(ans)}\,N/C\).`);
+  return qNum(E,'Electric field from force on a test charge',`A test charge of \\(${q}\\,\\mu C\\) experiences an electric force of \\(${F}\\,\\mu N\\). Find the electric field magnitude in N/C.`,ans,`\\(E=F/q=${F}\\,\\mu N/${q}\\,\\mu C=${nfmt(ans)}\\,N/C\\).`);
 });
 appendNumericRecipe('em','Additional · Energy stored by a capacitor','em-topup-03',()=>{
   const Cmicro=ri(2,30),V=ri(2,25),ans=.5*Cmicro*V*V;
-  return qNum(E,'Energy stored by a capacitor',`A capacitor has \(C=${Cmicro}\,\mu F\) and voltage \(V=${V}\,V\). Find its stored energy in \(\mu J\).`,ans,`\(U=CV^2/2=${Cmicro}(${V})^2/2=${ans}\,\mu J\).`);
+  return qNum(E,'Energy stored by a capacitor',`A capacitor has \\(C=${Cmicro}\\,\\mu F\\) and voltage \\(V=${V}\\,V\\). Find its stored energy in \\(\\mu J\\).`,ans,`\\(U=CV^2/2=${Cmicro}(${V})^2/2=${ans}\\,\\mu J\\).`);
 });
 appendNumericRecipe('em','Additional · Induced emf from changing magnetic flux','em-topup-04',()=>{
   const N=ri(20,300),delta=rand(.001,.05),dt=rand(.01,.3),ans=N*delta/dt;
-  return qNum(E,'Induced emf from changing magnetic flux',`A coil has \(${N}\) turns. Flux per turn changes by \(${nfmt(delta)}\,Wb\) in \(${nfmt(dt)}\,s\). Find the induced emf magnitude.`,ans,`Faraday's law gives \(|\mathcal E|=N|\Delta\Phi|/\Delta t=${N}(${nfmt(delta)})/${nfmt(dt)}=${nfmt(ans)}\,V\).`);
+  return qNum(E,'Induced emf from changing magnetic flux',`A coil has \\(${N}\\) turns. Flux per turn changes by \\(${nfmt(delta)}\\,Wb\\) in \\(${nfmt(dt)}\\,s\\). Find the induced emf magnitude.`,ans,`Faraday's law gives \\(|\\mathcal E|=N|\\Delta\\Phi|/\\Delta t=${N}(${nfmt(delta)})/${nfmt(dt)}=${nfmt(ans)}\\,V\\).`);
 });
 appendNumericRecipe('em','Additional · Electric potential energy of two charges','em-topup-05',()=>{
   const q1=ri(1,8),q2=ri(1,8),r=ri(2,10),ans=9*q1*q2/r;
-  return qNum(E,'Electric potential energy of two charges',`Two positive charges \(${q1}\,\mu C\) and \(${q2}\,\mu C\) are separated by \(${r}\,m\). Using the corresponding scaled Coulomb constant, find potential energy in mJ.`,ans,`\(U=kq_1q_2/r\). With microcoulombs and the requested scale, \(U=9(${q1})(${q2})/${r}=${nfmt(ans)}\,mJ\).`);
+  return qNum(E,'Electric potential energy of two charges',`Two positive charges \\(${q1}\\,\\mu C\\) and \\(${q2}\\,\\mu C\\) are separated by \\(${r}\\,m\\). Using the corresponding scaled Coulomb constant, find potential energy in mJ.`,ans,`\\(U=kq_1q_2/r\\). With microcoulombs and the requested scale, \\(U=9(${q1})(${q2})/${r}=${nfmt(ans)}\\,mJ\\).`);
 });

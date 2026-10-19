@@ -194,21 +194,21 @@ appendNumericRecipe(N,'Field scenario · Capital recovery on plant upgrade','sce
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('econ','Additional · Present worth of a uniform annual benefit','econ-topup-01',()=>{
   const A0=ri(1000,12000),i=pick([.03,.05,.07,.1,.12]),n=ri(3,12),ans=A0*(1-(1+i)**(-n))/i;
-  return qNum(N,'Present worth of a uniform annual benefit',`A monitoring upgrade yields annual savings of \(\$${A0}\) for \(${n}\) years. At \(${nfmt(100*i)}\%\), find present worth of the uniform savings.`,ans,`\(P=A[1-(1+i)^{-n}]/i=${A0}[1-(1+${nfmt(i)})^{-${n}}]/${nfmt(i)}=${nfmt(ans)}\).`);
+  return qNum(N,'Present worth of a uniform annual benefit',`A monitoring upgrade yields annual savings of \\(\\$${A0}\\) for \\(${n}\\) years. At \\(${nfmt(100*i)}\\%\\), find present worth of the uniform savings.`,ans,`\\(P=A[1-(1+i)^{-n}]/i=${A0}[1-(1+${nfmt(i)})^{-${n}}]/${nfmt(i)}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('econ','Additional · Future worth of an annual deposit series','econ-topup-02',()=>{
   const A0=ri(500,9000),i=pick([.03,.05,.06,.08,.1]),n=ri(3,10),ans=A0*((1+i)**n-1)/i;
-  return qNum(N,'Future worth of an annual deposit series',`A fund receives \(\$${A0}\) at the end of each year for \(${n}\) years. At \(${nfmt(100*i)}\%\), find the future worth immediately after the last deposit.`,ans,`\(F=A[(1+i)^n-1]/i=${A0}[(1+${nfmt(i)})^{${n}}-1]/${nfmt(i)}=${nfmt(ans)}\).`);
+  return qNum(N,'Future worth of an annual deposit series',`A fund receives \\(\\$${A0}\\) at the end of each year for \\(${n}\\) years. At \\(${nfmt(100*i)}\\%\\), find the future worth immediately after the last deposit.`,ans,`\\(F=A[(1+i)^n-1]/i=${A0}[(1+${nfmt(i)})^{${n}}-1]/${nfmt(i)}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('econ','Additional · Straight-line depreciation per year','econ-topup-03',()=>{
   const cost=ri(15000,150000),salv=ri(0,Math.floor(cost*.35)),life=ri(3,15),ans=(cost-salv)/life;
-  return qNum(N,'Straight-line depreciation per year',`An instrument costs \(\$${cost}\), has salvage value \(\$${salv}\), and useful life \(${life}\) years. Find annual straight-line depreciation.`,ans,`\(D=(C-S)/n=(${cost}-${salv})/${life}=${nfmt(ans)}\) dollars per year.`,'currency');
+  return qNum(N,'Straight-line depreciation per year',`An instrument costs \\(\\$${cost}\\), has salvage value \\(\\$${salv}\\), and useful life \\(${life}\\) years. Find annual straight-line depreciation.`,ans,`\\(D=(C-S)/n=(${cost}-${salv})/${life}=${nfmt(ans)}\\) dollars per year.`,'currency');
 });
 appendNumericRecipe('econ','Additional · Compound amount after several years','econ-topup-04',()=>{
   const P=ri(1000,30000),rate=pick([.02,.04,.06,.08,.1]),n=ri(2,10),ans=P*(1+rate)**n;
-  return qNum(N,'Compound amount after several years',`A principal of \(\$${P}\) grows at \(${nfmt(100*rate)}\%\) annual compound interest for \(${n}\) years. Find its future amount.`,ans,`\(F=P(1+i)^n=${P}(1+${nfmt(rate)})^{${n}}=${nfmt(ans)}\).`,'currency');
+  return qNum(N,'Compound amount after several years',`A principal of \\(\\$${P}\\) grows at \\(${nfmt(100*rate)}\\%\\) annual compound interest for \\(${n}\\) years. Find its future amount.`,ans,`\\(F=P(1+i)^n=${P}(1+${nfmt(rate)})^{${n}}=${nfmt(ans)}\\).`,'currency');
 });
 appendNumericRecipe('econ','Additional · Break-even production quantity','econ-topup-05',()=>{
   const fixed=ri(5000,60000),price=ri(100,900),variable=ri(20,price-10),ans=fixed/(price-variable);
-  return qNum(N,'Break-even production quantity',`A device maker has fixed costs \(\$${fixed}\), selling price \(\$${price}\) per unit, and variable cost \(\$${variable}\) per unit. Find break-even quantity.`,ans,`Contribution per unit is \(p-v=${price}-${variable}=${price-variable}\). Thus \(Q_{BE}=F/(p-v)=${fixed}/${price-variable}=${nfmt(ans)}\) units.`);
+  return qNum(N,'Break-even production quantity',`A device maker has fixed costs \\(\\$${fixed}\\), selling price \\(\\$${price}\\) per unit, and variable cost \\(\\$${variable}\\) per unit. Find break-even quantity.`,ans,`Contribution per unit is \\(p-v=${price}-${variable}=${price-variable}\\). Thus \\(Q_{BE}=F/(p-v)=${fixed}/${price-variable}=${nfmt(ans)}\\) units.`);
 });

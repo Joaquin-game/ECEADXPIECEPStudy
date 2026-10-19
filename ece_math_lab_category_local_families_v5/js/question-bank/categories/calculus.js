@@ -45,7 +45,7 @@ function makeCalculusExpansionFamily07(title){
 function makeCalculusExpansionFamily08(title){
   const v=ri(0,1)===1;
   {
-      const a0=ri(1,4),b0=a0+ri(1,4),ans=v?-1/(b0-a0):1/(b0-a0);return qNum(CAL,title,v?`Decompose \(\frac{1}{(x+${a0})(x+${b0})}\) into partial fractions. Find the coefficient of \(1/(x+${b0})\).`:`Decompose \(\frac{1}{(x+${a0})(x+${b0})}\) into partial fractions. Find the coefficient of \(1/(x+${a0})\).`,ans,v?`\(\frac1{(x+a)(x+b)}=\frac{1}{b-a}\left(\frac1{x+a}-\frac1{x+b}\right)\); the coefficient of \(1/(x+b)\) is \(-1/(${b0}-${a0})=${nfmt(ans)}\).`:`\(\frac1{(x+a)(x+b)}=\frac{1}{b-a}\left(\frac1{x+a}-\frac1{x+b}\right)\); the coefficient of \(1/(x+a)\) is \(1/(${b0}-${a0})=${nfmt(ans)}\).`)
+      const a0=ri(1,4),b0=a0+ri(1,4),ans=v?-1/(b0-a0):1/(b0-a0);return qNum(CAL,title,v?`Decompose \\(\\frac{1}{(x+${a0})(x+${b0})}\\) into partial fractions. Find the coefficient of \\(1/(x+${b0})\\).`:`Decompose \\(\\frac{1}{(x+${a0})(x+${b0})}\\) into partial fractions. Find the coefficient of \\(1/(x+${a0})\\).`,ans,v?`\\(\\frac1{(x+a)(x+b)}=\\frac{1}{b-a}\\left(\\frac1{x+a}-\\frac1{x+b}\\right)\\); the coefficient of \\(1/(x+b)\\) is \\(-1/(${b0}-${a0})=${nfmt(ans)}\\).`:`\\(\\frac1{(x+a)(x+b)}=\\frac{1}{b-a}\\left(\\frac1{x+a}-\\frac1{x+b}\\right)\\); the coefficient of \\(1/(x+a)\\) is \\(1/(${b0}-${a0})=${nfmt(ans)}\\).`)
   }
 }
 function makeCalculusExpansionFamily09(title){
@@ -75,7 +75,7 @@ function makeCalculusExpansionFamily12(title){
 function makeCalculusExpansionFamily13(title){
   const v=ri(0,1)===1;
   {
-      const x=ri(1,4),ans=v?Math.exp(x)-1:1-Math.exp(-x);return qNum(CAL,title,v?`Evaluate \(\int_0^{${x}} e^t\,dt\).`:`Evaluate \(\int_0^{${x}} e^{-t}\,dt\).`,ans,v?`\([e^t]_0^x=e^x-1=${nfmt(ans)}\).`:`\([-e^{-t}]_0^x=1-e^{-x}=${nfmt(ans)}\).`)
+      const x=ri(1,4),ans=v?Math.exp(x)-1:1-Math.exp(-x);return qNum(CAL,title,v?`Evaluate \\(\\int_0^{${x}} e^t\\,dt\\).`:`Evaluate \\(\\int_0^{${x}} e^{-t}\\,dt\\).`,ans,v?`\\([e^t]_0^x=e^x-1=${nfmt(ans)}\\).`:`\\([-e^{-t}]_0^x=1-e^{-x}=${nfmt(ans)}\\).`)
   }
 }
 function makeCalculusExpansionFamily14(title){
@@ -189,57 +189,57 @@ NUMERIC_GENERATOR_REGISTRY.calculus = [...numericSeedEntries(CAL, CALCULUS_SUP_N
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(CAL,'Derivative of a logarithmic composition','calculus-log-chain-rule',()=>{
   const a=ri(1,5),b=ri(2,8),x=ri(1,4),ans=a/(a*x+b);
-  return qNum(CAL,'Derivative of a logarithmic composition',`For \(f(x)=\\ln(${a}x+${b})\), evaluate \(f'(${x})\).`,ans,`By the chain rule, \(f'(x)=${a}/(${a}x+${b})\). At \(x=${x}\), the value is \(${a}/(${a*x+b})=${nfmt(ans)}\).`)
+  return qNum(CAL,'Derivative of a logarithmic composition',`For \\(f(x)=\\ln(${a}x+${b})\\), evaluate \\(f'(${x})\\).`,ans,`By the chain rule, \\(f'(x)=${a}/(${a}x+${b})\\). At \\(x=${x}\\), the value is \\(${a}/(${a*x+b})=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CAL,'Integration by parts with x sine','calculus-parts-x-sine',()=>{
   const k=ri(1,5),ans=-Math.cos(k)/k+Math.sin(k)/(k*k);
-  return qNum(CAL,'Integration by parts with x sine',`Evaluate \(\\int_0^1 x\\sin(${k}x)\\,dx\) using integration by parts.`,ans,`Let \(u=x\), \(dv=\\sin(${k}x)dx\); then \(v=-\\cos(${k}x)/${k}\). The antiderivative is \(-x\\cos(${k}x)/${k}+\\sin(${k}x)/${k*k}\), giving \(${nfmt(ans)}\).`)
+  return qNum(CAL,'Integration by parts with x sine',`Evaluate \\(\\int_0^1 x\\sin(${k}x)\\,dx\\) using integration by parts.`,ans,`Let \\(u=x\\), \\(dv=\\sin(${k}x)dx\\); then \\(v=-\\cos(${k}x)/${k}\\). The antiderivative is \\(-x\\cos(${k}x)/${k}+\\sin(${k}x)/${k*k}\\), giving \\(${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CAL,'Trigonometric substitution for a semicircle area','calculus-trig-sub-semicircle',()=>{
   const a=ri(2,8),ans=Math.PI*a*a/4;
-  return qNum(CAL,'Trigonometric substitution for a semicircle area',`Evaluate \(\\int_0^{${a}}\\sqrt{${a*a}-x^2}\\,dx\) using a trigonometric substitution.`,ans,`Set \(x=${a}\\sin\\theta\). The integral becomes the area of a quarter-circle of radius ${a}, namely \(\\pi a^2/4=\\pi(${a*a})/4=${nfmt(ans)}\).`)
+  return qNum(CAL,'Trigonometric substitution for a semicircle area',`Evaluate \\(\\int_0^{${a}}\\sqrt{${a*a}-x^2}\\,dx\\) using a trigonometric substitution.`,ans,`Set \\(x=${a}\\sin\\theta\\). The integral becomes the area of a quarter-circle of radius ${a}, namely \\(\\pi a^2/4=\\pi(${a*a})/4=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CAL,'Definite polynomial integral by the fundamental theorem','calculus-ftc-polynomial-integral',()=>{
   const a=ri(1,4),b=ri(0,6),T=ri(1,4),ans=a*T**3/3+b*T*T/2;
-  return qNum(CAL,'Definite polynomial integral by the fundamental theorem',`Evaluate \(\\int_0^{${T}}(${a}x^2+${b}x)\\,dx\).`,ans,`An antiderivative is \(${a}x^3/3+${b}x^2/2\). Evaluating at 0 and ${T} gives \(${a}(${T}^3)/3+${b}(${T}^2)/2=${nfmt(ans)}\).`)
+  return qNum(CAL,'Definite polynomial integral by the fundamental theorem',`Evaluate \\(\\int_0^{${T}}(${a}x^2+${b}x)\\,dx\\).`,ans,`An antiderivative is \\(${a}x^3/3+${b}x^2/2\\). Evaluating at 0 and ${T} gives \\(${a}(${T}^3)/3+${b}(${T}^2)/2=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CAL,'U-substitution for an exponential composite','calculus-u-sub-exp-square',()=>{
   const a=ri(1,3),ans=Math.exp(a*a)-1;
-  return qNum(CAL,'U-substitution for an exponential composite',`Evaluate \(\\int_0^{${a}}2x e^{x^2}\\,dx\) using \(u=x^2\).`,ans,`Let \(u=x^2\), so \(du=2x\\,dx\). The integral is \(\\int_0^{${a*a}}e^u du=e^{${a*a}}-1=${nfmt(ans)}\).`)
+  return qNum(CAL,'U-substitution for an exponential composite',`Evaluate \\(\\int_0^{${a}}2x e^{x^2}\\,dx\\) using \\(u=x^2\\).`,ans,`Let \\(u=x^2\\), so \\(du=2x\\,dx\\). The integral is \\(\\int_0^{${a*a}}e^u du=e^{${a*a}}-1=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CAL,'Partial fractions with a linear numerator','calculus-partial-fractions-linear-numerator',()=>{
   const a=ri(1,4),b=a+ri(2,5),m=ri(1,4),n=ri(6,15),ans=(n-m*a)/(b-a);
-  return qNum(CAL,'Partial fractions with a linear numerator',`In \(\\frac{${m}x+${n}}{(x+${a})(x+${b})}=\\frac{A}{x+${a}}+\\frac{B}{x+${b}}\), find \(A\).`,ans,`Set \(x=-${a}\): \(A=(${n}-${m}(${a}))/(${b}-${a})=${n-m*a}/${b-a}=${nfmt(ans)}\).`)
+  return qNum(CAL,'Partial fractions with a linear numerator',`In \\(\\frac{${m}x+${n}}{(x+${a})(x+${b})}=\\frac{A}{x+${a}}+\\frac{B}{x+${b}}\\), find \\(A\\).`,ans,`Set \\(x=-${a}\\): \\(A=(${n}-${m}(${a}))/(${b}-${a})=${n-m*a}/${b-a}=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CAL,'Definite integral of exponential decay','calculus-exponential-decay-integral',()=>{
   const k=ri(1,5),T=rand(.3,2.2),ans=(1-Math.exp(-k*T))/k;
-  return qNum(CAL,'Definite integral of exponential decay',`Evaluate the accumulated decay \(\\int_0^{${nfmt(T)}}e^{-${k}x}\\,dx\).`,ans,`An antiderivative is \(-e^{-${k}x}/${k}\), so the definite integral is \((1-e^{-${k}(${nfmt(T)})})/${k}=${nfmt(ans)}\).`)
+  return qNum(CAL,'Definite integral of exponential decay',`Evaluate the accumulated decay \\(\\int_0^{${nfmt(T)}}e^{-${k}x}\\,dx\\).`,ans,`An antiderivative is \\(-e^{-${k}x}/${k}\\), so the definite integral is \\((1-e^{-${k}(${nfmt(T)})})/${k}=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CAL,'U-substitution with a radical integrand','calculus-u-sub-radical',()=>{
   const a=ri(1,5),c=ri(1,4),ans=(Math.pow(a*a+c*c,1.5)-c**3)/3;
-  return qNum(CAL,'U-substitution with a radical integrand',`Evaluate \(\\int_0^{${a}}x\\sqrt{x^2+${c*c}}\\,dx\).`,ans,`Use \(u=x^2+${c*c}\), \(du=2x\\,dx\). The result is \(\\frac13[(${a*a+c*c})^{3/2}-(${c*c})^{3/2}]=${nfmt(ans)}\).`)
+  return qNum(CAL,'U-substitution with a radical integrand',`Evaluate \\(\\int_0^{${a}}x\\sqrt{x^2+${c*c}}\\,dx\\).`,ans,`Use \\(u=x^2+${c*c}\\), \\(du=2x\\,dx\\). The result is \\(\\frac13[(${a*a+c*c})^{3/2}-(${c*c})^{3/2}]=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CAL,'U-substitution for a rational integral','calculus-u-sub-rational-integral',()=>{
   const a=ri(1,5),c=ri(1,6),ans=Math.log((a*a+c)/c);
-  return qNum(CAL,'U-substitution for a rational integral',`Evaluate \(\\int_0^{${a}}\\frac{2x}{x^2+${c}}\\,dx\) using \(u=x^2+${c}\).`,ans,`Since \(du=2x\\,dx\), the result is \(\\ln(x^2+${c})\\big|_0^{${a}}=\\ln((${a*a+c})/${c})=${nfmt(ans)}\).`)
+  return qNum(CAL,'U-substitution for a rational integral',`Evaluate \\(\\int_0^{${a}}\\frac{2x}{x^2+${c}}\\,dx\\) using \\(u=x^2+${c}\\).`,ans,`Since \\(du=2x\\,dx\\), the result is \\(\\ln(x^2+${c})\\big|_0^{${a}}=\\ln((${a*a+c})/${c})=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CAL,'U-substitution with a cubic inner function','calculus-u-sub-cubic-radical',()=>{
   const a=ri(1,4),c=ri(1,5),ans=(2/9)*(Math.pow(a**3+c,1.5)-Math.pow(c,1.5));
-  return qNum(CAL,'U-substitution with a cubic inner function',`Evaluate \(\\int_0^{${a}}x^2\\sqrt{x^3+${c}}\\,dx\).`,ans,`Let \(u=x^3+${c}\), so \(du=3x^2\\,dx\). Integrating \(u^{1/2}/3\) gives \(\\frac29[(${a**3+c})^{3/2}-${c}^{3/2}]=${nfmt(ans)}\).`)
+  return qNum(CAL,'U-substitution with a cubic inner function',`Evaluate \\(\\int_0^{${a}}x^2\\sqrt{x^3+${c}}\\,dx\\).`,ans,`Let \\(u=x^3+${c}\\), so \\(du=3x^2\\,dx\\). Integrating \\(u^{1/2}/3\\) gives \\(\\frac29[(${a**3+c})^{3/2}-${c}^{3/2}]=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CAL,'U-substitution for a cosine of a square','calculus-u-sub-cos-square',()=>{
   const k=ri(1,6),ans=Math.sin(k)/(2*k);
-  return qNum(CAL,'U-substitution for a cosine of a square',`Evaluate \(\\int_0^1x\\cos(${k}x^2)\\,dx\) using \(u=x^2\).`,ans,`Let \(u=x^2\), so \(x\\,dx=du/2\). The integral is \(\\frac12\\int_0^1\\cos(${k}u)du=\\sin(${k})/(2${k})=${nfmt(ans)}\).`)
+  return qNum(CAL,'U-substitution for a cosine of a square',`Evaluate \\(\\int_0^1x\\cos(${k}x^2)\\,dx\\) using \\(u=x^2\\).`,ans,`Let \\(u=x^2\\), so \\(x\\,dx=du/2\\). The integral is \\(\\frac12\\int_0^1\\cos(${k}u)du=\\sin(${k})/(2${k})=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CAL,'Arctangent definite integral','calculus-arctangent-integral',()=>{
   const a=ri(1,6),b=ri(1,5),ans=Math.atan(a/b)/b;
-  return qNum(CAL,'Arctangent definite integral',`Evaluate \(\\int_0^{${a}}\\frac{1}{x^2+${b*b}}\\,dx\).`,ans,`Use \(\\int dx/(x^2+b^2)=\\frac1b\\arctan(x/b)\). The value is \(\\arctan(${a}/${b})/${b}=${nfmt(ans)}\).`)
+  return qNum(CAL,'Arctangent definite integral',`Evaluate \\(\\int_0^{${a}}\\frac{1}{x^2+${b*b}}\\,dx\\).`,ans,`Use \\(\\int dx/(x^2+b^2)=\\frac1b\\arctan(x/b)\\). The value is \\(\\arctan(${a}/${b})/${b}=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CAL,'Applied · Integrated sensor envelope by parts','scenario-calculus-envelope-integration-by-parts',()=>{
   const k=ri(1,5),T0=pick([.5,1,1.5,2]),ans=(1-(1+k*T0)*Math.exp(-k*T0))/(k*k);
-  return qNum(CAL,'Applied · Integrated sensor envelope by parts',`A signal processor accumulates an envelope proportional to \(t e^{-kt}\). Evaluate \(\int_0^{${T0}}t e^{-${k}t}\,dt\) using integration by parts.`,ans,`Let \(u=t\), \(dv=e^{-${k}t}dt\), so \(du=dt\), \(v=-e^{-${k}t}/${k}\). Therefore the integral is \([-(t e^{-${k}t})/${k}-e^{-${k}t}/${k^2}]_0^{${T0}}=[1-(1+${k}(${T0}))e^{-${k}(${T0})}]/${k}^2=${nfmt(ans)}\).`);
+  return qNum(CAL,'Applied · Integrated sensor envelope by parts',`A signal processor accumulates an envelope proportional to \\(t e^{-kt}\\). Evaluate \\(\\int_0^{${T0}}t e^{-${k}t}\\,dt\\) using integration by parts.`,ans,`Let \\(u=t\\), \\(dv=e^{-${k}t}dt\\), so \\(du=dt\\), \\(v=-e^{-${k}t}/${k}\\). Therefore the integral is \\([-(t e^{-${k}t})/${k}-e^{-${k}t}/${k^2}]_0^{${T0}}=[1-(1+${k}(${T0}))e^{-${k}(${T0})}]/${k}^2=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe(CAL,'Applied · Accumulated sensor response by substitution','scenario-calculus-accumulation-substitution',()=>{
   const b=ri(1,5),c=ri(1,8),ans=(Math.pow(b*b+c,1.5)-Math.pow(c,1.5))/3;
-  return qNum(CAL,'Applied · Accumulated sensor response by substitution',`A calibration model requires the integral \(\int_0^{${b}}x\sqrt{x^2+${c}}\,dx\). Evaluate it using \(u=x^2+${c}\).`,ans,`Let \(u=x^2+${c}\), then \(du=2x\,dx\). The integral equals \(\frac13[(x^2+${c})^{3/2}]_0^{${b}}=\frac{(${b*b+c})^{3/2}-${c}^{3/2}}3=${nfmt(ans)}\).`);
+  return qNum(CAL,'Applied · Accumulated sensor response by substitution',`A calibration model requires the integral \\(\\int_0^{${b}}x\\sqrt{x^2+${c}}\\,dx\\). Evaluate it using \\(u=x^2+${c}\\).`,ans,`Let \\(u=x^2+${c}\\), then \\(du=2x\\,dx\\). The integral equals \\(\\frac13[(x^2+${c})^{3/2}]_0^{${b}}=\\frac{(${b*b+c})^{3/2}-${c}^{3/2}}3=${nfmt(ans)}\\).`);
 });

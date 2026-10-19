@@ -173,35 +173,35 @@ NUMERIC_GENERATOR_REGISTRY.ode = [...coreSeedEntries(D, ODE_CORE_SEEDS),
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(D,'Field scenario · Thermal probe cooling model','scenario-ode-thermal-probe-cooling',()=>{
   const Tamb=pick([20,22,25]),T0=pick([70,80,90]),k=pick([.1,.2,.25,.3]),t=pick([2,3,4,5]),ans=Tamb+(T0-Tamb)*Math.exp(-k*t);
-  return qNum(D,'Field scenario · Thermal probe cooling model',`A thermal probe follows Newton cooling, \(\frac{dT}{dt}=-k(T-T_a)\), with ambient temperature \(T_a=${Tamb}^\circ C\), initial temperature \(T(0)=${T0}^\circ C\), and \(k=${k}\,min^{-1}\). Find \(T(${t}\,min)\).`,ans,`The solution is \(T(t)=T_a+(T_0-T_a)e^{-kt}\). Thus \(T(${t})=${Tamb}+(${T0}-${Tamb})e^{-${k}(${t})}=${nfmt(ans)}^\circ C\).`);
+  return qNum(D,'Field scenario · Thermal probe cooling model',`A thermal probe follows Newton cooling, \\(\\frac{dT}{dt}=-k(T-T_a)\\), with ambient temperature \\(T_a=${Tamb}^\\circ C\\), initial temperature \\(T(0)=${T0}^\\circ C\\), and \\(k=${k}\\,min^{-1}\\). Find \\(T(${t}\\,min)\\).`,ans,`The solution is \\(T(t)=T_a+(T_0-T_a)e^{-kt}\\). Thus \\(T(${t})=${Tamb}+(${T0}-${Tamb})e^{-${k}(${t})}=${nfmt(ans)}^\\circ C\\).`);
 });
 appendNumericRecipe(D,'Applied · Damped vibration frequency from complex roots','scenario-ode-damped-vibration-roots',()=>{
   const zeta=pick([.2,.3,.4,.6]),wn=ri(4,12),wd=wn*Math.sqrt(1-zeta*zeta);
-  return qNum(D,'Applied · Damped vibration frequency from complex roots',`A vibration-isolation platform has characteristic roots \(s=-\zeta\omega_n\pm j\omega_d\), with damping ratio \(\zeta=${zeta}\) and natural frequency \(\omega_n=${wn}\,rad/s\). Find \(\omega_d\).`,wd,`For an underdamped second-order system, \(\omega_d=\omega_n\sqrt{1-\zeta^2}=${wn}\sqrt{1-${zeta}^2}=${nfmt(wd)}\,rad/s\).`);
+  return qNum(D,'Applied · Damped vibration frequency from complex roots',`A vibration-isolation platform has characteristic roots \\(s=-\\zeta\\omega_n\\pm j\\omega_d\\), with damping ratio \\(\\zeta=${zeta}\\) and natural frequency \\(\\omega_n=${wn}\\,rad/s\\). Find \\(\\omega_d\\).`,wd,`For an underdamped second-order system, \\(\\omega_d=\\omega_n\\sqrt{1-\\zeta^2}=${wn}\\sqrt{1-${zeta}^2}=${nfmt(wd)}\\,rad/s\\).`);
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('ode','Additional · Half-life of exponential decay','ode-topup-01',()=>{
   const k=rand(.2,2),ans=Math.LN2/k;
-  return qNum(D,'Half-life of exponential decay',`A quantity follows \(y(t)=y_0e^{-kt}\) with decay constant \(k=${nfmt(k)}\,s^{-1}\). Find its half-life.`,ans,`Set \(y/y_0=1/2\): \(t_{1/2}=\ln2/k=${nfmt(ans)}\,s\).`);
+  return qNum(D,'Half-life of exponential decay',`A quantity follows \\(y(t)=y_0e^{-kt}\\) with decay constant \\(k=${nfmt(k)}\\,s^{-1}\\). Find its half-life.`,ans,`Set \\(y/y_0=1/2\\): \\(t_{1/2}=\\ln2/k=${nfmt(ans)}\\,s\\).`);
 });
 appendNumericRecipe('ode','Additional · One-step Euler approximation','ode-topup-02',()=>{
   const x0=ri(1,5),y0=ri(1,8),h=pick([.1,.2,.25,.5]),a=ri(1,4),ans=y0+h*(x0+a*y0);
-  return qNum(D,'One-step Euler approximation',`For \(y'=x+${a}y\), start at \(x_0=${x0}\), \(y_0=${y0}\), and take one Euler step of size \(h=${nfmt(h)}\). Find \(y_1\).`,ans,`Euler's method gives \(y_1=y_0+h f(x_0,y_0)=${y0}+${nfmt(h)}(${x0}+${a}(${y0}))=${nfmt(ans)}\).`);
+  return qNum(D,'One-step Euler approximation',`For \\(y'=x+${a}y\\), start at \\(x_0=${x0}\\), \\(y_0=${y0}\\), and take one Euler step of size \\(h=${nfmt(h)}\\). Find \\(y_1\\).`,ans,`Euler's method gives \\(y_1=y_0+h f(x_0,y_0)=${y0}+${nfmt(h)}(${x0}+${a}(${y0}))=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('ode','Additional · Equilibrium solution of a first-order model','ode-topup-03',()=>{
   const input=ri(2,20),loss=ri(1,5),ans=input/loss;
-  return qNum(D,'Equilibrium solution of a first-order model',`A state obeys \(y'=${input}-${loss}y\). Find its constant equilibrium value.`,ans,`At equilibrium, \(y'=0\), so \(${input}-${loss}y^*=0\) and \(y^*=${input}/${loss}=${nfmt(ans)}\).`);
+  return qNum(D,'Equilibrium solution of a first-order model',`A state obeys \\(y'=${input}-${loss}y\\). Find its constant equilibrium value.`,ans,`At equilibrium, \\(y'=0\\), so \\(${input}-${loss}y^*=0\\) and \\(y^*=${input}/${loss}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('ode','Additional · Instantaneous logistic growth rate','ode-topup-04',()=>{
   const r=rand(.2,1),K=ri(80,300),P=ri(10,K-10),ans=r*P*(1-P/K);
-  return qNum(D,'Instantaneous logistic growth rate',`A population follows \(P'=rP(1-P/K)\) with \(r=${nfmt(r)}\), carrying capacity \(K=${K}\), and current population \(P=${P}\). Find \(P'\).`,ans,`Substitute: \(P'=${nfmt(r)}(${P})(1-${P}/${K})=${nfmt(ans)}\) population units per time.`);
+  return qNum(D,'Instantaneous logistic growth rate',`A population follows \\(P'=rP(1-P/K)\\) with \\(r=${nfmt(r)}\\), carrying capacity \\(K=${K}\\), and current population \\(P=${P}\\). Find \\(P'\\).`,ans,`Substitute: \\(P'=${nfmt(r)}(${P})(1-${P}/${K})=${nfmt(ans)}\\) population units per time.`);
 });
 appendNumericRecipe('ode','Additional · Damped natural frequency','ode-topup-05',()=>{
   const zeta=pick([.1,.2,.3,.4,.5,.6]),wn=ri(5,20),ans=wn*Math.sqrt(1-zeta*zeta);
-  return qNum(D,'Damped natural frequency',`A second-order ODE has natural frequency \(\omega_n=${wn}\,rad/s\) and damping ratio \(\zeta=${nfmt(zeta)}\). Find \(\omega_d\).`,ans,`\(\omega_d=\omega_n\sqrt{1-\zeta^2}=${wn}\sqrt{1-${nfmt(zeta*zeta)}}=${nfmt(ans)}\,rad/s\).`);
+  return qNum(D,'Damped natural frequency',`A second-order ODE has natural frequency \\(\\omega_n=${wn}\\,rad/s\\) and damping ratio \\(\\zeta=${nfmt(zeta)}\\). Find \\(\\omega_d\\).`,ans,`\\(\\omega_d=\\omega_n\\sqrt{1-\\zeta^2}=${wn}\\sqrt{1-${nfmt(zeta*zeta)}}=${nfmt(ans)}\\,rad/s\\).`);
 });
 appendNumericRecipe('ode','Additional · Undamped oscillator displacement','ode-topup-06',()=>{
   const wn=ri(1,8),y0=ri(-4,6),v0=ri(-5,7),t=rand(.2,2),ans=y0*Math.cos(wn*t)+(v0/wn)*Math.sin(wn*t);
-  return qNum(D,'Undamped oscillator displacement',`Solve \(y''+${wn*wn}y=0\) with \(y(0)=${y0}\) and \(y'(0)=${v0}\). Find \(y(${nfmt(t)})\).`,ans,`The solution is \(y(t)=y_0\cos(\omega_nt)+(v_0/\omega_n)\sin(\omega_nt)\). Substitution gives \(${nfmt(ans)}\).`);
+  return qNum(D,'Undamped oscillator displacement',`Solve \\(y''+${wn*wn}y=0\\) with \\(y(0)=${y0}\\) and \\(y'(0)=${v0}\\). Find \\(y(${nfmt(t)})\\).`,ans,`The solution is \\(y(t)=y_0\\cos(\\omega_nt)+(v_0/\\omega_n)\\sin(\\omega_nt)\\). Substitution gives \\(${nfmt(ans)}\\).`);
 });

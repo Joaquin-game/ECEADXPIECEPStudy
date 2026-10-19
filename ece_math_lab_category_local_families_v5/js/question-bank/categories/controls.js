@@ -181,32 +181,32 @@ NUMERIC_GENERATOR_REGISTRY.controls = [...coreSeedEntries(C, CONTROLS_CORE_SEEDS
 appendNumericRecipe(C,'Field scenario · Negative-feedback level sensor','scenario-controls-water-level-feedback',()=>makeControlsScenario(0));
 appendNumericRecipe(C,'Applied · Closed-loop dosing-system output','scenario-controls-dosing-loop-output',()=>{
   const G0=ri(2,10),H=pick([.1,.2,.25,.4]),r0=ri(2,12),gain=G0/(1+G0*H),ans=gain*r0;
-  const q=qNum(C,'Applied · Closed-loop dosing-system output',`A dosing pump controller is approximated by static forward gain \(G(0)=${G0}\), feedback gain \(H(0)=${H}\), and step reference \(r_0=${r0}\,V\). Find the steady-state output \(y_\infty\).`,ans,`For negative feedback, \(T(0)=G/(1+GH)=${G0}/(1+${G0}(${H}))=${nfmt(gain)}\). Thus \(y_\infty=T(0)r_0=${nfmt(gain)}(${r0})=${nfmt(ans)}\,V\).`);
+  const q=qNum(C,'Applied · Closed-loop dosing-system output',`A dosing pump controller is approximated by static forward gain \\(G(0)=${G0}\\), feedback gain \\(H(0)=${H}\\), and step reference \\(r_0=${r0}\\,V\\). Find the steady-state output \\(y_\\infty\\).`,ans,`For negative feedback, \\(T(0)=G/(1+GH)=${G0}/(1+${G0}(${H}))=${nfmt(gain)}\\). Thus \\(y_\\infty=T(0)r_0=${nfmt(gain)}(${r0})=${nfmt(ans)}\\,V\\).`);
   return attachDiagram(q,'feedback','A reference enters a summing junction, the forward controller/plant block G(s) drives the output, and H(s) feeds the output back to the negative input.');
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('controls','Additional · Closed-loop output for a proportional controller','controls-topup-01',()=>{
   const Kp=ri(1,12),K=ri(1,8),r=ri(1,5),ans=Kp*K/(1+Kp*K)*r;
-  return qNum(C,'Closed-loop output for a proportional controller',`A unity-feedback plant has static gain \(K=${K}\) and proportional gain \(K_p=${Kp}\). For a reference \(r=${r}\), find the steady-state output.`,ans,`The closed-loop gain is \(K_pK/(1+K_pK)=${Kp}(${K})/[1+${Kp}(${K})]\). Multiplying by the reference gives \(${nfmt(ans)}\).`);
+  return qNum(C,'Closed-loop output for a proportional controller',`A unity-feedback plant has static gain \\(K=${K}\\) and proportional gain \\(K_p=${Kp}\\). For a reference \\(r=${r}\\), find the steady-state output.`,ans,`The closed-loop gain is \\(K_pK/(1+K_pK)=${Kp}(${K})/[1+${Kp}(${K})]\\). Multiplying by the reference gives \\(${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('controls','Additional · Damping ratio from percent overshoot','controls-topup-02',()=>{
   const os=pick([5,10,15,20,25,30]),ln=Math.log(os/100),ans=-ln/Math.sqrt(Math.PI*Math.PI+ln*ln);
-  return qNum(C,'Damping ratio from percent overshoot',`A standard underdamped second-order response has percent overshoot \(M_p=${os}\%\). Estimate its damping ratio from \(\zeta=-\ln(M_p/100)/\sqrt{\pi^2+\ln^2(M_p/100)}\).`,ans,`With \(r=${os/100}\), \(\zeta=-\ln r/\sqrt{\pi^2+\ln^2r}=${nfmt(ans)}\).`);
+  return qNum(C,'Damping ratio from percent overshoot',`A standard underdamped second-order response has percent overshoot \\(M_p=${os}\\%\\). Estimate its damping ratio from \\(\\zeta=-\\ln(M_p/100)/\\sqrt{\\pi^2+\\ln^2(M_p/100)}\\).`,ans,`With \\(r=${os/100}\\), \\(\\zeta=-\\ln r/\\sqrt{\\pi^2+\\ln^2r}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('controls','Additional · Peak time from damped natural frequency','controls-topup-03',()=>{
   const zeta=pick([.2,.3,.4,.5,.6]),wn=ri(4,14),wd=wn*Math.sqrt(1-zeta*zeta),ans=Math.PI/wd;
-  return qNum(C,'Peak time from damped natural frequency',`A second-order system has \(\zeta=${nfmt(zeta)}\) and \(\omega_n=${wn}\,rad/s\). Estimate its first peak time.`,ans,`\(\omega_d=\omega_n\sqrt{1-\zeta^2}=${nfmt(wd)}\). Thus \(t_p=\pi/\omega_d=${nfmt(ans)}\,s\).`);
+  return qNum(C,'Peak time from damped natural frequency',`A second-order system has \\(\\zeta=${nfmt(zeta)}\\) and \\(\\omega_n=${wn}\\,rad/s\\). Estimate its first peak time.`,ans,`\\(\\omega_d=\\omega_n\\sqrt{1-\\zeta^2}=${nfmt(wd)}\\). Thus \\(t_p=\\pi/\\omega_d=${nfmt(ans)}\\,s\\).`);
 });
 appendNumericRecipe('controls','Additional · Ramp steady-state error from velocity constant','controls-topup-04',()=>{
   const Kv=rand(1.5,12),slope=ri(1,5),ans=slope/Kv;
-  return qNum(C,'Ramp steady-state error from velocity constant',`A type-1 unity-feedback system has velocity constant \(K_v=${nfmt(Kv)}\). For a ramp input of slope \(${slope}\), estimate steady-state error \(e_{ss}=slope/K_v\).`,ans,`\(e_{ss}=${slope}/${nfmt(Kv)}=${nfmt(ans)}\).`);
+  return qNum(C,'Ramp steady-state error from velocity constant',`A type-1 unity-feedback system has velocity constant \\(K_v=${nfmt(Kv)}\\). For a ramp input of slope \\(${slope}\\), estimate steady-state error \\(e_{ss}=slope/K_v\\).`,ans,`\\(e_{ss}=${slope}/${nfmt(Kv)}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('controls','Additional · First-order phase lag at crossover','controls-topup-05',()=>{
   const pole=ri(2,10),w=ri(1,12),ans=-Math.atan(w/pole)*180/Math.PI;
-  return qNum(C,'First-order phase lag at crossover',`For \(G(s)=1/(s+${pole})\), find phase angle in degrees at \(\omega=${w}\,rad/s\).`,ans,`The phase is \(-\tan^{-1}(\omega/a)=-\tan^{-1}(${w}/${pole})=${nfmt(ans)}^\circ\).`,'degrees');
+  return qNum(C,'First-order phase lag at crossover',`For \\(G(s)=1/(s+${pole})\\), find phase angle in degrees at \\(\\omega=${w}\\,rad/s\\).`,ans,`The phase is \\(-\\tan^{-1}(\\omega/a)=-\\tan^{-1}(${w}/${pole})=${nfmt(ans)}^\\circ\\).`,'degrees');
 });
 appendNumericRecipe('controls','Additional · Damping coefficient for a mass-spring system','controls-topup-06',()=>{
   const m=ri(1,8),k=ri(20,150),zeta=pick([.2,.3,.4,.5,.6,.7]),ans=2*zeta*Math.sqrt(k*m);
-  return qNum(C,'Damping coefficient for a mass-spring system',`A mass-spring-damper has mass \(m=${m}\,kg\), stiffness \(k=${k}\,N/m\), and damping ratio \(\zeta=${nfmt(zeta)}\). Find damping coefficient \(c=2\zeta\sqrt{km}\).`,ans,`\(c=2(${nfmt(zeta)})\sqrt{${k}(${m})}=${nfmt(ans)}\,N\,s/m\).`);
+  return qNum(C,'Damping coefficient for a mass-spring system',`A mass-spring-damper has mass \\(m=${m}\\,kg\\), stiffness \\(k=${k}\\,N/m\\), and damping ratio \\(\\zeta=${nfmt(zeta)}\\). Find damping coefficient \\(c=2\\zeta\\sqrt{km}\\).`,ans,`\\(c=2(${nfmt(zeta)})\\sqrt{${k}(${m})}=${nfmt(ans)}\\,N\\,s/m\\).`);
 });

@@ -190,35 +190,35 @@ NUMERIC_GENERATOR_REGISTRY.relativity = [...numericSeedEntries(SR, RELATIVITY_SU
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(SR,'Length-contraction ratio','relativity-length-contraction-ratio',()=>{
   const beta=pick([.1,.2,.3,.4,.5,.6,.7,.8]),ans=Math.sqrt(1-beta*beta);
-  return qNum(SR,'Length-contraction ratio',`A moving spacecraft travels at \(v=${beta}c\). Find the ratio \(L/L_0\) of its measured length to its proper length.`,ans,`Length contraction gives \(L/L_0=\\sqrt{1-v^2/c^2}=\\sqrt{1-${beta}^2}=${nfmt(ans)}\).`)
+  return qNum(SR,'Length-contraction ratio',`A moving spacecraft travels at \\(v=${beta}c\\). Find the ratio \\(L/L_0\\) of its measured length to its proper length.`,ans,`Length contraction gives \\(L/L_0=\\sqrt{1-v^2/c^2}=\\sqrt{1-${beta}^2}=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(SR,'Relativistic momentum in units of mc','relativity-momentum-normalized',()=>{
   const beta=pick([.1,.2,.3,.4,.5,.6,.7,.8]),ans=beta/Math.sqrt(1-beta*beta);
-  return qNum(SR,'Relativistic momentum in units of mc',`A particle moves at speed \(v=${beta}c\). Find the dimensionless momentum \(p/(mc)\).`,ans,`Relativistic momentum is \(p=\\gamma mv\), so \(p/(mc)=\\gamma\\beta=\\beta/\\sqrt{1-\\beta^2}=${nfmt(ans)}\).`)
+  return qNum(SR,'Relativistic momentum in units of mc',`A particle moves at speed \\(v=${beta}c\\). Find the dimensionless momentum \\(p/(mc)\\).`,ans,`Relativistic momentum is \\(p=\\gamma mv\\), so \\(p/(mc)=\\gamma\\beta=\\beta/\\sqrt{1-\\beta^2}=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(SR,'Field scenario · Spacecraft clock time dilation','scenario-relativity-spacecraft-clock',()=>{
   const beta=pick([.6,.7,.8]),proper=pick([1.5,2,3,4]),gamma=1/Math.sqrt(1-beta*beta),ans=proper*gamma;
-  return qNum(SR,'Field scenario · Spacecraft clock time dilation',`Mission control observes a spacecraft moving at \(v=${beta}c\). The elapsed proper time on board is \(\Delta\tau=${proper}\,h\). Ignoring gravitational effects, find the time interval measured by mission control.`,ans,`\(\gamma=1/\sqrt{1-v^2/c^2}=1/\sqrt{1-${beta}^2}=${nfmt(gamma)}\). Therefore \(\Delta t=\gamma\Delta\tau=${nfmt(gamma)}(${proper})=${nfmt(ans)}\,h\).`);
+  return qNum(SR,'Field scenario · Spacecraft clock time dilation',`Mission control observes a spacecraft moving at \\(v=${beta}c\\). The elapsed proper time on board is \\(\\Delta\\tau=${proper}\\,h\\). Ignoring gravitational effects, find the time interval measured by mission control.`,ans,`\\(\\gamma=1/\\sqrt{1-v^2/c^2}=1/\\sqrt{1-${beta}^2}=${nfmt(gamma)}\\). Therefore \\(\\Delta t=\\gamma\\Delta\\tau=${nfmt(gamma)}(${proper})=${nfmt(ans)}\\,h\\).`);
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('relativity','Additional · Proper time from coordinate time','relativity-topup-01',()=>{
   const beta=pick([.2,.3,.4,.5,.6,.7,.8]),t=ri(2,20),ans=t*Math.sqrt(1-beta*beta);
-  return qNum(SR,'Proper time from coordinate time',`A clock moves at \(v=${nfmt(beta)}c\) for coordinate time \(\Delta t=${t}\,s\). Find the elapsed proper time.`,ans,`\(\Delta\tau=\Delta t\sqrt{1-v^2/c^2}=${t}\sqrt{1-${nfmt(beta)}^2}=${nfmt(ans)}\,s\).`);
+  return qNum(SR,'Proper time from coordinate time',`A clock moves at \\(v=${nfmt(beta)}c\\) for coordinate time \\(\\Delta t=${t}\\,s\\). Find the elapsed proper time.`,ans,`\\(\\Delta\\tau=\\Delta t\\sqrt{1-v^2/c^2}=${t}\\sqrt{1-${nfmt(beta)}^2}=${nfmt(ans)}\\,s\\).`);
 });
 appendNumericRecipe('relativity','Additional · Relativistic kinetic energy in rest-energy units','relativity-topup-02',()=>{
   const beta=pick([.2,.3,.4,.5,.6,.7,.8]),gamma=1/Math.sqrt(1-beta*beta),ans=gamma-1;
-  return qNum(SR,'Relativistic kinetic energy in rest-energy units',`A particle moves at \(v=${nfmt(beta)}c\). Find its kinetic energy as a multiple of \(mc^2\).`,ans,`\(K=(\gamma-1)mc^2\), where \(\gamma=1/\sqrt{1-\beta^2}=${nfmt(gamma)}\). Thus \(K/(mc^2)=${nfmt(ans)}\).`);
+  return qNum(SR,'Relativistic kinetic energy in rest-energy units',`A particle moves at \\(v=${nfmt(beta)}c\\). Find its kinetic energy as a multiple of \\(mc^2\\).`,ans,`\\(K=(\\gamma-1)mc^2\\), where \\(\\gamma=1/\\sqrt{1-\\beta^2}=${nfmt(gamma)}\\). Thus \\(K/(mc^2)=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('relativity','Additional · Total relativistic energy factor','relativity-topup-03',()=>{
   const beta=pick([.1,.2,.3,.4,.5,.6,.7,.8]),ans=1/Math.sqrt(1-beta*beta);
-  return qNum(SR,'Total relativistic energy factor',`A particle moves at \(v=${nfmt(beta)}c\). Find the total energy factor \(E/(mc^2)=\gamma\).`,ans,`\(\gamma=1/\sqrt{1-v^2/c^2}=1/\sqrt{1-${nfmt(beta)}^2}=${nfmt(ans)}\).`);
+  return qNum(SR,'Total relativistic energy factor',`A particle moves at \\(v=${nfmt(beta)}c\\). Find the total energy factor \\(E/(mc^2)=\\gamma\\).`,ans,`\\(\\gamma=1/\\sqrt{1-v^2/c^2}=1/\\sqrt{1-${nfmt(beta)}^2}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('relativity','Additional · Relativistic momentum in units of mc','relativity-topup-04',()=>{
   const beta=pick([.2,.3,.4,.5,.6,.7,.8]),ans=beta/Math.sqrt(1-beta*beta);
-  return qNum(SR,'Relativistic momentum in units of mc',`A particle moves at \(v=${nfmt(beta)}c\). Find relativistic momentum as a multiple of \(mc\).`,ans,`\(p=\gamma mv\), so \(p/(mc)=\beta/\sqrt{1-\beta^2}=${nfmt(ans)}\).`);
+  return qNum(SR,'Relativistic momentum in units of mc',`A particle moves at \\(v=${nfmt(beta)}c\\). Find relativistic momentum as a multiple of \\(mc\\).`,ans,`\\(p=\\gamma mv\\), so \\(p/(mc)=\\beta/\\sqrt{1-\\beta^2}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('relativity','Additional · Lorentz-contracted length ratio','relativity-topup-05',()=>{
   const beta=pick([.2,.3,.4,.5,.6,.7,.8]),ans=Math.sqrt(1-beta*beta);
-  return qNum(SR,'Lorentz-contracted length ratio',`A rod moves parallel to its length at \(v=${nfmt(beta)}c\). Find the ratio of observed length to proper length.`,ans,`Length contraction gives \(L/L_0=\sqrt{1-v^2/c^2}=\sqrt{1-${nfmt(beta)}^2}=${nfmt(ans)}\).`);
+  return qNum(SR,'Lorentz-contracted length ratio',`A rod moves parallel to its length at \\(v=${nfmt(beta)}c\\). Find the ratio of observed length to proper length.`,ans,`Length contraction gives \\(L/L_0=\\sqrt{1-v^2/c^2}=\\sqrt{1-${nfmt(beta)}^2}=${nfmt(ans)}\\).`);
 });

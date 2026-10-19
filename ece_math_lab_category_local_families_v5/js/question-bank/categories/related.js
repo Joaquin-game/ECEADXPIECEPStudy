@@ -206,21 +206,21 @@ appendNumericRecipe(RR,'Field scenario · Spherical weather balloon volume rate'
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('related','Additional · Rate of change of circular area','related-topup-01',()=>{
   const r=rand(1,12),dr=rand(.1,2),ans=2*Math.PI*r*dr;
-  return qNum(RR,'Rate of change of circular area',`A circular sensor footprint has radius \(r=${nfmt(r)}\,m\) growing at \(dr/dt=${nfmt(dr)}\,m/s\). Find \(dA/dt\).`,ans,`Since \(A=\pi r^2\), \(dA/dt=2\pi r\,dr/dt=2\pi(${nfmt(r)})(${nfmt(dr)})=${nfmt(ans)}\,m^2/s\).`);
+  return qNum(RR,'Rate of change of circular area',`A circular sensor footprint has radius \\(r=${nfmt(r)}\\,m\\) growing at \\(dr/dt=${nfmt(dr)}\\,m/s\\). Find \\(dA/dt\\).`,ans,`Since \\(A=\\pi r^2\\), \\(dA/dt=2\\pi r\\,dr/dt=2\\pi(${nfmt(r)})(${nfmt(dr)})=${nfmt(ans)}\\,m^2/s\\).`);
 });
 appendNumericRecipe('related','Additional · Rate of change of spherical volume','related-topup-02',()=>{
   const r=rand(.5,8),dr=rand(.05,1.5),ans=4*Math.PI*r*r*dr;
-  return qNum(RR,'Rate of change of spherical volume',`A spherical weather balloon has radius \(r=${nfmt(r)}\,m\) increasing at \(dr/dt=${nfmt(dr)}\,m/s\). Find \(dV/dt\).`,ans,`For \(V=4\pi r^3/3\), \(dV/dt=4\pi r^2 dr/dt=4\pi(${nfmt(r)})^2(${nfmt(dr)})=${nfmt(ans)}\,m^3/s\).`);
+  return qNum(RR,'Rate of change of spherical volume',`A spherical weather balloon has radius \\(r=${nfmt(r)}\\,m\\) increasing at \\(dr/dt=${nfmt(dr)}\\,m/s\\). Find \\(dV/dt\\).`,ans,`For \\(V=4\\pi r^3/3\\), \\(dV/dt=4\\pi r^2 dr/dt=4\\pi(${nfmt(r)})^2(${nfmt(dr)})=${nfmt(ans)}\\,m^3/s\\).`);
 });
 appendNumericRecipe('related','Additional · Rate of change of a fixed-height cylinder volume','related-topup-03',()=>{
   const r=rand(.5,6),h=ri(2,15),dr=rand(.1,1.2),ans=2*Math.PI*r*h*dr;
-  return qNum(RR,'Rate of change of a fixed-height cylinder volume',`A cylindrical tank has fixed height \(h=${h}\,m\), radius \(r=${nfmt(r)}\,m\), and radius growth rate \(dr/dt=${nfmt(dr)}\,m/s\). Find \(dV/dt\).`,ans,`With \(V=\pi r^2h\) and constant \(h\), \(dV/dt=2\pi rh\,dr/dt=2\pi(${nfmt(r)})(${h})(${nfmt(dr)})=${nfmt(ans)}\,m^3/s\).`);
+  return qNum(RR,'Rate of change of a fixed-height cylinder volume',`A cylindrical tank has fixed height \\(h=${h}\\,m\\), radius \\(r=${nfmt(r)}\\,m\\), and radius growth rate \\(dr/dt=${nfmt(dr)}\\,m/s\\). Find \\(dV/dt\\).`,ans,`With \\(V=\\pi r^2h\\) and constant \\(h\\), \\(dV/dt=2\\pi rh\\,dr/dt=2\\pi(${nfmt(r)})(${h})(${nfmt(dr)})=${nfmt(ans)}\\,m^3/s\\).`);
 });
 appendNumericRecipe('related','Additional · Vertical speed of a sliding ladder','related-topup-04',()=>{
   const L=ri(5,15),x=ri(2,L-2),dx=rand(.1,1.5),y=Math.sqrt(L*L-x*x),ans=-x/y*dx;
-  return qNum(RR,'Vertical speed of a sliding ladder',`A ladder of length \(${L}\,m\) has its foot \(x=${x}\,m\) from a wall and is sliding outward at \(dx/dt=${nfmt(dx)}\,m/s\). Find the signed vertical rate \(dy/dt\).`,ans,`From \(x^2+y^2=L^2\), differentiate: \(dy/dt=-(x/y)(dx/dt)\). Here \(y=\sqrt{${L}^2-${x}^2}=${nfmt(y)}\), so \(dy/dt=${nfmt(ans)}\,m/s\).`);
+  return qNum(RR,'Vertical speed of a sliding ladder',`A ladder of length \\(${L}\\,m\\) has its foot \\(x=${x}\\,m\\) from a wall and is sliding outward at \\(dx/dt=${nfmt(dx)}\\,m/s\\). Find the signed vertical rate \\(dy/dt\\).`,ans,`From \\(x^2+y^2=L^2\\), differentiate: \\(dy/dt=-(x/y)(dx/dt)\\). Here \\(y=\\sqrt{${L}^2-${x}^2}=${nfmt(y)}\\), so \\(dy/dt=${nfmt(ans)}\\,m/s\\).`);
 });
 appendNumericRecipe('related','Additional · Rate of change of spherical surface area','related-topup-05',()=>{
   const r=rand(.8,9),dr=rand(.05,1.2),ans=8*Math.PI*r*dr;
-  return qNum(RR,'Rate of change of spherical surface area',`A spherical tank has radius \(r=${nfmt(r)}\,m\) increasing at \(dr/dt=${nfmt(dr)}\,m/s\). Find the rate of change of surface area.`,ans,`For \(A=4\pi r^2\), \(dA/dt=8\pi r\,dr/dt=8\pi(${nfmt(r)})(${nfmt(dr)})=${nfmt(ans)}\,m^2/s\).`);
+  return qNum(RR,'Rate of change of spherical surface area',`A spherical tank has radius \\(r=${nfmt(r)}\\,m\\) increasing at \\(dr/dt=${nfmt(dr)}\\,m/s\\). Find the rate of change of surface area.`,ans,`For \\(A=4\\pi r^2\\), \\(dA/dt=8\\pi r\\,dr/dt=8\\pi(${nfmt(r)})(${nfmt(dr)})=${nfmt(ans)}\\,m^2/s\\).`);
 });

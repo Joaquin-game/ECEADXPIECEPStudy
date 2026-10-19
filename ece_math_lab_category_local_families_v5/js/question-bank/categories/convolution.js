@@ -189,36 +189,36 @@ NUMERIC_GENERATOR_REGISTRY.convolution = [...numericSeedEntries(CV, CONVOLUTION_
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(CV,'Discrete convolution at index two','convolution-discrete-coefficient-index-two',()=>{
   const x=[ri(1,5),ri(1,5),ri(1,5)],h=[ri(1,5),ri(1,5),ri(1,5)],ans=x[0]*h[2]+x[1]*h[1]+x[2]*h[0];
-  return qNum(CV,'Discrete convolution at index two',`Let \(x[n]=[${x.join(', ')}]\) and \(h[n]=[${h.join(', ')}]\), indexed from \(n=0\). Find \(y[2]\) for \(y[n]=x[n]*h[n]\).`,ans,`\(y[2]=x[0]h[2]+x[1]h[1]+x[2]h[0]=${x[0]}(${h[2]})+${x[1]}(${h[1]})+${x[2]}(${h[0]})=${ans}\).`)
+  return qNum(CV,'Discrete convolution at index two',`Let \\(x[n]=[${x.join(', ')}]\\) and \\(h[n]=[${h.join(', ')}]\\), indexed from \\(n=0\\). Find \\(y[2]\\) for \\(y[n]=x[n]*h[n]\\).`,ans,`\\(y[2]=x[0]h[2]+x[1]h[1]+x[2]h[0]=${x[0]}(${h[2]})+${x[1]}(${h[1]})+${x[2]}(${h[0]})=${ans}\\).`)
 });
 appendNumericRecipe(CV,'Applied · FIR filtering of sensor samples','scenario-convolution-sensor-fir',()=>{
   const x=Array.from({length:5},()=>ri(1,9)),h=[1,2,1],ans=x[2]*h[0]+x[1]*h[1]+x[0]*h[2];
-  const q=qNum(CV,'Applied · FIR filtering of sensor samples',`A three-tap noise filter has impulse response \(h[n]=[1,2,1]\), indexed from zero. For recent sensor samples \(x[0]=${x[0]}, x[1]=${x[1]}, x[2]=${x[2]}\), compute the convolution output \(y[2]\).`,ans,`\(y[2]=x[0]h[2]+x[1]h[1]+x[2]h[0]=${x[0]}(1)+${x[1]}(2)+${x[2]}(1)=${ans}\).`);
+  const q=qNum(CV,'Applied · FIR filtering of sensor samples',`A three-tap noise filter has impulse response \\(h[n]=[1,2,1]\\), indexed from zero. For recent sensor samples \\(x[0]=${x[0]}, x[1]=${x[1]}, x[2]=${x[2]}\\), compute the convolution output \\(y[2]\\).`,ans,`\\(y[2]=x[0]h[2]+x[1]h[1]+x[2]h[0]=${x[0]}(1)+${x[1]}(2)+${x[2]}(1)=${ans}\\).`);
   return attachDiagram(q,'filterFlow','Sensor samples enter a finite-impulse-response filter with taps 1, 2, 1; the output is the discrete convolution sum.');
 });
 appendNumericRecipe(CV,'Applied · Continuous step input through an exponential system','scenario-convolution-step-exponential',()=>{
   const A0=ri(2,8),a=ri(1,5),t=pick([.25,.5,1,1.5]),ans=A0*(1-Math.exp(-a*t))/a;
-  return qNum(CV,'Applied · Continuous step input through an exponential system',`A continuous sensor model has unit-step input amplitude \(${A0}\) and impulse response \(h(t)=e^{-${a}t}u(t)\). Compute the convolution output at \(t=${t}\): \(y(t)=\int_0^t ${A0}e^{-${a}(t-\tau)}d\tau\).`,ans,`Integrating gives \(y(t)=\frac{${A0}}{${a}}(1-e^{-${a}t})\). At \(t=${t}\), \(y=${nfmt(ans)}\).`);
+  return qNum(CV,'Applied · Continuous step input through an exponential system',`A continuous sensor model has unit-step input amplitude \\(${A0}\\) and impulse response \\(h(t)=e^{-${a}t}u(t)\\). Compute the convolution output at \\(t=${t}\\): \\(y(t)=\\int_0^t ${A0}e^{-${a}(t-\\tau)}d\\tau\\).`,ans,`Integrating gives \\(y(t)=\\frac{${A0}}{${a}}(1-e^{-${a}t})\\). At \\(t=${t}\\), \\(y=${nfmt(ans)}\\).`);
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('convolution','Additional · Continuous-time ramp-ramp convolution','convolution-topup-01',()=>{
   const T=rand(.5,3),ans=T**3/6;
-  return qNum(CV,'Continuous-time ramp-ramp convolution',`For causal unit ramps \(r(t)=tu(t)\), evaluate \((r*r)(${nfmt(T)})\).`,ans,`\((r*r)(t)=\int_0^t \tau(t-\tau)\,d\tau=t^3/6\). At \(t=${nfmt(T)}\), the value is \(${nfmt(ans)}\).`);
+  return qNum(CV,'Continuous-time ramp-ramp convolution',`For causal unit ramps \\(r(t)=tu(t)\\), evaluate \\((r*r)(${nfmt(T)})\\).`,ans,`\\((r*r)(t)=\\int_0^t \\tau(t-\\tau)\\,d\\tau=t^3/6\\). At \\(t=${nfmt(T)}\\), the value is \\(${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('convolution','Additional · Discrete convolution of two short sequences','convolution-topup-02',()=>{
   const a0=ri(1,5),a1=ri(1,5),a2=ri(0,4),b0=ri(1,4),b1=ri(1,4),b2=ri(0,3),n=ri(1,3);const aa=[a0,a1,a2],bb=[b0,b1,b2];let ans=0;for(let k=0;k<aa.length;k++){const j=n-k;if(j>=0&&j<bb.length)ans+=aa[k]*bb[j]}
-  return qNum(CV,'Discrete convolution of two short sequences',`Let \(a=[${a0},${a1},${a2}]\) and \(b=[${b0},${b1},${b2}]\), with indices starting at zero. Find \(y[${n}]\) for \(y=a*b\).`,ans,`Use \(y[n]=\sum_k a[k]b[n-k]\). The valid products for \(n=${n}\) sum to \(${ans}\).`);
+  return qNum(CV,'Discrete convolution of two short sequences',`Let \\(a=[${a0},${a1},${a2}]\\) and \\(b=[${b0},${b1},${b2}]\\), with indices starting at zero. Find \\(y[${n}]\\) for \\(y=a*b\\).`,ans,`Use \\(y[n]=\\sum_k a[k]b[n-k]\\). The valid products for \\(n=${n}\\) sum to \\(${ans}\\).`);
 });
 appendNumericRecipe('convolution','Additional · Exponential input through a first-order integrator','convolution-topup-03',()=>{
   const a=ri(1,5),T=rand(.5,3),ans=(1-Math.exp(-a*T))/a;
-  return qNum(CV,'Exponential input through a first-order integrator',`Evaluate \((e^{-${a}t}u(t)*u(t))\) at \(t=${nfmt(T)}\).`,ans,`The convolution is \(\int_0^T e^{-a\tau}\,d\tau=(1-e^{-aT})/a\), which gives \(${nfmt(ans)}\).`);
+  return qNum(CV,'Exponential input through a first-order integrator',`Evaluate \\((e^{-${a}t}u(t)*u(t))\\) at \\(t=${nfmt(T)}\\).`,ans,`The convolution is \\(\\int_0^T e^{-a\\tau}\\,d\\tau=(1-e^{-aT})/a\\), which gives \\(${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('convolution','Additional · Moving-average FIR output','convolution-topup-04',()=>{
   const x0=ri(-5,10),x1=ri(-5,10),x2=ri(-5,10),ans=(x0+x1+x2)/3;
-  return qNum(CV,'Moving-average FIR output',`A length-three moving-average filter outputs \(y[n]=(x[n]+x[n-1]+x[n-2])/3\). If the samples are \(${x0}\), \(${x1}\), and \(${x2}\), find the output.`,ans,`\(y=(${x0}+${x1}+${x2})/3=${nfmt(ans)}\).`);
+  return qNum(CV,'Moving-average FIR output',`A length-three moving-average filter outputs \\(y[n]=(x[n]+x[n-1]+x[n-2])/3\\). If the samples are \\(${x0}\\), \\(${x1}\\), and \\(${x2}\\), find the output.`,ans,`\\(y=(${x0}+${x1}+${x2})/3=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('convolution','Additional · Convolution of a unit step and a finite pulse','convolution-topup-05',()=>{
   const A=ri(1,6),T=ri(1,5),t=ri(1,T+5),ans=A*Math.min(t,T);
-  return qNum(CV,'Convolution of a unit step and a finite pulse',`Let \(x(t)=A\) for \(0\le t\le ${T}\) and zero otherwise, with \(A=${A}\). Find \((u*x)(${t})\).`,ans,`The accumulated pulse area up to time \(t\) is \(A\min(t,T)=${A}\min(${t},${T})=${nfmt(ans)}\).`);
+  return qNum(CV,'Convolution of a unit step and a finite pulse',`Let \\(x(t)=A\\) for \\(0\\le t\\le ${T}\\) and zero otherwise, with \\(A=${A}\\). Find \\((u*x)(${t})\\).`,ans,`The accumulated pulse area up to time \\(t\\) is \\(A\\min(t,T)=${A}\\min(${t},${T})=${nfmt(ans)}\\).`);
 });

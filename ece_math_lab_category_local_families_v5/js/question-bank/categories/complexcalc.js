@@ -57,7 +57,7 @@ function makeComplexcalcExpansionFamily09(title){
 function makeComplexcalcExpansionFamily10(title){
   const v=ri(0,1)===1;
   {
-      const c0=ri(1,5),a0=ri(1,5),offset=ri(2,5),ans=v?c0:c0/offset;return qNum(CC,title,v?`For \(f(z)=\frac{${c0}}{z-${a0}}\), find the residue at its simple pole \(z=${a0}\).`:`For \(f(z)=\frac{${c0}}{z-${a0}}\), evaluate \(f(${a0+offset})\).`,ans,v?`The coefficient of \(1/(z-${a0})\) is \(${c0}\), so the residue is \(${c0}\).`:`Substitute \(z=${a0+offset}\): \(f(z)=${c0}/${offset}=${nfmt(ans)}\).`)
+      const c0=ri(1,5),a0=ri(1,5),offset=ri(2,5),ans=v?c0:c0/offset;return qNum(CC,title,v?`For \\(f(z)=\\frac{${c0}}{z-${a0}}\\), find the residue at its simple pole \\(z=${a0}\\).`:`For \\(f(z)=\\frac{${c0}}{z-${a0}}\\), evaluate \\(f(${a0+offset})\\).`,ans,v?`The coefficient of \\(1/(z-${a0})\\) is \\(${c0}\\), so the residue is \\(${c0}\\).`:`Substitute \\(z=${a0+offset}\\): \\(f(z)=${c0}/${offset}=${nfmt(ans)}\\).`)
   }
 }
 function makeComplexcalcExpansionFamily11(title){
@@ -140,7 +140,7 @@ function makeComplexcalcSupplement(index){
       if(fam===4){const ans=Math.exp(-ar);return qNum(CC,title,`For \\(z=-${ar}+${bi}i\\), find \\(|e^z|\\).`,ans,`\\(|e^{x+iy}|=e^x\\), so \\(|e^z|=e^{-${ar}}=${nfmt(ans)}\\).`)}
       if(fam===5){const ans=0;return qNum(CC,title,`For \\(u(x,y)=x^2-y^2\\) and \\(v(x,y)=2xy\\), evaluate \\(u_x-v_y\\) at \\((x,y)=(${ar},${bi})\\).`,ans,`\\(u_x=2x\\) and \\(v_y=2x\\), therefore \\(u_x-v_y=0\\).`)}
       if(fam===6){const ans=3*(ar*ar-bi*bi);return qNum(CC,title,`For \\(f(z)=z^3\\), let \\(z=${ar}+${bi}i\\). Find \\(\\operatorname{Re} f'(z)\\).`,ans,`\\(f'(z)=3z^2\\) and \\(\\operatorname{Re}(z^2)=x^2-y^2\\), giving \\(3(${ar}^2-${bi}^2)=${ans}\\).`)}
-      if(fam===7){const ans=ar*bi;return qNum(CC,title,`Evaluate the imaginary part of \\(\int_0^{${ar}+${bi}i} z\,dz\\) along a straight path.`,ans,`An antiderivative is \\(z^2/2\\). Its imaginary part at \\(${ar}+${bi}i\\) is \\(ab=${ar}\\cdot${bi}=${ans}\\).`)}
+      if(fam===7){const ans=ar*bi;return qNum(CC,title,`Evaluate the imaginary part of \\(\\int_0^{${ar}+${bi}i} z\\,dz\\) along a straight path.`,ans,`An antiderivative is \\(z^2/2\\). Its imaginary part at \\(${ar}+${bi}i\\) is \\(ab=${ar}\\cdot${bi}=${ans}\\).`)}
       if(fam===8){const ans=ar*ar+bi*bi;return qNum(CC,title,`For \\(z=${ar}+${bi}i\\), evaluate \\(z\\overline z\\).`,ans,`\\(z\\overline z=|z|^2=${ar}^2+${bi}^2=${ans}\\).`)}
       const ans=cr;return qNum(CC,title,`For \\(f(z)=\\frac{${cr}}{z-${ar}}\\), find the residue at its simple pole \\(z=${ar}\\).`,ans,`The coefficient of \\(1/(z-${ar})\\) is \\(${cr}\\), so the residue is \\(${cr}\\).`);
 }
@@ -190,50 +190,50 @@ NUMERIC_GENERATOR_REGISTRY.complexcalc = [...numericSeedEntries(CC, COMPLEXCALC_
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(CC,'Real part of a complex reciprocal','complex-reciprocal-real-part',()=>{
   const a=ri(1,7),b=ri(-5,5),ans=a/(a*a+b*b);
-  return qNum(CC,'Real part of a complex reciprocal',`For \(z=${a}${b<0?'':'+'}${b}i\), find \(\\operatorname{Re}(1/z)\).`,ans,`\(1/z=\\frac{a-bi}{a^2+b^2}\), so \(\\operatorname{Re}(1/z)=a/(a^2+b^2)=${a}/(${a*a+b*b})=${nfmt(ans)}\).`)
+  return qNum(CC,'Real part of a complex reciprocal',`For \\(z=${a}${b<0?'':'+'}${b}i\\), find \\(\\operatorname{Re}(1/z)\\).`,ans,`\\(1/z=\\frac{a-bi}{a^2+b^2}\\), so \\(\\operatorname{Re}(1/z)=a/(a^2+b^2)=${a}/(${a*a+b*b})=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CC,'Real part of a complex product','complex-product-real-part',()=>{
   const a=ri(-5,5),b=ri(-5,5),c=ri(-5,5),d=ri(-5,5),ans=a*c-b*d;
-  return qNum(CC,'Real part of a complex product',`For \(z_1=${a}${b<0?'':'+'}${b}i\) and \(z_2=${c}${d<0?'':'+'}${d}i\), find \(\\operatorname{Re}(z_1z_2)\).`,ans,`\((a+bi)(c+di)=(ac-bd)+i(ad+bc)\). Hence the real part is \(${a}(${c})-(${b})(${d})=${ans}\).`)
+  return qNum(CC,'Real part of a complex product',`For \\(z_1=${a}${b<0?'':'+'}${b}i\\) and \\(z_2=${c}${d<0?'':'+'}${d}i\\), find \\(\\operatorname{Re}(z_1z_2)\\).`,ans,`\\((a+bi)(c+di)=(ac-bd)+i(ad+bc)\\). Hence the real part is \\(${a}(${c})-(${b})(${d})=${ans}\\).`)
 });
 appendNumericRecipe(CC,'Modulus of a complex quotient','complex-quotient-modulus',()=>{
   let a=ri(-5,5),b=ri(-5,5);if(a===0&&b===0)a=2;const c=ri(1,5),d=ri(1,5),ans=Math.hypot(a,b)/Math.hypot(c,d);
-  return qNum(CC,'Modulus of a complex quotient',`For \(z_1=${a}${b<0?'':'+'}${b}i\) and \(z_2=${c}+${d}i\), find \(|z_1/z_2|\).`,ans,`\(|z_1/z_2|=|z_1|/|z_2|=\\sqrt{${a*a+b*b}}/\\sqrt{${c*c+d*d}}=${nfmt(ans)}\).`)
+  return qNum(CC,'Modulus of a complex quotient',`For \\(z_1=${a}${b<0?'':'+'}${b}i\\) and \\(z_2=${c}+${d}i\\), find \\(|z_1/z_2|\\).`,ans,`\\(|z_1/z_2|=|z_1|/|z_2|=\\sqrt{${a*a+b*b}}/\\sqrt{${c*c+d*d}}=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CC,'Principal argument of a complex exponential','complex-exponential-principal-argument',()=>{
   const a=ri(-3,3),theta=rand(-2.5,2.5),ans=theta;
-  return qNum(CC,'Principal argument of a complex exponential',`For \(z=e^{${a}+i(${nfmt(theta)})}\), find the principal argument \(\\operatorname{Arg}(z)\) in radians.`,ans,`\(e^{a+i\\theta}=e^a(\\cos\\theta+i\\sin\\theta)\). Since \(-\\pi<${nfmt(theta)}<\\pi\), the principal argument is \(${nfmt(ans)}\,rad\).`)
+  return qNum(CC,'Principal argument of a complex exponential',`For \\(z=e^{${a}+i(${nfmt(theta)})}\\), find the principal argument \\(\\operatorname{Arg}(z)\\) in radians.`,ans,`\\(e^{a+i\\theta}=e^a(\\cos\\theta+i\\sin\\theta)\\). Since \\(-\\pi<${nfmt(theta)}<\\pi\\), the principal argument is \\(${nfmt(ans)}\\,rad\\).`)
 });
 appendNumericRecipe(CC,'Real part of a complex quotient','complex-quotient-real-part',()=>{
   let a=ri(-5,5),b=ri(-5,5);if(a===0&&b===0)a=1;const c=ri(1,5),d=ri(1,5),ans=(a*c+b*d)/(c*c+d*d);
-  return qNum(CC,'Real part of a complex quotient',`For \(z_1=${a}${b<0?'':'+'}${b}i\) and \(z_2=${c}+${d}i\), find \(\\operatorname{Re}(z_1/z_2)\).`,ans,`Multiply numerator and denominator by the conjugate of \(z_2\): the real part is \((ac+bd)/(c^2+d^2)=(${a}(${c})+(${b})(${d}))/(${c*c+d*d})=${nfmt(ans)}\).`)
+  return qNum(CC,'Real part of a complex quotient',`For \\(z_1=${a}${b<0?'':'+'}${b}i\\) and \\(z_2=${c}+${d}i\\), find \\(\\operatorname{Re}(z_1/z_2)\\).`,ans,`Multiply numerator and denominator by the conjugate of \\(z_2\\): the real part is \\((ac+bd)/(c^2+d^2)=(${a}(${c})+(${b})(${d}))/(${c*c+d*d})=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CC,'Residue at a double pole','complex-residue-double-pole',()=>{
   const a=ri(1,7),b=ri(-4,8),c=ri(-3,4),ans=a;
-  return qNum(CC,'Residue at a double pole',`For \(f(z)=\\frac{${a}z+(${b})}{(z-${c})^2}\), find the residue at its double pole \(z=${c}\).`,ans,`For a double pole, \(\\operatorname{Res}_{z=c}f=\\left.\\frac{d}{dz}[(z-c)^2f(z)]\\right|_{z=c}\). Here the derivative of \(${a}z+(${b})\) is \(${a}\), so the residue is \(${ans}\).`)
+  return qNum(CC,'Residue at a double pole',`For \\(f(z)=\\frac{${a}z+(${b})}{(z-${c})^2}\\), find the residue at its double pole \\(z=${c}\\).`,ans,`For a double pole, \\(\\operatorname{Res}_{z=c}f=\\left.\\frac{d}{dz}[(z-c)^2f(z)]\\right|_{z=c}\\). Here the derivative of \\(${a}z+(${b})\\) is \\(${a}\\), so the residue is \\(${ans}\\).`)
 });
 appendNumericRecipe(CC,'Magnitude of a residue at an imaginary pole','complex-residue-magnitude-imaginary-pole',()=>{
   const ans=.5;
-  return qNum(CC,'Magnitude of a residue at an imaginary pole',`For \(f(z)=1/(z^2+1)\), find \(|\\operatorname{Res}_{z=i}f(z)|\).`,ans,`The pole at \(z=i\) is simple, so \(\\operatorname{Res}_{z=i}f=1/(2i)=-i/2\). Its magnitude is \(1/2=${nfmt(ans)}\).`)
+  return qNum(CC,'Magnitude of a residue at an imaginary pole',`For \\(f(z)=1/(z^2+1)\\), find \\(|\\operatorname{Res}_{z=i}f(z)|\\).`,ans,`The pole at \\(z=i\\) is simple, so \\(\\operatorname{Res}_{z=i}f=1/(2i)=-i/2\\). Its magnitude is \\(1/2=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(CC,'Partial derivative of the imaginary component','complex-imaginary-component-partial',()=>{
   const k=ri(1,5),x=ri(1,5),y=ri(1,5),ans=k*y;
-  return qNum(CC,'Partial derivative of the imaginary component',`Let the imaginary component be \(v(x,y)=${k}xy\). Evaluate \(\\partial v/\\partial x\) at \((x,y)=(${x},${y})\).`,ans,`\(v_x=${k}y\). At \(y=${y}\), \(v_x=${k}(${y})=${ans}\).`)
+  return qNum(CC,'Partial derivative of the imaginary component',`Let the imaginary component be \\(v(x,y)=${k}xy\\). Evaluate \\(\\partial v/\\partial x\\) at \\((x,y)=(${x},${y})\\).`,ans,`\\(v_x=${k}y\\). At \\(y=${y}\\), \\(v_x=${k}(${y})=${ans}\\).`)
 });
 appendNumericRecipe(CC,'Principal argument of a complex quotient','complex-quotient-principal-argument',()=>{
   let a=ri(-5,5),b=ri(-5,5);if(a===0&&b===0)a=1;const c=ri(1,5),d=ri(1,5),re=a*c+b*d,im=b*c-a*d,ans=Math.atan2(im,re);
-  return qNum(CC,'Principal argument of a complex quotient',`For \(z_1=${a}${b<0?'':'+'}${b}i\) and \(z_2=${c}+${d}i\), find the principal argument of \(z_1/z_2\) in radians.`,ans,`The quotient has real numerator component \(ac+bd=${re}\) and imaginary numerator component \(bc-ad=${im}\), over the positive denominator \(c^2+d^2\). Thus \(\\operatorname{Arg}(z_1/z_2)=\\operatorname{atan2}(${im},${re})=${nfmt(ans)}\,rad\).`)
+  return qNum(CC,'Principal argument of a complex quotient',`For \\(z_1=${a}${b<0?'':'+'}${b}i\\) and \\(z_2=${c}+${d}i\\), find the principal argument of \\(z_1/z_2\\) in radians.`,ans,`The quotient has real numerator component \\(ac+bd=${re}\\) and imaginary numerator component \\(bc-ad=${im}\\), over the positive denominator \\(c^2+d^2\\). Thus \\(\\operatorname{Arg}(z_1/z_2)=\\operatorname{atan2}(${im},${re})=${nfmt(ans)}\\,rad\\).`)
 });
 appendNumericRecipe(CC,'Principal argument of a complex number','complex-number-principal-argument',()=>{
   let a=ri(-5,5),b=ri(-5,5);if(a===0&&b===0)b=1;const ans=Math.atan2(b,a);
-  return qNum(CC,'Principal argument of a complex number',`For \(z=${a}${b<0?'':'+'}${b}i\), find its principal argument \(\\operatorname{Arg}(z)\) in radians.`,ans,`Use \(\\operatorname{Arg}(a+bi)=\\operatorname{atan2}(b,a)\), so the principal argument is \(${nfmt(ans)}\,rad\).`)
+  return qNum(CC,'Principal argument of a complex number',`For \\(z=${a}${b<0?'':'+'}${b}i\\), find its principal argument \\(\\operatorname{Arg}(z)\\) in radians.`,ans,`Use \\(\\operatorname{Arg}(a+bi)=\\operatorname{atan2}(b,a)\\), so the principal argument is \\(${nfmt(ans)}\\,rad\\).`)
 });
 appendNumericRecipe(CC,'Field scenario · Real current component from AC impedance','scenario-complex-ac-current-real',()=>{
   const R=ri(3,8)*10,X=ri(2,6)*10,Vrms=pick([24,48,120]),ans=Vrms*R/(R*R+X*X);
-  const q=qNum(CC,'Field scenario · Real current component from AC impedance',`An AC measurement gives RMS source phasor \(\tilde V=${Vrms}\angle0^\circ\,V\) and load impedance \(Z=${R}+j${X}\,\Omega\). With \(\tilde I=\tilde V/Z\), find the real component of current in amperes.`,ans,`\(\frac{1}{R+jX}=\frac{R-jX}{R^2+X^2}\), so \(\Re\{\tilde I\}=V_{rms}R/(R^2+X^2)=${Vrms}(${R})/(${R}^2+${X}^2)=${nfmt(ans)}\,A\).`);
+  const q=qNum(CC,'Field scenario · Real current component from AC impedance',`An AC measurement gives RMS source phasor \\(\\tilde V=${Vrms}\\angle0^\\circ\\,V\\) and load impedance \\(Z=${R}+j${X}\\,\\Omega\\). With \\(\\tilde I=\\tilde V/Z\\), find the real component of current in amperes.`,ans,`\\(\\frac{1}{R+jX}=\\frac{R-jX}{R^2+X^2}\\), so \\(\\Re\\{\\tilde I\\}=V_{rms}R/(R^2+X^2)=${Vrms}(${R})/(${R}^2+${X}^2)=${nfmt(ans)}\\,A\\).`);
   q.diagramKind='phasor';q.diagramAlt='Complex impedance is represented on the complex plane with resistance on the real axis and positive reactance on the imaginary axis.';return q;
 });
 appendNumericRecipe(CC,'Applied · Imaginary component of a complex channel product','scenario-complex-channel-product',()=>{
   const a=ri(1,7),b=ri(1,6),c=ri(1,8),d=ri(1,5),ans=a*d+b*c;
-  return qNum(CC,'Applied · Imaginary component of a complex channel product',`A communications equalizer multiplies phasors \(z=(${a}+j${b})\) and \(w=(${c}+j${d})\). Find \(\Im\{zw\}\).`,ans,`\(zw=ac-bd+j(ad+bc)\). Therefore \(\Im\{zw\}=ad+bc=${a}(${d})+${b}(${c})=${ans}\).`);
+  return qNum(CC,'Applied · Imaginary component of a complex channel product',`A communications equalizer multiplies phasors \\(z=(${a}+j${b})\\) and \\(w=(${c}+j${d})\\). Find \\(\\Im\\{zw\\}\\).`,ans,`\\(zw=ac-bd+j(ad+bc)\\). Therefore \\(\\Im\\{zw\\}=ad+bc=${a}(${d})+${b}(${c})=${ans}\\).`);
 });

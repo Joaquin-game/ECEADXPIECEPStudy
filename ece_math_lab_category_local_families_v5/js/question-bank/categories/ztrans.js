@@ -189,38 +189,38 @@ NUMERIC_GENERATOR_REGISTRY.ztrans = [...numericSeedEntries(Z, Z_SUP_NAMES, 'Core
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe('ztrans','Finite-length rectangular sequence Z-transform','ztrans-finite-rectangular-sequence',()=>{
   const N=ri(3,8),z=ri(2,6),ans=(1-Math.pow(z,-N))/(1-1/z);
-  return qNum('ztrans','Finite-length rectangular sequence Z-transform',`A sequence is \(x[n]=1\) for \(0\\le n\\le ${N-1}\), and zero otherwise. Evaluate \(X(z)=\\sum_{n=0}^{${N-1}}z^{-n}\) at \(z=${z}\).`,ans,`This is a finite geometric series: \(X(z)=(1-z^{-${N}})/(1-z^{-1})\). At \(z=${z}\), \(X=${nfmt(ans)}\).`)
+  return qNum('ztrans','Finite-length rectangular sequence Z-transform',`A sequence is \\(x[n]=1\\) for \\(0\\le n\\le ${N-1}\\), and zero otherwise. Evaluate \\(X(z)=\\sum_{n=0}^{${N-1}}z^{-n}\\) at \\(z=${z}\\).`,ans,`This is a finite geometric series: \\(X(z)=(1-z^{-${N}})/(1-z^{-1})\\). At \\(z=${z}\\), \\(X=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(Z,'Applied · Firmware smoothing recurrence','scenario-z-firmware-smoothing',()=>{
   const alpha=pick([.25,.5,.75]),x=Array.from({length:4},()=>ri(1,12)),y=[x[0]];
   for(let n=1;n<4;n++)y[n]=alpha*y[n-1]+(1-alpha)*x[n];
   const ans=y[3];
-  return qNum(Z,'Applied · Firmware smoothing recurrence',`A microcontroller smooths a noisy sensor stream using \(y[n]=\alpha y[n-1]+(1-\alpha)x[n]\), with \(\alpha=${alpha}\) and initial value \(y[0]=x[0]=${x[0]}\). The next three inputs are \(x[1]=${x[1]}\), \(x[2]=${x[2]}\), and \(x[3]=${x[3]}\). Find \(y[3]\).`,ans,`Recursively, \(y[1]=${nfmt(y[1])}\), \(y[2]=${nfmt(y[2])}\), and \(y[3]=${alpha}(${nfmt(y[2])})+(1-${alpha})(${x[3]})=${nfmt(ans)}\).`);
+  return qNum(Z,'Applied · Firmware smoothing recurrence',`A microcontroller smooths a noisy sensor stream using \\(y[n]=\\alpha y[n-1]+(1-\\alpha)x[n]\\), with \\(\\alpha=${alpha}\\) and initial value \\(y[0]=x[0]=${x[0]}\\). The next three inputs are \\(x[1]=${x[1]}\\), \\(x[2]=${x[2]}\\), and \\(x[3]=${x[3]}\\). Find \\(y[3]\\).`,ans,`Recursively, \\(y[1]=${nfmt(y[1])}\\), \\(y[2]=${nfmt(y[2])}\\), and \\(y[3]=${alpha}(${nfmt(y[2])})+(1-${alpha})(${x[3]})=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe(Z,'Applied · Three-tap firmware filter','scenario-z-three-tap-fir',()=>{
   const x=Array.from({length:5},()=>ri(0,12)),n=3,ans=(x[n]+2*x[n-1]+x[n-2])/4;
-  const q=qNum(Z,'Applied · Three-tap firmware filter',`A firmware filter uses \(y[n]=\frac14x[n]+\frac12x[n-1]+\frac14x[n-2]\). Its measured input buffer, indexed from \(n=0\), is \([${x.join(', ')}]\). Find \(y[3]\).`,ans,`\(y[3]=\frac14x[3]+\frac12x[2]+\frac14x[1]=\frac14(${x[3]})+\frac12(${x[2]})+\frac14(${x[1]})=${nfmt(ans)}\).`);
+  const q=qNum(Z,'Applied · Three-tap firmware filter',`A firmware filter uses \\(y[n]=\\frac14x[n]+\\frac12x[n-1]+\\frac14x[n-2]\\). Its measured input buffer, indexed from \\(n=0\\), is \\([${x.join(', ')}]\\). Find \\(y[3]\\).`,ans,`\\(y[3]=\\frac14x[3]+\\frac12x[2]+\\frac14x[1]=\\frac14(${x[3]})+\\frac12(${x[2]})+\\frac14(${x[1]})=${nfmt(ans)}\\).`);
   return attachDiagram(q,'filterFlow','A discrete input sequence passes through a three-tap FIR digital filter h[n] and produces the smoothed output sequence y[n].');
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('ztrans','Additional · Finite geometric sequence transform','ztrans-topup-01',()=>{
   const a=ri(1,4),z=ri(6,12),N=ri(3,7);let ans=0;for(let n=0;n<N;n++)ans+=a**n/z**n;
-  return qNum(Z,'Finite geometric sequence transform',`A sequence is \(x[n]=${a}^n\) for \(0\le n<${N}\), and zero otherwise. Evaluate \(X(z)\) at \(z=${z}\).`,ans,`The finite Z-transform is \(X(z)=\sum_{n=0}^{${N-1}}(${a}/z)^n\). Evaluating the finite sum gives \(${nfmt(ans)}\).`);
+  return qNum(Z,'Finite geometric sequence transform',`A sequence is \\(x[n]=${a}^n\\) for \\(0\\le n<${N}\\), and zero otherwise. Evaluate \\(X(z)\\) at \\(z=${z}\\).`,ans,`The finite Z-transform is \\(X(z)=\\sum_{n=0}^{${N-1}}(${a}/z)^n\\). Evaluating the finite sum gives \\(${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('ztrans','Additional · First-order pole-zero transfer value','ztrans-topup-02',()=>{
   const a=ri(1,3),b=ri(1,4),z=ri(7,12),ans=(z-b)/(z-a);
-  return qNum(Z,'First-order pole-zero transfer value',`A discrete-time system has \(H(z)=(z-${b})/(z-${a})\). Evaluate \(H(${z})\).`,ans,`Substitute \(z=${z}\): \(H=(${z}-${b})/(${z}-${a})=${nfmt(ans)}\).`);
+  return qNum(Z,'First-order pole-zero transfer value',`A discrete-time system has \\(H(z)=(z-${b})/(z-${a})\\). Evaluate \\(H(${z})\\).`,ans,`Substitute \\(z=${z}\\): \\(H=(${z}-${b})/(${z}-${a})=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('ztrans','Additional · Inverse Z-transform of a scaled exponential','ztrans-topup-03',()=>{
   const A=ri(2,7),a=ri(1,4),n=ri(0,6),ans=A*a**n;
-  return qNum(Z,'Inverse Z-transform of a scaled exponential',`If \(X(z)=${A}z/(z-${a})\) is causal, find \(x[${n}]\).`,ans,`The pair is \(z/(z-a)\leftrightarrow a^n u[n]\), so \(x[n]=${A}(${a})^n\); at \(n=${n}\), \(x=${ans}\).`);
+  return qNum(Z,'Inverse Z-transform of a scaled exponential',`If \\(X(z)=${A}z/(z-${a})\\) is causal, find \\(x[${n}]\\).`,ans,`The pair is \\(z/(z-a)\\leftrightarrow a^n u[n]\\), so \\(x[n]=${A}(${a})^n\\); at \\(n=${n}\\), \\(x=${ans}\\).`);
 });
 appendNumericRecipe('ztrans','Additional · Steady-state solution of a recurrence','ztrans-topup-04',()=>{
   const r=pick([.2,.3,.4,.5,.6,.7]),u=ri(2,8),ans=u/(1-r);
-  return qNum(Z,'Steady-state solution of a recurrence',`A stable recurrence is \(y[n]=${nfmt(r)}y[n-1]+${u}\). Find its constant steady-state value.`,ans,`At steady state, \(y[n]=y[n-1]=y_\infty\). Thus \(y_\infty=${nfmt(r)}y_\infty+${u}\), so \(y_\infty=${u}/(1-${nfmt(r)})=${nfmt(ans)}\).`);
+  return qNum(Z,'Steady-state solution of a recurrence',`A stable recurrence is \\(y[n]=${nfmt(r)}y[n-1]+${u}\\). Find its constant steady-state value.`,ans,`At steady state, \\(y[n]=y[n-1]=y_\\infty\\). Thus \\(y_\\infty=${nfmt(r)}y_\\infty+${u}\\), so \\(y_\\infty=${u}/(1-${nfmt(r)})=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('ztrans','Additional · Three-tap FIR response at a sample frequency','ztrans-topup-05',()=>{
   const z=ri(3,8),b0=pick([.2,.3,.5,1]),b1=pick([.1,.25,.4]),b2=pick([.1,.2,.3]),ans=b0+b1/z+b2/(z*z);
-  return qNum(Z,'Three-tap FIR response at a sample frequency',`A three-tap filter has \(H(z)=${nfmt(b0)}+${nfmt(b1)}z^{-1}+${nfmt(b2)}z^{-2}\). Find \(H(${z})\).`,ans,`Substitute \(z=${z}\): \(H=${nfmt(b0)}+${nfmt(b1)}/${z}+${nfmt(b2)}/${z}^2=${nfmt(ans)}\).`);
+  return qNum(Z,'Three-tap FIR response at a sample frequency',`A three-tap filter has \\(H(z)=${nfmt(b0)}+${nfmt(b1)}z^{-1}+${nfmt(b2)}z^{-2}\\). Find \\(H(${z})\\).`,ans,`Substitute \\(z=${z}\\): \\(H=${nfmt(b0)}+${nfmt(b1)}/${z}+${nfmt(b2)}/${z}^2=${nfmt(ans)}\\).`);
 });

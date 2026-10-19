@@ -173,36 +173,36 @@ NUMERIC_GENERATOR_REGISTRY.signals = [...coreSeedEntries(S, SIGNALS_CORE_SEEDS),
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(S,'Field scenario · Sampling rate for a vibration logger','scenario-signals-vibration-nyquist',()=>{
   const fs=ri(4,24)*1000,ans=fs/2;
-  const q=qNum(S,'Field scenario · Sampling rate for a vibration logger',`A maintenance team configures a vibration logger at sampling rate \(f_s=${fs}\,samples/s\). By the Nyquist criterion, what is the highest sinusoidal frequency that can be represented without aliasing under ideal assumptions?`,ans,`The Nyquist frequency is \(f_N=f_s/2=${fs}/2=${nfmt(ans)}\,Hz\). Components above this limit can alias into lower frequencies.`);
+  const q=qNum(S,'Field scenario · Sampling rate for a vibration logger',`A maintenance team configures a vibration logger at sampling rate \\(f_s=${fs}\\,samples/s\\). By the Nyquist criterion, what is the highest sinusoidal frequency that can be represented without aliasing under ideal assumptions?`,ans,`The Nyquist frequency is \\(f_N=f_s/2=${fs}/2=${nfmt(ans)}\\,Hz\\). Components above this limit can alias into lower frequencies.`);
   q.diagramKind='sampleWave';q.diagramAlt='A continuous sinusoid is shown with sample markers taken at regular time intervals; the Nyquist limit is half the sampling rate.';return q;
 });
 appendNumericRecipe(S,'Applied · ADC quantization step size','scenario-signals-adc-lsb',()=>{
   const bits=pick([8,10,12]),Vref=pick([3.3,5,10]),ans=Vref/(2**bits);
-  return qNum(S,'Applied · ADC quantization step size',`An embedded data logger uses an ideal ${bits}-bit ADC with input range \(0\) to \(${Vref}\,V\). Using \(\Delta V=V_{ref}/2^{N}\), find one least-significant-bit step in volts.`,ans,`There are \(2^{${bits}}=${2**bits}\) quantization intervals, so \(\Delta V=${Vref}/2^{${bits}}=${nfmt(ans)}\,V\).`);
+  return qNum(S,'Applied · ADC quantization step size',`An embedded data logger uses an ideal ${bits}-bit ADC with input range \\(0\\) to \\(${Vref}\\,V\\). Using \\(\\Delta V=V_{ref}/2^{N}\\), find one least-significant-bit step in volts.`,ans,`There are \\(2^{${bits}}=${2**bits}\\) quantization intervals, so \\(\\Delta V=${Vref}/2^{${bits}}=${nfmt(ans)}\\,V\\).`);
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('signals','Additional · Nyquist minimum sampling rate','signals-topup-01',()=>{
   const fmax=ri(2,120),ans=2*fmax;
-  return qNum(S,'Nyquist minimum sampling rate',`A band-limited signal has highest frequency \(${fmax}\,Hz\). Find the Nyquist minimum sampling rate.`,ans,`Nyquist requires \(f_s\ge2f_{max}\), so the theoretical minimum is \(2(${fmax})=${ans}\,samples/s\).`);
+  return qNum(S,'Nyquist minimum sampling rate',`A band-limited signal has highest frequency \\(${fmax}\\,Hz\\). Find the Nyquist minimum sampling rate.`,ans,`Nyquist requires \\(f_s\\ge2f_{max}\\), so the theoretical minimum is \\(2(${fmax})=${ans}\\,samples/s\\).`);
 });
 appendNumericRecipe('signals','Additional · Number of ADC quantization levels','signals-topup-02',()=>{
   const bits=ri(3,12),ans=2**bits;
-  return qNum(S,'Number of ADC quantization levels',`An ideal ADC has \(${bits}\) bits. How many distinct quantization levels are available?`,ans,`An \(N\)-bit converter has \(2^N\) levels, so \(2^{${bits}}=${ans}\).`);
+  return qNum(S,'Number of ADC quantization levels',`An ideal ADC has \\(${bits}\\) bits. How many distinct quantization levels are available?`,ans,`An \\(N\\)-bit converter has \\(2^N\\) levels, so \\(2^{${bits}}=${ans}\\).`);
 });
 appendNumericRecipe('signals','Additional · RMS of a symmetric square wave','signals-topup-03',()=>{
   const A=ri(2,20),ans=A;
-  return qNum(S,'RMS of a symmetric square wave',`A symmetric square wave alternates between \(+${A}\,V\) and \(-${A}\,V\). Find its RMS voltage.`,ans,`The magnitude is constantly \(${A}\,V\), so \(V_{rms}=\sqrt{\operatorname{mean}(v^2)}=${A}\,V\).`);
+  return qNum(S,'RMS of a symmetric square wave',`A symmetric square wave alternates between \\(+${A}\\,V\\) and \\(-${A}\\,V\\). Find its RMS voltage.`,ans,`The magnitude is constantly \\(${A}\\,V\\), so \\(V_{rms}=\\sqrt{\\operatorname{mean}(v^2)}=${A}\\,V\\).`);
 });
 appendNumericRecipe('signals','Additional · Pulse duty cycle','signals-topup-04',()=>{
   const ton=ri(1,8),off=ri(1,12),T=ton+off,ans=100*ton/T;
-  return qNum(S,'Pulse duty cycle',`A digital pulse is high for \(${ton}\,ms\) and low for \(${off}\,ms\). Find duty cycle in percent.`,ans,`The period is \(T=${ton}+${off}=${T}\,ms\). Duty cycle is \(100t_{on}/T=100(${ton}/${T})=${nfmt(ans)}\%\).`,'percent');
+  return qNum(S,'Pulse duty cycle',`A digital pulse is high for \\(${ton}\\,ms\\) and low for \\(${off}\\,ms\\). Find duty cycle in percent.`,ans,`The period is \\(T=${ton}+${off}=${T}\\,ms\\). Duty cycle is \\(100t_{on}/T=100(${ton}/${T})=${nfmt(ans)}\\%\\).`,'percent');
 });
 appendNumericRecipe('signals','Additional · Energy of a causal exponential pulse','signals-topup-05',()=>{
   const A=ri(1,8),a=ri(1,6),ans=A*A/(2*a);
-  return qNum(S,'Energy of a causal exponential pulse',`For \(x(t)=${A}e^{-${a}t}u(t)\), find its total energy \(E=\int_0^\infty x^2(t)\,dt\).`,ans,`\(E=${A}^2\int_0^\infty e^{-2${a}t}dt=${A}^2/(2${a})=${nfmt(ans)}\).`);
+  return qNum(S,'Energy of a causal exponential pulse',`For \\(x(t)=${A}e^{-${a}t}u(t)\\), find its total energy \\(E=\\int_0^\\infty x^2(t)\\,dt\\).`,ans,`\\(E=${A}^2\\int_0^\\infty e^{-2${a}t}dt=${A}^2/(2${a})=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('signals','Additional · Beat frequency of two sinusoids','signals-topup-06',()=>{
   const f1=ri(20,180),f2=ri(20,180),ans=Math.abs(f1-f2);
-  return qNum(S,'Beat frequency of two sinusoids',`Two nearby tones have frequencies \(${f1}\,Hz\) and \(${f2}\,Hz\). Find their beat frequency.`,ans,`The beat frequency is the absolute difference: \(f_b=|f_1-f_2|=|${f1}-${f2}|=${ans}\,Hz\).`);
+  return qNum(S,'Beat frequency of two sinusoids',`Two nearby tones have frequencies \\(${f1}\\,Hz\\) and \\(${f2}\\,Hz\\). Find their beat frequency.`,ans,`The beat frequency is the absolute difference: \\(f_b=|f_1-f_2|=|${f1}-${f2}|=${ans}\\,Hz\\).`);
 });

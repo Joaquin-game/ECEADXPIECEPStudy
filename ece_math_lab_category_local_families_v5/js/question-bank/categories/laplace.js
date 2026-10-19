@@ -173,36 +173,36 @@ NUMERIC_GENERATOR_REGISTRY.laplace = [...coreSeedEntries(L, LAP_CORE_SEEDS),
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(L,'Causal convolution of a ramp and an exponential','laplace-causal-ramp-exponential-convolution',()=>{
   const a=ri(1,5),T=rand(.2,1.6),ans=T/a-1/(a*a)+Math.exp(-a*T)/(a*a);
-  return qNum(L,'Causal convolution of a ramp and an exponential',`Using the convolution integral, evaluate \((t*u(t))* (e^{-${a}t}u(t))\) at \(t=${nfmt(T)}\). In the integral, \(x_{\\mathrm{prev}}\) is not used; evaluate \(\int_0^T\\tau e^{-a(T-\\tau)}d\\tau\).`,ans,`\(\int_0^T\\tau e^{-a(T-\\tau)}d\\tau=T/a-1/a^2+e^{-aT}/a^2\). Substituting \(T=${nfmt(T)}\), \(a=${a}\) gives \(${nfmt(ans)}\).`)
+  return qNum(L,'Causal convolution of a ramp and an exponential',`Using the convolution integral, evaluate \\((t*u(t))* (e^{-${a}t}u(t))\\) at \\(t=${nfmt(T)}\\). In the integral, \\(x_{\\mathrm{prev}}\\) is not used; evaluate \\(\\int_0^T\\tau e^{-a(T-\\tau)}d\\tau\\).`,ans,`\\(\\int_0^T\\tau e^{-a(T-\\tau)}d\\tau=T/a-1/a^2+e^{-aT}/a^2\\). Substituting \\(T=${nfmt(T)}\\), \\(a=${a}\\) gives \\(${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(L,'Applied · RC sensor step response','scenario-laplace-rc-sensor-step',()=>{
   const Rk=ri(2,10),Cmicro=ri(10,100),tauMs=Rk*Cmicro,multiple=pick([.5,1,1.5,2]),tMs=tauMs*multiple,ans=1-Math.exp(-tMs/tauMs);
-  const q=qNum(L,'Applied · RC sensor step response',`A water-level sensor uses an RC low-pass stage with \(R=${Rk}\,k\Omega\) and \(C=${Cmicro}\,\mu F\). A unit step is applied. Find the normalized output \(v_C(t)/V_{in}=1-e^{-t/\tau}\) at \(t=${nfmt(tMs)}\,ms\).`,ans,`The time constant is \(\tau=RC=(${Rk}\,k\Omega)(${Cmicro}\,\mu F)=${nfmt(tauMs)}\,ms\). Thus \(v_C/V_{in}=1-e^{-t/\tau}=1-e^{-${nfmt(tMs)}/${nfmt(tauMs)}}=${nfmt(ans)}\).`);
+  const q=qNum(L,'Applied · RC sensor step response',`A water-level sensor uses an RC low-pass stage with \\(R=${Rk}\\,k\\Omega\\) and \\(C=${Cmicro}\\,\\mu F\\). A unit step is applied. Find the normalized output \\(v_C(t)/V_{in}=1-e^{-t/\\tau}\\) at \\(t=${nfmt(tMs)}\\,ms\\).`,ans,`The time constant is \\(\\tau=RC=(${Rk}\\,k\\Omega)(${Cmicro}\\,\\mu F)=${nfmt(tauMs)}\\,ms\\). Thus \\(v_C/V_{in}=1-e^{-t/\\tau}=1-e^{-${nfmt(tMs)}/${nfmt(tauMs)}}=${nfmt(ans)}\\).`);
   return attachDiagram(q,'rcTransient','An input source drives a resistor R in series with a capacitor C to ground. The output voltage is measured across the capacitor; the RC time constant is tau = RC.');
 });
 appendNumericRecipe(L,'Applied · Laplace step response of a sensor module','scenario-laplace-step-sensor-module',()=>{
   const amplitude=pick([2,3,5,8]),K=pick([.5,.75,1,1.25]),a=ri(2,6),t=pick([.25,.5,.75,1,1.5]),ans=amplitude*K*(1-Math.exp(-a*t));
-  return qNum(L,'Applied · Laplace step response of a sensor module',`A calibrated sensor has transfer function \(G(s)=\frac{Ka}{s+a}\), where \(K=${K}\), \(a=${a}\,s^{-1}\). Its input is a step of amplitude \(${amplitude}\). Using the Laplace step response, find \(y(${t}\,s)\).`,ans,`For \(U(s)=${amplitude}/s\), \(Y(s)=\frac{Ka}{s+a}\frac{${amplitude}}s\), so \(y(t)=${amplitude}K(1-e^{-at})\). At \(t=${t}\), \(y=${amplitude}(${K})(1-e^{-${a}(${t})})=${nfmt(ans)}\).`);
+  return qNum(L,'Applied · Laplace step response of a sensor module',`A calibrated sensor has transfer function \\(G(s)=\\frac{Ka}{s+a}\\), where \\(K=${K}\\), \\(a=${a}\\,s^{-1}\\). Its input is a step of amplitude \\(${amplitude}\\). Using the Laplace step response, find \\(y(${t}\\,s)\\).`,ans,`For \\(U(s)=${amplitude}/s\\), \\(Y(s)=\\frac{Ka}{s+a}\\frac{${amplitude}}s\\), so \\(y(t)=${amplitude}K(1-e^{-at})\\). At \\(t=${t}\\), \\(y=${amplitude}(${K})(1-e^{-${a}(${t})})=${nfmt(ans)}\\).`);
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('laplace','Additional · Impulse response value for a first-order pole','laplace-topup-01',()=>{
   const K=ri(2,8),a=ri(1,5),t=rand(.2,1.8),ans=K*Math.exp(-a*t);
-  return qNum(L,'Impulse response value for a first-order pole',`For \(H(s)=K/(s+a)\) with \(K=${K}\) and \(a=${a}\), find the impulse response \(h(${nfmt(t)})\).`,ans,`\(h(t)=Ke^{-at}u(t)\), so \(h(${nfmt(t)})=${K}e^{-${a}(${nfmt(t)})}=${nfmt(ans)}\).`);
+  return qNum(L,'Impulse response value for a first-order pole',`For \\(H(s)=K/(s+a)\\) with \\(K=${K}\\) and \\(a=${a}\\), find the impulse response \\(h(${nfmt(t)})\\).`,ans,`\\(h(t)=Ke^{-at}u(t)\\), so \\(h(${nfmt(t)})=${K}e^{-${a}(${nfmt(t)})}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('laplace','Additional · Delayed exponential transform value','laplace-topup-02',()=>{
   const K=ri(2,7),a=ri(1,4),d=ri(1,4),s=ri(2,8),ans=K*Math.exp(-s*d)/(s+a);
-  return qNum(L,'Delayed exponential transform value',`For \(f(t)=${K}e^{-${a}(t-${d})}u(t-${d})\), evaluate \(F(${s})\).`,ans,`The delay contributes \(e^{-ds}\), so \(F(s)=Ke^{-ds}/(s+a)\). At \(s=${s}\), \(F=${nfmt(ans)}\).`);
+  return qNum(L,'Delayed exponential transform value',`For \\(f(t)=${K}e^{-${a}(t-${d})}u(t-${d})\\), evaluate \\(F(${s})\\).`,ans,`The delay contributes \\(e^{-ds}\\), so \\(F(s)=Ke^{-ds}/(s+a)\\). At \\(s=${s}\\), \\(F=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('laplace','Additional · Unit-ramp transform at a frequency','laplace-topup-03',()=>{
   const s=ri(2,9),ans=1/(s*s);
-  return qNum(L,'Unit-ramp transform at a frequency',`Evaluate \(\mathcal L\{tu(t)\}\) at \(s=${s}\).`,ans,`\(\mathcal L\{t u(t)\}=1/s^2\), hence \(F(${s})=1/${s}^2=${nfmt(ans)}\).`);
+  return qNum(L,'Unit-ramp transform at a frequency',`Evaluate \\(\\mathcal L\\{tu(t)\\}\\) at \\(s=${s}\\).`,ans,`\\(\\mathcal L\\{t u(t)\\}=1/s^2\\), hence \\(F(${s})=1/${s}^2=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('laplace','Additional · Accumulated first-order step response','laplace-topup-04',()=>{
   const K=ri(2,8),tau=ri(1,5),T=rand(.3,2.4),ans=K*(T-tau*(1-Math.exp(-T/tau)));
-  return qNum(L,'Accumulated first-order step response',`A first-order unit-step response is \(y(t)=${K}(1-e^{-t/${tau}})\). Find the accumulated output \(\int_0^{${nfmt(T)}}y(t)\,dt\).`,ans,`Integrating gives \(K[T-\tau(1-e^{-T/\tau})]\). Substitution yields \(${nfmt(ans)}\).`);
+  return qNum(L,'Accumulated first-order step response',`A first-order unit-step response is \\(y(t)=${K}(1-e^{-t/${tau}})\\). Find the accumulated output \\(\\int_0^{${nfmt(T)}}y(t)\\,dt\\).`,ans,`Integrating gives \\(K[T-\\tau(1-e^{-T/\\tau})]\\). Substitution yields \\(${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('laplace','Additional · Cascade transfer-function value','laplace-topup-05',()=>{
   const K1=ri(1,5),K2=ri(2,6),a=ri(1,4),b=ri(2,6),s=ri(3,9),ans=K1*K2/((s+a)*(s+b));
-  return qNum(L,'Cascade transfer-function value',`Two cascaded stages have \(H_1(s)=${K1}/(s+${a})\) and \(H_2(s)=${K2}/(s+${b})\). Find the overall gain magnitude \(H_1(${s})H_2(${s})\).`,ans,`For cascaded systems, \(H=H_1H_2=K_1K_2/[(s+a)(s+b)]\). At \(s=${s}\), the result is \(${nfmt(ans)}\).`);
+  return qNum(L,'Cascade transfer-function value',`Two cascaded stages have \\(H_1(s)=${K1}/(s+${a})\\) and \\(H_2(s)=${K2}/(s+${b})\\). Find the overall gain magnitude \\(H_1(${s})H_2(${s})\\).`,ans,`For cascaded systems, \\(H=H_1H_2=K_1K_2/[(s+a)(s+b)]\\). At \\(s=${s}\\), the result is \\(${nfmt(ans)}\\).`);
 });

@@ -41,7 +41,16 @@
         </div>
         <div class="controls-panel">
           <h3 class="section-title">Test settings</h3>
-          <div class="field"><label for="questionCount">Question count</label><select id="questionCount"><option value="5">5 questions</option><option value="10" selected>10 questions</option><option value="15">15 questions</option><option value="20">20 questions</option><option value="30">30 questions</option><option value="40">40 questions</option></select></div>
+          <div class="field"><label for="questionCount">Question count</label><select id="questionCount">
+            <option value="5">5 questions</option>
+            <option value="10" selected>10 questions</option>
+            <option value="15">15 questions</option>
+            <option value="20">20 questions</option>
+            <option value="30">30 questions</option>
+            <option value="40">40 questions</option>
+            <option value="50">50 questions</option>
+            <option value="100">100 questions</option>
+          </select></div>
           <div class="field"><label>Difficulty / level range</label><div class="difficulty-picker" role="group" aria-label="Choose minimum and maximum difficulty levels"><div class="difficulty-readouts"><span>Minimum <strong id="difficultyMinLabel">Level 1 · Foundation</strong></span><span>Maximum <strong id="difficultyMaxLabel">Level 3 · Intermediate</strong></span></div><div class="dual-range" id="difficultySlider"><div class="range-track"></div><div class="range-fill" id="difficultyRangeFill"></div><input id="difficultyMinSlider" type="range" min="1" max="5" step="1" value="1" aria-label="Minimum difficulty level"><input id="difficultyMaxSlider" type="range" min="1" max="5" step="1" value="3" aria-label="Maximum difficulty level"></div><div class="range-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div><div class="range-descriptions"><span>Foundation</span><span>Olympiad challenge</span></div></div><input type="hidden" id="difficultyMin" value="1"><input type="hidden" id="difficultyMax" value="3"><small>Drag either handle to set the range. The minimum and maximum stay ordered automatically; selected levels apply to all built-in question formats.</small></div>
           <div class="field"><label>Answer formats · choose any combination</label><div id="answerFormats" class="format-options" role="group" aria-label="Question answer formats">
             <label class="format-option"><input type="checkbox" name="answerFormat" value="mc" checked><span class="format-icon" aria-hidden="true">☷</span><span>Multiple choice</span></label>

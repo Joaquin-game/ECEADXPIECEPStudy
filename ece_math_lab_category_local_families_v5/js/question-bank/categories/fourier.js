@@ -189,37 +189,37 @@ NUMERIC_GENERATOR_REGISTRY.fourier = [...numericSeedEntries(FT, FOURIER_SUP_NAME
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(FT,'Peak amplitude from sinusoidal RMS value','fourier-rms-to-peak-amplitude',()=>{
   const rms=ri(2,24),ans=Math.sqrt(2)*rms;
-  return qNum(FT,'Peak amplitude from sinusoidal RMS value',`A sinusoidal voltage has RMS value \(V_{\\rm rms}=${rms}\\,V\). Find its peak amplitude \(V_p\).`,ans,`For a sinusoid, \(V_{\\rm rms}=V_p/\\sqrt2\), so \(V_p=\\sqrt2 V_{\\rm rms}=\\sqrt2(${rms})=${nfmt(ans)}\\,V\).`)
+  return qNum(FT,'Peak amplitude from sinusoidal RMS value',`A sinusoidal voltage has RMS value \\(V_{\\rm rms}=${rms}\\,V\\). Find its peak amplitude \\(V_p\\).`,ans,`For a sinusoid, \\(V_{\\rm rms}=V_p/\\sqrt2\\), so \\(V_p=\\sqrt2 V_{\\rm rms}=\\sqrt2(${rms})=${nfmt(ans)}\\,V\\).`)
 });
 appendNumericRecipe(FT,'Fundamental angular frequency from period','fourier-angular-frequency-from-period',()=>{
   const T0=rand(.02,.25),ans=2*Math.PI/T0;
-  return qNum(FT,'Fundamental angular frequency from period',`A periodic waveform has period \(T_0=${nfmt(T0)}\\,s\). Find its fundamental angular frequency \(\\omega_0\) in rad/s.`,ans,`\(\\omega_0=2\\pi/T_0=2\\pi/${nfmt(T0)}=${nfmt(ans)}\\,rad/s\).`)
+  return qNum(FT,'Fundamental angular frequency from period',`A periodic waveform has period \\(T_0=${nfmt(T0)}\\,s\\). Find its fundamental angular frequency \\(\\omega_0\\) in rad/s.`,ans,`\\(\\omega_0=2\\pi/T_0=2\\pi/${nfmt(T0)}=${nfmt(ans)}\\,rad/s\\).`)
 });
 appendNumericRecipe(FT,'Applied · RMS of a two-harmonic vibration signal','scenario-fourier-harmonic-rms',()=>{
   const A1=ri(2,12),A3=ri(1,8),ans=Math.sqrt((A1*A1+A3*A3)/2);
-  const q=qNum(FT,'Applied · RMS of a two-harmonic vibration signal',`A vibration sensor records \(v(t)=${A1}\sin(\omega t)+${A3}\sin(3\omega t)\). Over an integer number of periods, find the total RMS value, using orthogonality of the harmonics.`,ans,`The mean square is \((A_1^2+A_3^2)/2\). Hence \(v_{rms}=\sqrt{(${A1}^2+${A3}^2)/2}=${nfmt(ans)}\).`);
+  const q=qNum(FT,'Applied · RMS of a two-harmonic vibration signal',`A vibration sensor records \\(v(t)=${A1}\\sin(\\omega t)+${A3}\\sin(3\\omega t)\\). Over an integer number of periods, find the total RMS value, using orthogonality of the harmonics.`,ans,`The mean square is \\((A_1^2+A_3^2)/2\\). Hence \\(v_{rms}=\\sqrt{(${A1}^2+${A3}^2)/2}=${nfmt(ans)}\\).`);
   q.diagramKind='spectrum';q.diagramAlt='Schematic amplitude spectrum with separate fundamental and third-harmonic lines; the signal components are orthogonal over integer periods.';return q;
 });
 appendNumericRecipe(FT,'Applied · Third harmonic of a square-wave sensor signal','scenario-fourier-square-wave-third-harmonic',()=>{
   const A=ri(2,15),ans=4*A/(3*Math.PI);
-  const q=qNum(FT,'Applied · Third harmonic of a square-wave sensor signal',`A symmetric square-wave calibration signal has peak magnitude \(A=${A}\,V\). Using its Fourier series, find the magnitude of the third-harmonic sine coefficient.`,ans,`For a symmetric square wave, odd-harmonic coefficient magnitude is \(4A/(n\pi)\). At \(n=3\), \(b_3=4(${A})/(3\pi)=${nfmt(ans)}\,V\).`);
+  const q=qNum(FT,'Applied · Third harmonic of a square-wave sensor signal',`A symmetric square-wave calibration signal has peak magnitude \\(A=${A}\\,V\\). Using its Fourier series, find the magnitude of the third-harmonic sine coefficient.`,ans,`For a symmetric square wave, odd-harmonic coefficient magnitude is \\(4A/(n\\pi)\\). At \\(n=3\\), \\(b_3=4(${A})/(3\\pi)=${nfmt(ans)}\\,V\\).`);
   q.diagramKind='spectrum';q.diagramAlt='Schematic square-wave spectrum containing odd harmonics; the third-harmonic coefficient is one third of the fundamental coefficient.';return q;
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('fourier','Additional · RMS value of two orthogonal harmonics','fourier-topup-01',()=>{
   const A1=ri(2,8),A2=ri(1,6),ans=Math.sqrt((A1*A1+A2*A2)/2);
-  return qNum(FT,'RMS value of two orthogonal harmonics',`A zero-mean signal contains orthogonal sinusoids with peak amplitudes \(${A1}\) and \(${A2}\). Find its RMS value.`,ans,`The mean-square contributions add: \(x_{rms}=\sqrt{A_1^2/2+A_2^2/2}=\sqrt{(${A1}^2+${A2}^2)/2}=${nfmt(ans)}\).`);
+  return qNum(FT,'RMS value of two orthogonal harmonics',`A zero-mean signal contains orthogonal sinusoids with peak amplitudes \\(${A1}\\) and \\(${A2}\\). Find its RMS value.`,ans,`The mean-square contributions add: \\(x_{rms}=\\sqrt{A_1^2/2+A_2^2/2}=\\sqrt{(${A1}^2+${A2}^2)/2}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('fourier','Additional · Odd-harmonic amplitude of a square wave','fourier-topup-02',()=>{
   const A=ri(2,10),n=pick([1,3,5,7,9]),ans=4*A/(Math.PI*n);
-  return qNum(FT,'Odd-harmonic amplitude of a square wave',`A symmetric square wave has peak magnitude \(${A}\). Find the peak amplitude of its \(${n}\)th odd harmonic using \(A_n=4A/(n\pi)\).`,ans,`\(A_{${n}}=4(${A})/(${n}\pi)=${nfmt(ans)}\).`);
+  return qNum(FT,'Odd-harmonic amplitude of a square wave',`A symmetric square wave has peak magnitude \\(${A}\\). Find the peak amplitude of its \\(${n}\\)th odd harmonic using \\(A_n=4A/(n\\pi)\\).`,ans,`\\(A_{${n}}=4(${A})/(${n}\\pi)=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('fourier','Additional · Average power from harmonic amplitudes','fourier-topup-03',()=>{
   const A1=ri(1,7),A2=ri(1,7),A3=ri(1,5),ans=(A1*A1+A2*A2+A3*A3)/2;
-  return qNum(FT,'Average power from harmonic amplitudes',`A normalized-resistance signal has three sinusoidal peak amplitudes \(${A1}\), \(${A2}\), and \(${A3}\). Find average power using \(P=\sum A_k^2/2\).`,ans,`The harmonics are orthogonal, so \(P=(${A1}^2+${A2}^2+${A3}^2)/2=${nfmt(ans)}\).`);
+  return qNum(FT,'Average power from harmonic amplitudes',`A normalized-resistance signal has three sinusoidal peak amplitudes \\(${A1}\\), \\(${A2}\\), and \\(${A3}\\). Find average power using \\(P=\\sum A_k^2/2\\).`,ans,`The harmonics are orthogonal, so \\(P=(${A1}^2+${A2}^2+${A3}^2)/2=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('fourier','Additional · Frequency of a selected harmonic','fourier-topup-04',()=>{
   const T=ri(2,10),n=ri(2,8),ans=n/T;
-  return qNum(FT,'Frequency of a selected harmonic',`A periodic waveform has fundamental period \(T=${T}\,s\). Find the frequency of its \(${n}\)th harmonic.`,ans,`The fundamental frequency is \(f_0=1/T=${nfmt(1/T)}\,Hz\), and \(f_n=nf_0=${n}/${T}=${nfmt(ans)}\,Hz\).`);
+  return qNum(FT,'Frequency of a selected harmonic',`A periodic waveform has fundamental period \\(T=${T}\\,s\\). Find the frequency of its \\(${n}\\)th harmonic.`,ans,`The fundamental frequency is \\(f_0=1/T=${nfmt(1/T)}\\,Hz\\), and \\(f_n=nf_0=${n}/${T}=${nfmt(ans)}\\,Hz\\).`);
 });

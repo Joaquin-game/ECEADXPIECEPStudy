@@ -173,36 +173,36 @@ NUMERIC_GENERATOR_REGISTRY.advanced = [...coreSeedEntries(A, ADVANCED_CORE_SEEDS
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(A,'Newton iteration for a square root','advanced-newton-square-root-iteration',()=>{
   const N0=ri(2,30),x0=ri(1,10),ans=.5*(x0+N0/x0);
-  return qNum(A,'Newton iteration for a square root',`Use one Newton iteration to approximate \(\\sqrt{${N0}}\), starting from \(x_0=${x0}\), with \(x_1=\\frac12(x_0+N_0/x_0)\). Find \(x_1\).`,ans,`Substitute into the Newton update: \(x_1=\\frac12(${x0}+${N0}/${x0})=${nfmt(ans)}\).`)
+  return qNum(A,'Newton iteration for a square root',`Use one Newton iteration to approximate \\(\\sqrt{${N0}}\\), starting from \\(x_0=${x0}\\), with \\(x_1=\\frac12(x_0+N_0/x_0)\\). Find \\(x_1\\).`,ans,`Substitute into the Newton update: \\(x_1=\\frac12(${x0}+${N0}/${x0})=${nfmt(ans)}\\).`)
 });
 appendNumericRecipe(A,'Third term of a first-order recurrence','advanced-first-order-recurrence',()=>{
   const a0=ri(1,8),ans=8*a0+7;
-  return qNum(A,'Third term of a first-order recurrence',`A sequence satisfies \(a_n=2a_{n-1}+1\) with \(a_0=${a0}\). Find \(a_3\).`,ans,`\(a_1=2(${a0})+1=${2*a0+1}\), \(a_2=2(${2*a0+1})+1=${4*a0+3}\), and \(a_3=2(${4*a0+3})+1=${ans}\).`)
+  return qNum(A,'Third term of a first-order recurrence',`A sequence satisfies \\(a_n=2a_{n-1}+1\\) with \\(a_0=${a0}\\). Find \\(a_3\\).`,ans,`\\(a_1=2(${a0})+1=${2*a0+1}\\), \\(a_2=2(${2*a0+1})+1=${4*a0+3}\\), and \\(a_3=2(${4*a0+3})+1=${ans}\\).`)
 });
 appendNumericRecipe(A,'Applied · Two-sensor calibration matrix','scenario-advanced-calibration-matrix',()=>{
   const a=ri(2,6),b=ri(1,4),c=ri(1,4);let d=ri(3,8),det=a*d-b*c;while(Math.abs(det)<2){d++;det=a*d-b*c}
   const m=ri(1,5),offset=ri(-2,5),u=a*m+b*offset,v=c*m+d*offset,ans=(u*d-b*v)/det;
-  return qNum(A,'Applied · Two-sensor calibration matrix',`Two sensor channels obey \(\begin{pmatrix}${a}&${b}\\${c}&${d}\end{pmatrix}\begin{pmatrix}g\\o\end{pmatrix}=\begin{pmatrix}${u}\\${v}\end{pmatrix}\), where \(g\) is gain and \(o\) is offset. Find the gain \(g\) using the supplied calibration measurements.`,ans,`By Cramer's rule, \(g=\frac{${u}(${d})-${b}(${v})}{${a}(${d})-${b}(${c})}=\frac{${u*d-b*v}}{${det}}=${nfmt(ans)}\).`);
+  return qNum(A,'Applied · Two-sensor calibration matrix',`Two sensor channels obey \\(\\begin{pmatrix}${a}&${b}\\${c}&${d}\\end{pmatrix}\\begin{pmatrix}g\\o\\end{pmatrix}=\\begin{pmatrix}${u}\\${v}\\end{pmatrix}\\), where \\(g\\) is gain and \\(o\\) is offset. Find the gain \\(g\\) using the supplied calibration measurements.`,ans,`By Cramer's rule, \\(g=\\frac{${u}(${d})-${b}(${v})}{${a}(${d})-${b}(${c})}=\\frac{${u*d-b*v}}{${det}}=${nfmt(ans)}\\).`);
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('advanced','Additional · Determinant of a two-by-two matrix','advanced-topup-01',()=>{
   const a=ri(-6,8),b=ri(-6,8),c=ri(-6,8),d=ri(-6,8),ans=a*d-b*c;
-  return qNum(A,'Determinant of a two-by-two matrix',`Find the determinant of \(M=\begin{pmatrix}${a}&${b}\\${c}&${d}\end{pmatrix}\).`,ans,`For a \(2\times2\) matrix, \(\det M=ad-bc=${a}(${d})-${b}(${c})=${ans}\).`);
+  return qNum(A,'Determinant of a two-by-two matrix',`Find the determinant of \\(M=\\begin{pmatrix}${a}&${b}\\${c}&${d}\\end{pmatrix}\\).`,ans,`For a \\(2\\times2\\) matrix, \\(\\det M=ad-bc=${a}(${d})-${b}(${c})=${ans}\\).`);
 });
 appendNumericRecipe('advanced','Additional · Binomial coefficient evaluation','advanced-topup-02',()=>{
   const n=ri(5,12),r=ri(1,n-1);let ans=1;for(let i=1;i<=r;i++)ans=ans*(n-r+i)/i;
-  return qNum(A,'Binomial coefficient evaluation',`Evaluate the binomial coefficient \(\binom{${n}}{${r}}\).`,ans,`\(\binom nr=n!/[r!(n-r)!]=${ans}\).`);
+  return qNum(A,'Binomial coefficient evaluation',`Evaluate the binomial coefficient \\(\\binom{${n}}{${r}}\\).`,ans,`\\(\\binom nr=n!/[r!(n-r)!]=${ans}\\).`);
 });
 appendNumericRecipe('advanced','Additional · Finite geometric-series sum','advanced-topup-03',()=>{
   const a=ri(1,5),ratio=pick([.2,.25,.4,.5,.6]),n=ri(3,8),ans=a*(1-ratio**n)/(1-ratio);
-  return qNum(A,'Finite geometric-series sum',`Find the sum of the first \(${n}\) terms of a geometric sequence with first term \(${a}\) and ratio \(${nfmt(ratio)}\).`,ans,`\(S_n=a(1-r^n)/(1-r)=${a}[1-${nfmt(ratio)}^{${n}}]/[1-${nfmt(ratio)}]=${nfmt(ans)}\).`);
+  return qNum(A,'Finite geometric-series sum',`Find the sum of the first \\(${n}\\) terms of a geometric sequence with first term \\(${a}\\) and ratio \\(${nfmt(ratio)}\\).`,ans,`\\(S_n=a(1-r^n)/(1-r)=${a}[1-${nfmt(ratio)}^{${n}}]/[1-${nfmt(ratio)}]=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('advanced','Additional · One Newton step for a cube root','advanced-topup-04',()=>{
   const N=ri(2,80),x0=ri(1,8),ans=(2*x0+N/(x0*x0))/3;
-  return qNum(A,'One Newton step for a cube root',`Use one Newton iteration to approximate \(\sqrt[3]{${N}}\), starting from \(x_0=${x0}\), with \(x_1=(2x_0+N/x_0^2)/3\). Find \(x_1\).`,ans,`Substitute: \(x_1=[2(${x0})+${N}/${x0}^2]/3=${nfmt(ans)}\).`);
+  return qNum(A,'One Newton step for a cube root',`Use one Newton iteration to approximate \\(\\sqrt[3]{${N}}\\), starting from \\(x_0=${x0}\\), with \\(x_1=(2x_0+N/x_0^2)/3\\). Find \\(x_1\\).`,ans,`Substitute: \\(x_1=[2(${x0})+${N}/${x0}^2]/3=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('advanced','Additional · Taylor polynomial for cosine','advanced-topup-05',()=>{
   const x=rand(.1,1.1),ans=1-x*x/2+x**4/24;
-  return qNum(A,'Taylor polynomial for cosine',`Use the fourth-degree Maclaurin polynomial to approximate \(\cos(${nfmt(x)})\): \(1-x^2/2+x^4/24\).`,ans,`Substitute \(x=${nfmt(x)}\): \(1-x^2/2+x^4/24=${nfmt(ans)}\).`);
+  return qNum(A,'Taylor polynomial for cosine',`Use the fourth-degree Maclaurin polynomial to approximate \\(\\cos(${nfmt(x)})\\): \\(1-x^2/2+x^4/24\\).`,ans,`Substitute \\(x=${nfmt(x)}\\): \\(1-x^2/2+x^4/24=${nfmt(ans)}\\).`);
 });

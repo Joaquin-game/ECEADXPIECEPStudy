@@ -9,7 +9,7 @@ function makePrecalcExpansionFamily01(title){
 function makePrecalcExpansionFamily02(title){
   const v=ri(0,1)===1;
   {
-      const a=ri(1,5),b=a+ri(1,5),ans=v?-1/(b-a):1/(b-a);return qNum(PC,title,v?`For \\(\frac1{(x+${a})(x+${b})}=\frac{A}{x+${a}}+\frac{B}{x+${b}}\\), find coefficient \\(B\\).`:`For \\(\frac1{(x+${a})(x+${b})}=\frac{A}{x+${a}}+\frac{B}{x+${b}}\\), find coefficient \\(A\\).`,ans,v?`Cover-up at \\(x=-${b}\\) gives \\(B=1/(a-b)=-1/(${b}-${a})=${nfmt(ans)}\\).`:`Cover-up at \\(x=-${a}\\) gives \\(A=1/(b-a)=${nfmt(ans)}\\).`)
+      const a=ri(1,5),b=a+ri(1,5),ans=v?-1/(b-a):1/(b-a);return qNum(PC,title,v?`For \\(\\frac1{(x+${a})(x+${b})}=\\frac{A}{x+${a}}+\\frac{B}{x+${b}}\\), find coefficient \\(B\\).`:`For \\(\\frac1{(x+${a})(x+${b})}=\\frac{A}{x+${a}}+\\frac{B}{x+${b}}\\), find coefficient \\(A\\).`,ans,v?`Cover-up at \\(x=-${b}\\) gives \\(B=1/(a-b)=-1/(${b}-${a})=${nfmt(ans)}\\).`:`Cover-up at \\(x=-${a}\\) gives \\(A=1/(b-a)=${nfmt(ans)}\\).`)
   }
 }
 function makePrecalcExpansionFamily03(title){
@@ -203,55 +203,55 @@ NUMERIC_GENERATOR_REGISTRY.precalc = [...numericSeedEntries(PC, PRECALC_EXTRA_NA
 /* Category-specific generator families, retained as standalone entries. */
 appendNumericRecipe(PC,'Solve a linear rational equation','precalc-linear-rational-equation',()=>{
   const a=ri(1,8),b=ri(1,6),c=ri(2,7),ans=(a+c*b)/(c-1);
-  return qNum(PC,'Solve a linear rational equation',`Solve for \(x\): \(\\frac{x+${a}}{x-${b}}=${c}\), with \(x\\ne ${b}\).`,ans,`Cross-multiply: \(x+${a}=${c}(x-${b})\). Thus \((${c}-1)x=${a}+${c*b}=${a+c*b}\), so \(x=${nfmt(ans)}\). The result is not the excluded value ${b}.`)
+  return qNum(PC,'Solve a linear rational equation',`Solve for \\(x\\): \\(\\frac{x+${a}}{x-${b}}=${c}\\), with \\(x\\ne ${b}\\).`,ans,`Cross-multiply: \\(x+${a}=${c}(x-${b})\\). Thus \\((${c}-1)x=${a}+${c*b}=${a+c*b}\\), so \\(x=${nfmt(ans)}\\). The result is not the excluded value ${b}.`)
 });
 appendNumericRecipe(PC,'Applied · Linear calibration slope from two readings','scenario-precalc-calibration-slope',()=>{
   const x1=ri(1,5),x2=x1+ri(2,6),m=ri(1,5),b=ri(-3,5),y1=m*x1+b,y2=m*x2+b,ans=(y2-y1)/(x2-x1);
-  return qNum(PC,'Applied · Linear calibration slope from two readings',`A technician calibrates a sensor with two reference-input and output pairs \((${x1},${y1})\) and \((${x2},${y2})\). Assuming the relation \(y=mx+b\) is linear, find the slope \(m\).`,ans,`\(m=\frac{y_2-y_1}{x_2-x_1}=\frac{${y2}-${y1}}{${x2}-${x1}}=${nfmt(ans)}\).`);
+  return qNum(PC,'Applied · Linear calibration slope from two readings',`A technician calibrates a sensor with two reference-input and output pairs \\((${x1},${y1})\\) and \\((${x2},${y2})\\). Assuming the relation \\(y=mx+b\\) is linear, find the slope \\(m\\).`,ans,`\\(m=\\frac{y_2-y_1}{x_2-x_1}=\\frac{${y2}-${y1}}{${x2}-${x1}}=${nfmt(ans)}\\).`);
 });
 
 /* Seed/topic-level additional generators added locally to satisfy the minimum per-category family count. */
 appendNumericRecipe('precalc','Additional · Solve a linear equation','precalc-topup-01',()=>{
   const a=ri(2,9),b=ri(-8,12),x=ri(-5,9),c=a*x+b,ans=(c-b)/a;
-  return qNum(PC,'Solve a linear equation',`Solve \(${a}x${b>=0?'+':''}${b}=${c}\) for \(x\).`,ans,`Subtract \(${b}\) from both sides and divide by \(${a}\): \(x=(${c}-${b})/${a}=${nfmt(ans)}\).`);
+  return qNum(PC,'Solve a linear equation',`Solve \\(${a}x${b>=0?'+':''}${b}=${c}\\) for \\(x\\).`,ans,`Subtract \\(${b}\\) from both sides and divide by \\(${a}\\): \\(x=(${c}-${b})/${a}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('precalc','Additional · Slope between two points','precalc-topup-02',()=>{
   const x1=ri(-5,4),x2=x1+ri(1,8),y1=ri(-8,8),y2=ri(-8,8),ans=(y2-y1)/(x2-x1);
-  return qNum(PC,'Slope between two points',`Find the slope of the line through \((${x1},${y1})\) and \((${x2},${y2})\).`,ans,`\(m=(y_2-y_1)/(x_2-x_1)=(${y2}-${y1})/(${x2}-${x1})=${nfmt(ans)}\).`);
+  return qNum(PC,'Slope between two points',`Find the slope of the line through \\((${x1},${y1})\\) and \\((${x2},${y2})\\).`,ans,`\\(m=(y_2-y_1)/(x_2-x_1)=(${y2}-${y1})/(${x2}-${x1})=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('precalc','Additional · Discriminant of a quadratic equation','precalc-topup-03',()=>{
   const a=ri(1,5),b=ri(-8,8),c=ri(-6,8),ans=b*b-4*a*c;
-  return qNum(PC,'Discriminant of a quadratic equation',`Find the discriminant of \(${a}x^2${b>=0?'+':''}${b}x${c>=0?'+':''}${c}=0\).`,ans,`\(\Delta=b^2-4ac=(${b})^2-4(${a})(${c})=${ans}\).`);
+  return qNum(PC,'Discriminant of a quadratic equation',`Find the discriminant of \\(${a}x^2${b>=0?'+':''}${b}x${c>=0?'+':''}${c}=0\\).`,ans,`\\(\\Delta=b^2-4ac=(${b})^2-4(${a})(${c})=${ans}\\).`);
 });
 appendNumericRecipe('precalc','Additional · Nth term of an arithmetic sequence','precalc-topup-04',()=>{
   const a1=ri(-5,12),d=ri(-4,6),n=ri(4,20),ans=a1+(n-1)*d;
-  return qNum(PC,'Nth term of an arithmetic sequence',`An arithmetic sequence has first term \(a_1=${a1}\) and common difference \(d=${d}\). Find \(a_{${n}}\).`,ans,`\(a_n=a_1+(n-1)d=${a1}+(${n}-1)(${d})=${ans}\).`);
+  return qNum(PC,'Nth term of an arithmetic sequence',`An arithmetic sequence has first term \\(a_1=${a1}\\) and common difference \\(d=${d}\\). Find \\(a_{${n}}\\).`,ans,`\\(a_n=a_1+(n-1)d=${a1}+(${n}-1)(${d})=${ans}\\).`);
 });
 appendNumericRecipe('precalc','Additional · Nth term of a geometric sequence','precalc-topup-05',()=>{
   const a1=pick([1,2,3,4]),r=pick([.5,2,3]),n=ri(2,7),ans=a1*r**(n-1);
-  return qNum(PC,'Nth term of a geometric sequence',`A geometric sequence has first term \(a_1=${a1}\), common ratio \(r=${nfmt(r)}\), and \(n=${n}\). Find \(a_n\).`,ans,`\(a_n=a_1r^{n-1}=${a1}(${nfmt(r)})^{${n}-1}=${nfmt(ans)}\).`);
+  return qNum(PC,'Nth term of a geometric sequence',`A geometric sequence has first term \\(a_1=${a1}\\), common ratio \\(r=${nfmt(r)}\\), and \\(n=${n}\\). Find \\(a_n\\).`,ans,`\\(a_n=a_1r^{n-1}=${a1}(${nfmt(r)})^{${n}-1}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('precalc','Additional · Distance between two coordinate points','precalc-topup-06',()=>{
   const x1=ri(-8,8),x2=ri(-8,8),y1=ri(-8,8),y2=ri(-8,8),ans=Math.hypot(x2-x1,y2-y1);
-  return qNum(PC,'Distance between two coordinate points',`Find the distance between \((${x1},${y1})\) and \((${x2},${y2})\).`,ans,`\(d=\sqrt{(${x2}-${x1})^2+(${y2}-${y1})^2}=${nfmt(ans)}\).`);
+  return qNum(PC,'Distance between two coordinate points',`Find the distance between \\((${x1},${y1})\\) and \\((${x2},${y2})\\).`,ans,`\\(d=\\sqrt{(${x2}-${x1})^2+(${y2}-${y1})^2}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('precalc','Additional · Midpoint of two x-coordinates','precalc-topup-07',()=>{
   const x1=ri(-10,10),x2=ri(-10,10),ans=(x1+x2)/2;
-  return qNum(PC,'Midpoint of two x-coordinates',`Find the x-coordinate of the midpoint of points with x-coordinates \(${x1}\) and \(${x2}\).`,ans,`The midpoint x-coordinate is \((x_1+x_2)/2=(${x1}+${x2})/2=${nfmt(ans)}\).`);
+  return qNum(PC,'Midpoint of two x-coordinates',`Find the x-coordinate of the midpoint of points with x-coordinates \\(${x1}\\) and \\(${x2}\\).`,ans,`The midpoint x-coordinate is \\((x_1+x_2)/2=(${x1}+${x2})/2=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('precalc','Additional · Direct proportion constant','precalc-topup-08',()=>{
   const x=ri(2,15),k=ri(2,9),y=k*x,ans=y/x;
-  return qNum(PC,'Direct proportion constant',`A variable \(y\) is directly proportional to \(x\). When \(x=${x}\), \(y=${y}\). Find the proportionality constant \(k\) in \(y=kx\).`,ans,`\(k=y/x=${y}/${x}=${nfmt(ans)}\).`);
+  return qNum(PC,'Direct proportion constant',`A variable \\(y\\) is directly proportional to \\(x\\). When \\(x=${x}\\), \\(y=${y}\\). Find the proportionality constant \\(k\\) in \\(y=kx\\).`,ans,`\\(k=y/x=${y}/${x}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('precalc','Additional · Solve an exponential equation with a common base','precalc-topup-09',()=>{
   const base=pick([2,3,5]),y=ri(-2,6),target=2*y-1,ans=y;
-  return qNum(PC,'Solve an exponential equation with a common base',`Solve \(${base}^{2y-1}=${base}^{${target}}\) for \(y\).`,ans,`Because the common base \(${base}\) is positive and not 1, equate exponents: \(2y-1=${target}\), so \(y=(${target}+1)/2=${ans}\).`);
+  return qNum(PC,'Solve an exponential equation with a common base',`Solve \\(${base}^{2y-1}=${base}^{${target}}\\) for \\(y\\).`,ans,`Because the common base \\(${base}\\) is positive and not 1, equate exponents: \\(2y-1=${target}\\), so \\(y=(${target}+1)/2=${ans}\\).`);
 });
 appendNumericRecipe('precalc','Additional · Inverse proportion value','precalc-topup-10',()=>{
   const k=ri(20,180),x=ri(2,12),ans=k/x;
-  return qNum(PC,'Inverse proportion value',`A variable obeys inverse proportion \(y=k/x\) with \(k=${k}\). Find \(y\) when \(x=${x}\).`,ans,`\(y=k/x=${k}/${x}=${nfmt(ans)}\).`);
+  return qNum(PC,'Inverse proportion value',`A variable obeys inverse proportion \\(y=k/x\\) with \\(k=${k}\\). Find \\(y\\) when \\(x=${x}\\).`,ans,`\\(y=k/x=${k}/${x}=${nfmt(ans)}\\).`);
 });
 appendNumericRecipe('precalc','Additional · Compound growth of a quantity','precalc-topup-11',()=>{
   const P=ri(100,5000),rate=pick([.02,.05,.08,.1,.12]),n=ri(2,8),ans=P*(1+rate)**n;
-  return qNum(PC,'Compound growth of a quantity',`A quantity starts at \(${P}\) and grows by \(${nfmt(100*rate)}\%\) per period for \(${n}\) periods. Find its final value.`,ans,`\(P_n=P_0(1+r)^n=${P}(1+${nfmt(rate)})^{${n}}=${nfmt(ans)}\).`);
+  return qNum(PC,'Compound growth of a quantity',`A quantity starts at \\(${P}\\) and grows by \\(${nfmt(100*rate)}\\%\\) per period for \\(${n}\\) periods. Find its final value.`,ans,`\\(P_n=P_0(1+r)^n=${P}(1+${nfmt(rate)})^{${n}}=${nfmt(ans)}\\).`);
 });
