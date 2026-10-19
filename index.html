@@ -1,19 +1,24 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="ECE Math Lab: randomized engineering mathematics practice, linked cross-topic questions, and custom question generators.">
-<title>ECE Math Lab — Olympiad Trainer</title>
-<script>window.MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']],processEscapes:true},options:{ignoreHtmlClass:'no-math'},svg:{fontCache:'global'}};</script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ECE Math Lab: randomized engineering mathematics practice, linked cross-topic questions, and custom question generators.">
+  <title>ECE Math Lab — Olympiad Trainer</title>
+  <script>window.MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']],processEscapes:true},options:{ignoreHtmlClass:'no-math'},svg:{fontCache:'global'}};</script>
+  <script defer src="ece_math_lab_category_local_families_v5/library/tex-svg.jsm.js"></script>
+  <script defer src="ece_math_lab_category_local_families_v5/library/html2canvas.min.js"></script>
+  <link rel="stylesheet" href="ece_math_lab_category_local_families_v5/css/style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/res/favicon-v2.png">
+  <link rel="icon" type="image/svg+xml" href="/res/ece-icon-v2.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/res/apple-touch-icon-v2.png">
+  <meta name="theme-color" content="#1247BD">
+  <meta name="apple-mobile-web-app-title" content="ECE Lab">
 </head>
 <body>
 <div class="shell">
   <header class="topbar">
-    <div class="brand"><span class="brand-mark">∑</span><span>ECE Math Lab</span></div>
+    <div class="brand"><img class="brand-mark" src="/res/ece-icon-v2.svg" alt="ECE circuit logo" width="44" height="44" style="width:44px;height:44px;background:#1247BD"><span>ECE Math Lab</span></div>
     <div class="top-note">Practice locally · Create and export your own generators</div>
   </header>
   <section class="hero">
@@ -110,51 +115,51 @@ common abbreviation"></textarea><small>One accepted synonym per line. Used only 
   <footer class="footer"><span>ECE Math Lab · formula-based randomized practice</span><span id="mathStatus" class="math-status">Math rendering loads from MathJax CDN.</span></footer>
 </div>
 <div id="toast" class="toast hidden" role="status"></div>
-<script src="locales/en.js"></script>
+<script src="ece_math_lab_category_local_families_v5/locales/en.js"></script>
 
 
 <!-- Ordered local scripts: do not reorder without retesting; the category modules register before the finalizer and UI startup. -->
-<script src="js/core/runtime.js"></script>
-<script src="js/question-bank/shared-helpers.js"></script>
-<script src="js/question-bank/registry-core.js"></script>
-<script src="js/question-bank/categories/laplace.js"></script>
-<script src="js/question-bank/categories/ztrans.js"></script>
-<script src="js/question-bank/categories/fourier.js"></script>
-<script src="js/question-bank/categories/convolution.js"></script>
-<script src="js/question-bank/categories/controls.js"></script>
-<script src="js/question-bank/categories/signals.js"></script>
-<script src="js/question-bank/categories/complexcalc.js"></script>
-<script src="js/question-bank/categories/ode.js"></script>
-<script src="js/question-bank/categories/vector.js"></script>
-<script src="js/question-bank/categories/calculus.js"></script>
-<script src="js/question-bank/categories/related.js"></script>
-<script src="js/question-bank/categories/relativity.js"></script>
-<script src="js/question-bank/categories/advanced.js"></script>
-<script src="js/question-bank/categories/em.js"></script>
-<script src="js/question-bank/categories/econ.js"></script>
-<script src="js/question-bank/categories/data.js"></script>
-<script src="js/question-bank/categories/geas.js"></script>
-<script src="js/question-bank/categories/electronics.js"></script>
-<script src="js/question-bank/categories/precalc.js"></script>
-<script src="js/question-bank/categories/probability.js"></script>
-<script src="js/question-bank/finalize-registry.js"></script>
-<script src="js/concept-bank/catalog.js"></script>
-<script src="js/concept-bank/generators.js"></script>
-<script src="js/linked/linked-pairs.js"></script>
-<script src="js/custom/storage.js"></script>
-<script src="js/custom/specs.js"></script>
-<script src="js/custom/question-factory.js"></script>
-<script src="js/question-engine/format-normalization.js"></script>
-<script src="js/linked/module-builder.js"></script>
-<script src="js/custom/linked-custom.js"></script>
-<script src="js/question-engine/selection.js"></script>
-<script src="js/question-engine/test-builder.js"></script>
-<script src="js/ui/question-renderer.js"></script>
-<script src="js/ui/results.js"></script>
-<script src="js/ui/navigation.js"></script>
-<script src="js/ui/question-builder.js"></script>
-<script src="js/ui/bank-inspector.js"></script>
-<script src="js/ui/setup-categories.js"></script>
-<script src="js/ui/setup.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/core/runtime.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/shared-helpers.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/registry-core.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/laplace.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/ztrans.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/fourier.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/convolution.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/controls.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/signals.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/complexcalc.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/ode.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/vector.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/calculus.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/related.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/relativity.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/advanced.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/em.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/econ.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/data.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/geas.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/electronics.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/precalc.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/categories/probability.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-bank/finalize-registry.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/concept-bank/catalog.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/concept-bank/generators.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/linked/linked-pairs.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/custom/storage.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/custom/specs.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/custom/question-factory.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-engine/format-normalization.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/linked/module-builder.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/custom/linked-custom.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-engine/selection.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/question-engine/test-builder.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/ui/question-renderer.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/ui/results.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/ui/navigation.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/ui/question-builder.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/ui/bank-inspector.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/ui/setup-categories.js"></script>
+<script src="ece_math_lab_category_local_families_v5/js/ui/setup.js"></script>
 </body>
 </html>
