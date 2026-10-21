@@ -1,3 +1,0 @@
-/* Instantiates an ordered two-question built-in link, passing Step 1’s computed answer into Step 2. */
-
-function makePairModule(pair,globalMode){let seed=makeSeedQuestion(pair.categories[0],pair.variant);let next=makeDependentQuestion(pair.categories[1],seed.answer,pair.variant);seed.generatorId=`seed-${pair.categories[0]}`;next.generatorId=pair.id;next.dependencyFactory=v=>makeDependentQuestion(pair.categories[1],v);next._dependencyValue=seed.answer;next._lastDepValue=seed.answer;const module=[seed,next];seed.difficulty=pair.difficulty;next.difficulty=pair.difficulty;markLinked(module,pair.title);normalizeTestMode(seed,globalMode);normalizeTestMode(next,globalMode);next.dependsOnLocalIndex=0;return module}

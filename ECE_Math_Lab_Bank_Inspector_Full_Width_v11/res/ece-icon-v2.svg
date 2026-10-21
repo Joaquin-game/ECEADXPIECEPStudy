@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<rect width="512" height="512" fill="#1247BD"/>
+<rect x="34" y="34" width="444" height="444" rx="84" fill="#164FC9" stroke="#3971E1" stroke-width="3"/>
+<g fill="none" stroke="#FFDA38" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+<path d="M96 155h67l30-30h103l29 30h91M96 357h67l30 30h103l29-30h91"/>
+<path d="M224 125V91m64 296v34M128 155v28m256 146v28"/>
+<circle cx="88" cy="155" r="9"/><circle cx="424" cy="155" r="9"/><circle cx="88" cy="357" r="9"/><circle cx="424" cy="357" r="9"/>
+<circle cx="224" cy="83" r="8"/><circle cx="288" cy="429" r="8"/>
+</g>
+<!-- Geometric ECE letterforms remain sharp without any external fonts. -->
+<g fill="none" stroke="#FFDA38" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter">
+<path d="M177 209h-68v94h68m-68-47h54"/>
+<path d="M285 209h-53l-16 16v62l16 16h53"/>
+<path d="M403 209h-68v94h68m-68-47h54"/>
+</g></svg>
