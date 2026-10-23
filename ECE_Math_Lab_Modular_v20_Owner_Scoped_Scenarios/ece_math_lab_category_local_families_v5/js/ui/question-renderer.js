@@ -32,11 +32,12 @@ function oneIllustrationMarkup(item,i,j){
     return `<figure class="question-diagram question-svg"><div class="illustration-svg" role="img" aria-label="${safeAlt}">${markup}</div><figcaption>${safeAlt}</figcaption></figure>`;
   }
   let src=String(item.src||'');
+  let is_file = false;
   if(type==='diagram'||item.diagramKind){
     const file=QUESTION_DIAGRAM_FILES[item.diagramKind||item.kind];
-    if(file)src=`/${ECE_MATH_LAB_ASSET_BASE_PATH}/diagrams/${file}`;
+    if(file) {is_file = true; src=`${ECE_MATH_LAB_ASSET_BASE_PATH}/diagrams/${file}`;}
   }
-  if(src&&(/^(?:https?:|data:image\/|blob:|\/|\.\.?\/)/i.test(src)))return `<figure class="question-diagram"><img class="diagram-artwork" src="${htmlEscape(src)}" alt="${safeAlt}" loading="lazy"><figcaption>${safeAlt}</figcaption></figure>`;
+  if(src&&(is_file||/^(?:https?:|data:image\/|blob:|\/|\.\.?\/)/i.test(src)))return `<figure class="question-diagram"><img class="diagram-artwork" src="${htmlEscape(src)}" alt="${safeAlt}" loading="lazy"><figcaption>${safeAlt}</figcaption></figure>`;
   return `<figure class="question-diagram"><p class="text-fallback">${safeAlt}</p><figcaption>${safeAlt} source ${src}</figcaption></figure>`;
 }
 function questionDiagramMarkup(q,i){
