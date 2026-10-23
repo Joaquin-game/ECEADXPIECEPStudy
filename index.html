@@ -6,19 +6,19 @@
   <meta name="description" content="ECE Math Lab: randomized engineering mathematics practice, compound question trees, and custom question generators.">
   <title>ECE Math Lab — Olympiad Trainer</title>
   <script>window.MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']],processEscapes:true},options:{ignoreHtmlClass:'no-math'},svg:{fontCache:'global'}};</script>
-  <script defer src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/library/tex-svg.jsm.js"></script>
-  <script defer src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/library/html2canvas.min.js"></script>
-  <link rel="stylesheet" href="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/css/style.css">
-  <link rel="icon" type="image/png" sizes="32x32" href="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/res/favicon-v2.png">
-  <link rel="icon" type="image/svg+xml" href="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/res/ece-icon-v2.svg">
-  <link rel="apple-touch-icon" sizes="180x180" href="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/res/apple-touch-icon-v2.png">
+  <script defer src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/library/tex-svg.jsm.js"></script>
+  <script defer src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/library/html2canvas.min.js"></script>
+  <link rel="stylesheet" href="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/css/style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/res/favicon-v2.png">
+  <link rel="icon" type="image/svg+xml" href="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/res/ece-icon-v2.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/res/apple-touch-icon-v2.png">
   <meta name="theme-color" content="#1247BD">
   <meta name="apple-mobile-web-app-title" content="ECE Lab">
 </head>
 <body>
 <div class="shell">
   <header class="topbar">
-    <div class="brand"><img class="brand-mark" src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/res/ece-icon-v2.svg" alt="ECE circuit logo" width="44" height="44" style="width:44px;height:44px;background:#1247BD"><span>ECE Math Lab</span></div>
+    <div class="brand"><img class="brand-mark" src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/res/ece-icon-v2.svg" alt="ECE circuit logo" width="44" height="44" style="width:44px;height:44px;background:#1247BD"><span>ECE Math Lab</span></div>
     <div class="top-note">Practice locally · Create and export your own generators</div>
   </header>
   <section class="hero">
@@ -36,7 +36,7 @@
         </div>
         <div class="controls-panel">
           <h3 class="section-title">Test settings</h3>
-          <div class="field"><label for="questionCount">Question count</label><select id="questionCount">
+          <div class="field"><label for="questionCount">Question count</label><label class="check-row compact"><input type="checkbox" id="debugAllQuestions"><span>Debug: generate every enabled unique question (ignore question count)</span></label><select id="questionCount">
             <option value="5">5 questions</option>
             <option value="10" selected>10 questions</option>
             <option value="15">15 questions</option>
@@ -53,13 +53,15 @@
             <label class="format-option"><input type="checkbox" name="answerFormat" value="id"><span class="format-icon" aria-hidden="true">Aa</span><span>Identification</span></label>
             <label class="format-option"><input type="checkbox" name="answerFormat" value="tf"><span class="format-icon" aria-hidden="true">T/F</span><span>True or false</span></label>
           </div><div class="format-note">Select one or more formats. With Multiple choice + Identification selected, identification concepts may also appear as term-recognition choices.</div></div>
+          <label class="check-row inverse-unit-accessibility"><input type="checkbox" id="inverseUnitExponentAccessibility"><span><strong>Accessibility: show inverse units as exponents</strong><small>Off by default: use a slash for one denominator unit and a fraction bar for multiple denominator units. Enable to show inverse units as exponents like \(\mathrm{m}\,\mathrm{s}^{\left(-1\right)}\).</small></span></label>
+          <label class="check-row single-denominator-slash"><input type="checkbox" id="singleDenominatorSlashNotation"><span><strong>Use a slash for one denominator unit</strong><small>On by default: show \(\mathrm{m}/\mathrm{s}\) and \(\mathrm{m}^2/\mathrm{s}\); turn off to use a fraction bar.</small></span></label>
           <div class="field"><label>Test flow</label><div class="flow-options" role="radiogroup" aria-label="Test flow">
             <label class="flow-option"><input type="radio" name="testFlow" value="all" checked><span><strong>All questions at once</strong><small>Answer the full set, then see the score and solutions.</small></span></label>
             <label class="flow-option"><input type="radio" name="testFlow" value="one"><span><strong>One at a time</strong><small>Check each answer and read its solution before continuing.</small></span></label>
           </div></div>
-          <div class="field"><label for="generatorPool">Question generators</label><select id="generatorPool"><option value="both" selected>Top-level + tree traversal</option><option value="single">Top-level questions only</option><option value="trees">Compound trees only</option></select><small>Choose top-level questions, or move between roots, children, and siblings in a compound tree. Each selected node counts as one question.</small></div>
+          <div class="field"><label for="generatorPool">Question generators</label><select id="generatorPool"><option value="both" selected>Mixed practice + follow-up calculations</option><option value="single">Standalone questions only</option><option value="trees">Scenario trees only</option></select><small>Choose standalone questions or cohesive scenarios with linked follow-up calculations. Setup cards provide shared context and illustrations; only answerable questions count toward your question limit.</small></div>
           <label class="check-row"><input type="checkbox" id="includeCustom" checked><span>Include my saved generators whenever their category and dependency requirements match.</span></label>
-          <div class="notice"><strong>Compound questions:</strong> Child questions share context with their parent. Changing a parent answer updates descendant questions and supports follow-through scoring.</div>
+          <div class="notice"><strong>Scenario questions:</strong> Follow-up calculations can reuse shared scenario data or build from an earlier numerical result. Changing an earlier answer updates dependent calculations and supports follow-through scoring.</div>
           <button class="primary wide" id="startQuizBtn" type="button">Generate practice test →</button>
           <div id="setupMessage" class="stats-line" aria-live="polite"></div>
         </div>
@@ -67,11 +69,11 @@
     </section>
 
     <section id="quizPanel" class="panel quiz-shell hidden" style="margin-top:18px">
-      <div class="quiz-topline"><div><strong id="quizTitle">Practice test</strong><span id="quizSubtitle"></span></div><label class="recipe-debug-toggle"><input id="showRecipeDebug" type="checkbox"><span>Show recipe names</span></label><button id="restartBtn" class="text-btn" type="button">← Back to setup</button></div>
+      <div class="quiz-topline"><div><strong id="quizTitle">Practice test</strong><span id="quizSubtitle"></span></div><label class="recipe-debug-toggle"><input id="showTreeDebug" type="checkbox" aria-label="Show tree structure debug labels"><span>Show tree structure debug</span></label><label class="recipe-debug-toggle"><input id="showRecipeDebug" type="checkbox"><span>Show recipe names</span></label><label class="recipe-debug-toggle"><input id="showQuestionDataDebug" type="checkbox"><span>Inspect question data</span></label><button id="restartBtn" class="text-btn" type="button">← Back to setup</button></div>
       <form id="quizForm"><div id="questionList" class="question-list"></div><section id="stepFeedback" class="step-feedback hidden" aria-live="polite"></section><div class="quiz-actions"><span class="hint" id="quizHint">Answers are checked after you submit.</span><button id="submitQuizBtn" class="primary" type="submit">Submit answers</button></div></form>
       <section id="resultsPanel" class="hidden" aria-live="polite">
         <div class="result-summary"><div><h2 id="resultHeading">Test complete</h2><p id="resultMessage"></p></div><div style="text-align:right"><div class="result-score" id="resultScore"></div><div class="result-percent" id="resultPercent"></div></div></div>
-        <div class="result-toolbar"><button class="primary" id="screenshotBtn" type="button">Save results screenshot</button><button class="secondary" id="printBtn" type="button">Print / Save PDF</button><button class="ghost" id="newQuizBtn" type="button">New test</button></div>
+        <div class="result-toolbar"><button class="primary" id="screenshotBtn" type="button">Save results screenshot</button><button class="secondary" id="printBtn" type="button">Print / Save PDF</button><button class="ghost" id="retakeSameBtn" type="button">Retake same set</button><button class="ghost" id="newQuizBtn" type="button">New test</button></div>
         <div class="review-heading">Answer review &amp; worked solutions</div><div id="reviewList" class="review-list"></div>
       </section>
     </section>
@@ -92,19 +94,23 @@
 
   <main id="builderPage" class="page">
     <section class="panel">
-      <div class="panel-head"><div><h2>Build your question generators</h2><p>Create a template in the visual editor or edit a JSON generator spec directly. Use <code>x_prev</code> (or the legacy alias <code>prev</code>) to make a question depend on the answer before it.</p></div><span class="chip teal">YOUR QUESTION BANK</span></div>
+      <div class="panel-head"><div><h2>Build your question generators</h2><p>Create a template in the visual editor or edit a JSON generator spec directly. Use the tree data-transfer object for dependent questions; built-in tree nodes receive owner-scoped data from their ancestors.</p></div><span class="chip teal">YOUR QUESTION BANK</span></div>
       <nav class="subtabs" aria-label="Question builder modes"><button class="subtab active" data-subtab="visualSubpage">Visual builder</button><button class="subtab" data-subtab="codeSubpage">Code editor (JSON)</button></nav>
       <div id="visualSubpage" class="subpage active"><div class="builder-grid" style="padding:18px">
         <section class="panel" style="box-shadow:none"><div class="panel-head"><div><h2>Create a template</h2><p>Random ranges and expressions are recalculated every time the template is used.</p></div></div><div class="panel-body">
           <div class="field"><label for="templateTitle">Generator name</label><input id="templateTitle" maxlength="90" placeholder="e.g. Find the current from Ohm's law"></div>
           <div class="two-col"><div class="field"><label for="templateCategory">Question category</label><select id="templateCategory"></select></div><div class="field"><label for="templateFormat">Answer display</label><select id="templateFormat"><option value="number">Number</option><option value="currency">Currency ($)</option><option value="percent">Percent (%)</option><option value="degrees">Degrees (°)</option></select></div></div>
-          <details class="precision-options"><summary>Answer precision (optional)</summary><div class="two-col"><div class="field"><label for="templateNotation">Required notation</label><select id="templateNotation"><option value="any">Accept decimal, scientific, or engineering</option><option value="scientific">Scientific notation only</option><option value="engineering">Engineering notation only</option><option value="decimal">Ordinary decimal notation only</option></select></div><div class="field"><label for="templateAbsoluteTolerance">Absolute tolerance</label><input id="templateAbsoluteTolerance" inputmode="decimal" placeholder="Automatic (e.g. 1e-12)"></div></div><div class="two-col"><div class="field"><label for="templateRelativeTolerance">Relative tolerance</label><input id="templateRelativeTolerance" inputmode="decimal" placeholder="Automatic (e.g. 0.005 for 0.5%)"></div><div class="field"><label for="templateSignificantDigits">Significant digits</label><input id="templateSignificantDigits" type="number" min="1" max="1000" step="1" placeholder="Default: 8"></div></div><div class="field"><label for="templateDecimalPlaces">Decimal places</label><input id="templateDecimalPlaces" type="number" min="0" max="1000" step="1" placeholder="Optional; auto notation protects tiny values"></div><small>Numeric questions accept either notation by default. Explicit notation selection enforces that form; significant digits and decimal places also control the answer key and default tolerance. An explicit absolute tolerance overrides those defaults.</small></details>
-          <div class="field"><label for="templateMode">Preferred answer style</label><select id="templateMode"><option value="mixed">Mixed / follow test setting</option><option value="mc">Multiple choice</option><option value="fib">Fill-in-the-blank</option><option value="id">Identification</option><option value="tf">True / false</option></select></div>
+          <details class="precision-options"><summary>Answer precision (optional)</summary><div class="two-col"><div class="field"><label for="templateNotation">Required notation</label><select id="templateNotation"><option value="any">Accept decimal, scientific, or engineering</option><option value="scientific">Scientific notation only</option><option value="engineering">Engineering notation only</option><option value="decimal">Ordinary decimal notation only</option></select></div><div class="field"><label for="templateAbsoluteTolerance">Absolute tolerance</label><input id="templateAbsoluteTolerance" inputmode="decimal" placeholder="Automatic (e.g. 1e-12)"></div></div><div class="two-col"><div class="field"><label for="templateRelativeTolerance">Relative tolerance</label><input id="templateRelativeTolerance" inputmode="decimal" placeholder="Automatic (e.g. 0.005 for 0.5%)"></div><div class="field"><label for="templateSignificantDigits">Significant digits</label><input id="templateSignificantDigits" type="number" min="1" max="1000" step="1" placeholder="Default: 8"></div></div><div class="field"><label for="templateDecimalPlaces">Decimal places</label><input id="templateDecimalPlaces" type="number" min="0" max="1000" step="1" placeholder="Optional; auto notation protects tiny values"></div><div class="two-col"><div class="field"><label for="templateAnswerUnit">Answer unit (optional)</label><input id="templateAnswerUnit" placeholder="e.g. m/s, kHz, N·m, m^2/s"></div><div class="field"><label for="templateUnitMode">Unit handling</label><select id="templateUnitMode"><option value="lenient">Lenient — convert equivalent units</option><option value="strict">Strict — exact unit/prefix required</option></select></div></div><small>Numeric questions accept either notation by default. Explicit notation selection enforces that form; significant digits and decimal places also control the answer key and default tolerance. An explicit absolute tolerance overrides those defaults.</small></details>
+          <div class="field"><label for="templateMode">Question class / preferred answer style</label><select id="templateMode"><option value="mixed">Numeric — mixed / follow test setting</option><option value="mc">Numeric — multiple choice</option><option value="fib">Numeric — fill-in-the-blank</option><option value="id">Identification</option><option value="tf">True / false</option><option value="setup">Setup / context-only</option></select><small>Setup questions provide context and transfer data but do not expect an answer or count toward the test total.</small></div>
+          <div class="two-col"><div class="field"><label for="templateDifficulty">Difficulty</label><input id="templateDifficulty" type="number" min="1" max="5" step="1" value="3"></div><div class="field"><label class="check-row" style="margin-top:30px"><input id="templateRepeatable" type="checkbox" checked><span>Repeatable generator</span></label></div></div>
+          <details><summary>Tree and data-transfer properties</summary><div class="field"><label for="templateRecipeKey">Recipe key</label><input id="templateRecipeKey" placeholder="e.g. electronics-custom-load-check"><small>Stable developer key. Leave blank to generate one when saved.</small></div><div class="two-col"><div class="field"><label for="templateParentRecipeKey">Parent recipe key</label><input id="templateParentRecipeKey" placeholder="Optional parent generator key"></div><div class="field"><label for="templateChildrenRecipeKeys">Child recipe keys</label><textarea id="templateChildrenRecipeKeys" placeholder="one-child-key
+another-child-key"></textarea></div></div><div class="field"><label for="templateTransferData">Published transfer data (JSON)</label><textarea id="templateTransferData" class="code-editor" spellcheck="false" placeholder='{"V_s":12,"R_L":10}'></textarea><small>Use primitive values when descendants only need the value. Use <code>{"value":...,"unit":"..."}</code> only when the unit is part of the transfer contract.</small></div></details>
+          <details><summary>Illustrations</summary><div class="field"><label for="templateIllustrations">Illustrations (JSON array)</label><textarea id="templateIllustrations" class="code-editor" spellcheck="false" placeholder='[{"type":"svg","alt":"Block diagram of the circuit","svg":"&lt;svg ...&gt;...&lt;/svg&gt;"}]'></textarea><small>Each SVG illustration must have descriptive <code>alt</code> text. Keep category-specific built-in SVGs in their category files.</small></div></details>
           <div class="field"><label for="templateVariables">Random variables</label><textarea id="templateVariables" placeholder="R=2..10&#10;V=12..24"></textarea><small>One per line: <code>name=min..max</code>. Integer ranges are inclusive. Example: <code>R=2..10</code>.</small></div>
           <div class="field"><label for="templatePrompt">Question prompt</label><textarea id="templatePrompt" placeholder="A circuit has \(R={{R}}\,\Omega\) and \(V={{V}}\,V\). Find current \(I=V/R\)."></textarea><small>Use LaTeX: <code>\(...\)</code> or <code>\[...\]</code>. Insert computed values with <code>{{R}}</code> or expressions like <code>{{V/R}}</code>.</small></div>
           <div class="field"><label id="templateAnswerLabel" for="templateAnswer">Correct-answer expression</label><input id="templateAnswer" placeholder="V/R"><small id="templateAnswerHelp">Supported operators: <code>+ - * / ^</code>, parentheses and <code>sqrt, abs, sin, cos, tan, exp, log, ln</code>. No JavaScript execution is used.</small></div><div class="field hidden" id="templateAliasesField"><label for="templateAliases">Accepted identification answers / synonyms</label><textarea id="templateAliases" placeholder="alternate name
 common abbreviation"></textarea><small>One accepted synonym per line. Used only for identification generators.</small></div>
-          <label class="check-row"><input type="checkbox" id="templateDepends"><span><strong>Make this generator depend on a previous question.</strong> Use <code>x_prev</code> in the answer expression (for example <code>x_prev*2</code>). In the prompt, explicitly define \(x_{\mathrm{prev}}\) as the numerical answer from the previous step. It can be used as a dependent question beneath a compatible numeric parent from its category.</span></label>
+          <label class="check-row"><input type="checkbox" id="templateDepends"><span><strong>Legacy dependent-question mode.</strong> This keeps the existing linear custom-chain feature available; for new built-in-style trees, prefer explicit owner-scoped transfer data and tree keys above.</span></label>
           <div class="field"><label for="templateExplanation">Solution / explanation</label><textarea id="templateExplanation" placeholder="Use Ohm's law: I=V/R={{V/R}} A."></textarea></div>
           <div class="field"><label for="templateDistractors">Incorrect answer expressions (optional)</label><textarea id="templateDistractors" placeholder="R/V&#10;V*R&#10;V-R"></textarea><small>One per line. Must evaluate to distinct incorrect numeric choices for a particular randomized version.</small></div>
           <div class="two-col"><button id="previewTemplateBtn" class="secondary" type="button">Preview a random version</button><button id="saveTemplateBtn" class="primary" type="button">Save generator</button></div>
@@ -125,7 +131,7 @@ common abbreviation"></textarea><small>One accepted synonym per line. Used only 
           <p><strong>Custom dependency sequence</strong></p><p>Use a root <code>title</code> and a <code>steps</code> array. Each step has a category, variables, prompt, answer, and explanation. A later step can use <code>x_prev</code> (or legacy <code>prev</code>) in its answer formula. In the prompt, declare \(x_{\mathrm{prev}}\) as the previous step’s numeric result. Use <code>{{x_prev}}</code> to insert its current numeric value into prompt/explanation text. If Step 1 changes, Step 2 recalculates and supports follow-through scoring.</p>
           <p><strong>Categories</strong></p><p><code>laplace</code>, <code>ztrans</code>, <code>fourier</code>, <code>convolution</code>, <code>controls</code>, <code>signals</code>, <code>complexcalc</code>, <code>ode</code>, <code>vector</code>, <code>calculus</code>, <code>related</code>, <code>relativity</code>, <code>advanced</code>, <code>em</code>, <code>econ</code>, <code>data</code>, <code>geas</code>, <code>electronics</code>, <code>precalc</code>, <code>probability</code>.</p>
           <p><strong>Expression functions</strong></p><p>Arithmetic operators, parentheses, <code>sqrt</code>, <code>abs</code>, <code>sin</code>, <code>cos</code>, <code>tan</code>, <code>exp</code>, <code>log</code>/<code>ln</code>, <code>floor</code>, <code>ceil</code>, <code>round</code>, <code>min</code>, <code>max</code>, <code>pi</code>, and <code>e</code>. Expressions are evaluated by a restricted math parser, not <code>eval()</code>.</p>
-          <p><strong>Example:</strong> a parent question outputs a value; the next step uses <code>x_prev/(1+x_prev*H)</code>, with <code>H</code> sampled from its own variable range. The code editor accepts JSON only and checks required fields. Identification generators use a text answer; true/false generators use true/false or a numeric truth expression.</p>
+          <p><strong>Example:</strong> one calculation produces a value; a linked calculation can then use <code>x_prev/(1+x_prev*H)</code>, with <code>H</code> sampled from its own variable range. The code editor accepts JSON only and checks required fields. Identification generators use a text answer; true/false generators use true/false or a numeric truth expression.</p>
         </div></section><div class="builder-tip">Use code mode to version, share, or back up custom generators as JSON files. Use the visual builder for a faster single-question template.</div></div>
       </div></div>
     </section>
@@ -139,47 +145,48 @@ common abbreviation"></textarea><small>One accepted synonym per line. Used only 
   <div class="tree-visualizer-canvas"><svg id="questionTreeSvg" role="img" aria-label="Question generator dependency tree"></svg></div>
   <p id="treeVisualizerDetail" class="tree-visualizer-detail"></p>
 </div>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/locales/en.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/core/decimal-precision.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/core/runtime.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/shared-helpers.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/registry-core.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/laplace.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/ztrans.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/fourier.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/convolution.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/controls.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/signals.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/complexcalc.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/ode.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/vector.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/calculus.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/related.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/relativity.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/advanced.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/em.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/econ.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/data.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/geas.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/electronics.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/precalc.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/categories/probability.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-bank/finalize-registry.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-engine/question-tree.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/custom/storage.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/custom/specs.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/custom/question-factory.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-engine/format-normalization.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-engine/module-builder.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/custom/sequence-custom.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-engine/selection.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/question-engine/test-builder.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/ui/question-renderer.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/ui/results.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/ui/navigation.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/ui/question-builder.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/ui/bank-inspector.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/ui/setup-categories.js"></script>
-<script src="ECE_Math_Lab_Bank_Inspector_Full_Width_v11/ece_math_lab_category_local_families_v5/js/ui/setup.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/locales/en.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/core/decimal-precision.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/core/units.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/core/runtime.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/shared-helpers.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/registry-core.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/laplace.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/ztrans.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/fourier.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/convolution.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/controls.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/signals.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/complexcalc.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/ode.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/vector.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/calculus.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/related.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/relativity.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/advanced.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/em.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/econ.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/data.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/geas.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/electronics.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/precalc.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/categories/probability.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-bank/finalize-registry.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-engine/question-tree.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/custom/storage.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/custom/specs.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/custom/question-factory.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-engine/format-normalization.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-engine/module-builder.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/custom/sequence-custom.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-engine/selection.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/question-engine/test-builder.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/ui/question-renderer.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/ui/results.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/ui/navigation.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/ui/question-builder.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/ui/bank-inspector.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/ui/setup-categories.js"></script>
+<script src="ECE_Math_Lab_Modular_v20_Owner_Scoped_Scenarios/ece_math_lab_category_local_families_v5/js/ui/setup.js"></script>
 </body>
 </html>
